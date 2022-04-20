@@ -6,10 +6,12 @@ public class GameController : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private GameObject obj;
+    [SerializeField] private GameObject EnemyObj;
 
     private void Awake()
     {
         cam = Camera.main;
+        EnemyObj.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -34,15 +36,27 @@ public class GameController : MonoBehaviour
             if (raycastHit.transform != null)
                pos = raycastHit.point;
 
+            obj.SetActive(true);
             obj.transform.position = pos;
-            Debug.Log("[MOUSE POS] " + mpos);
-            Debug.Log("[RAY DIRECTION] " + dir);
-            Debug.Log("[CONVERTED POS] " + pos);
         }
 
     }
 
     void FixedUpdate()
     {
+    }
+
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(10, 10, 50, 50), "Add Enemy"))
+        {
+            int zpos = Random.Range(6, -6);
+
+            Vector3 pos = new Vector3(-30, 0.75f, zpos);
+
+            GameObject obj = Instantiate(EnemyObj);
+            obj.transform.position = pos;
+            obj.SetActive(true);
+        }
     }
 }

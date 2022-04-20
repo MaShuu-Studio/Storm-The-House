@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         if (_isMoving)
         {
             Move();
@@ -44,4 +49,13 @@ public class Enemy : MonoBehaviour
         _isMoving = isMoving;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Attack Point")
+        {
+            _hp--;
+            Debug.Log("[SYSTEM] ENEMY HP: " + _hp);
+            other.gameObject.SetActive(false);
+        }
+    }
 }
