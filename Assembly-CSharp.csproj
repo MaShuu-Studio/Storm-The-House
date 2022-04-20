@@ -59,6 +59,8 @@
     <Compile Include="Assets\Scripts\GameControll\WeaponController.cs" />
     <Compile Include="Assets\Scripts\GameControll\GameController.cs" />
     <Compile Include="Assets\Scripts\GameControll\SoundController.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyAttackArea.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Kevin Iglesias\3DCharacterDummy\Readme.txt" />
