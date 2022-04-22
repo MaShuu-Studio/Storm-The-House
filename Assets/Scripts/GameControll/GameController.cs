@@ -6,12 +6,10 @@ public class GameController : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private GameObject obj;
-    [SerializeField] private GameObject EnemyObj;
 
     private void Awake()
     {
         cam = Camera.main;
-        EnemyObj.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -54,9 +52,9 @@ public class GameController : MonoBehaviour
 
             Vector3 pos = new Vector3(-30, 0.75f, zpos);
 
-            GameObject obj = Instantiate(EnemyObj);
+            GameObject obj = ObjectPool.GetObject(EnumData.EnemyType.DUMMY);
+
             obj.transform.position = pos;
-            obj.SetActive(true);
         }
     }
 }
