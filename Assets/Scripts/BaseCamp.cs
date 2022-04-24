@@ -10,6 +10,9 @@ public class BaseCamp : MonoBehaviour
     private Dictionary<string, int> supporter;
     private Queue<GameObject> enemys;
 
+    private Dictionary<string, IEnumerator> coroutines;
+    private List<string> keys;
+
     void Awake()
     {
         area = GetComponent<BoxCollider>();
@@ -20,38 +23,65 @@ public class BaseCamp : MonoBehaviour
         area.center = new Vector3(-4, 0, 0);
         area.size = new Vector3(8, 2, 2);
 
+        enemys = new Queue<GameObject>();
+
         supporter = new Dictionary<string, int>()
         {
             {"GUNMAN", 0 },
             {"REPAIRMAN", 0 },
         };
 
-        enemys = new Queue<GameObject>();
+        coroutines = new Dictionary<string, IEnumerator>();
+        keys = new List<string>();
+        foreach (string key in supporter.Keys)
+        {
+            keys.Add(key);
+            coroutines.Add(key, null);
+        }
     }
 
-    IEnumerator Fire(string type)
+    void Update()
+    {
+        for (int i = 0; i < keys.Count; i++)
+        {
+            string type = keys[i];
+            if (coroutines[type] == null && supporter[type] > 0)
+                ActiveSupporter(type);
+        }
+    }
+
+    private void ActiveSupporter(string type)
+    {
+        Debug.Log("[SYSTEM] ACTIVE SUPPROTER " + type);
+        coroutines[type] = Active(type);
+        StartCoroutine(coroutines[type]);
+    }
+
+    IEnumerator Active(string type)
     {
         float time = SupporterManager.Delay(type, supporter[type]);
         yield return new WaitForSeconds(time);
+        
+        GameObject target;
+        Vector3 pos = Vector3.zero; 
+            
+        while (enemys.Count > 0)
+        {
+            target = enemys.Peek();
+            
+            if (target == null || target.activeSelf == false) enemys.Dequeue();
+            else
+            {
+                pos = target.transform.position;
+                attackPoint.Attack(0.1f, pos);
+                break;
+            }
+        } 
 
         if (enemys.Count > 0)
-        {
-            GameObject target;
-            do
-            {
-                target = enemys.Peek();
-
-                if (target == null || target.activeSelf == false) enemys.Dequeue();
-                else break;
-            } 
-            while (enemys.Count > 0);
-
-            if (enemys.Count > 0)
-            {
-                attackPoint.Attack(0.1f, target.transform.position);
-                StartCoroutine(Fire(type));
-            }
-        }
+            ActiveSupporter(type);
+        else
+            coroutines[type] = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,9 +89,6 @@ public class BaseCamp : MonoBehaviour
         if (other.tag == "Enemy")
         {
             enemys.Enqueue(other.gameObject);
-
-            if (enemys.Count == 1)
-                StartCoroutine(Fire("GUNMAN"));
         }
     }
 
