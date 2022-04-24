@@ -5,6 +5,7 @@ using EnumData;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private WeaponController weaponController;
     private void Awake()
     {
     }
@@ -19,12 +20,14 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            WeaponController.Instance.Fire();
+            weaponController.Fire();
+            //WeaponController.Instance.Fire();
         }
 
         if (Input.GetButtonDown("RELOAD"))
         {
-            WeaponController.Instance.Reload();
+            weaponController.Reload();
+            //WeaponController.Instance.Reload();
         }
     }
 
@@ -35,9 +38,15 @@ public class GameController : MonoBehaviour
     GUIStyle style = new GUIStyle();
     private void OnGUI()
     {
+        string ammo = weaponController.Ammo.ToString();
+        bool canFire = weaponController._canUse[WeaponTimerType.FIRE];
+        bool isReloading = weaponController._canUse[WeaponTimerType.RELOAD];
+
+        /*
         string ammo = WeaponController.Instance.Ammo.ToString();
         bool canFire = WeaponController.Instance._canUse[WeaponTimerType.FIRE];
         bool isReloading = WeaponController.Instance._canUse[WeaponTimerType.RELOAD];
+        */
         style.fontSize = 50;
         GUI.Label(new Rect(10, 60, 50, 50), ammo, style);
         GUI.Label(new Rect(10, 110, 50, 50), canFire ? "CAN SHOOT" : "SHOOTING", style);

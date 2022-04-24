@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class AttackPoint : MonoBehaviour
 {
+    /*
     public static AttackPoint Instance { get { return instance; } }
     private static AttackPoint instance;
+    */
     void Awake()
     {
+        /*
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -16,10 +19,11 @@ public class AttackPoint : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+        */
         _isRemain = false;
         gameObject.SetActive(false);
     }
-
+    
     private IEnumerator _coroutine = null;
     private bool _isRemain;
 
