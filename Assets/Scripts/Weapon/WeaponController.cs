@@ -13,6 +13,7 @@ public class WeaponController : MonoBehaviour
     private int[] _ammo;
     private int _curWeapon;
 
+    private Camera cam;
 
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
@@ -28,6 +29,7 @@ public class WeaponController : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
+        cam = Camera.main;
 
         // 후에 데이터 테이블을 통해 외부에서 불러올 예정
         _weapons = new List<Weapon>()
@@ -82,22 +84,36 @@ public class WeaponController : MonoBehaviour
         Initialize();
     }
 
-    public bool Fire()
+    public void Fire()
     {
-        if (_ammo[_curWeapon] > 0 && _canUse[WeaponTimerType.FIRE])
+        if (_canUse[WeaponTimerType.FIRE] == false) return;
+
+        if (_ammo[_curWeapon] > 0)
         {
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
             float fireTime = _weapons[_usingWeapon[_curWeapon]].FireTime;
             _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
-            return true;
+
+            Vector3 mpos = Input.mousePosition;
+            mpos.z = cam.transform.position.z * -3;
+            Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
+
+            RaycastHit raycastHit;
+            Physics.Raycast(cam.transform.position, dir, out raycastHit);
+
+            Vector3 pos = Vector3.zero;
+
+            if (raycastHit.transform != null)
+                pos = raycastHit.point;
+
+            AttackPoint.Instance.Attack(0.5f, pos);
         }
         else
         {
             // 총알이 부족하면 자동으로 장전
             Reload();
-            return false;
         }
     }
 

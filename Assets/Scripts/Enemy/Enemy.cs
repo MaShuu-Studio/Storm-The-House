@@ -73,7 +73,6 @@ public class Enemy : MonoBehaviour
         {
             _hp--;
             Debug.Log("[SYSTEM] ENEMY HP: " + _hp);
-            other.gameObject.SetActive(false);
         }
     }
 }

@@ -5,12 +5,8 @@ using EnumData;
 
 public class GameController : MonoBehaviour
 {
-    private Camera cam;
-    [SerializeField] private GameObject obj;
-
     private void Awake()
     {
-        cam = Camera.main;
     }
 
     // Start is called before the first frame update
@@ -21,25 +17,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) 
-            && WeaponController.Instance._canUse[WeaponTimerType.FIRE])
+        if (Input.GetMouseButton(0))
         {
-            if (WeaponController.Instance.Fire() == false) return;
-
-            Vector3 mpos = Input.mousePosition;
-            mpos.z = cam.transform.position.z * -3;
-            Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
-
-            RaycastHit raycastHit;
-            Physics.Raycast(cam.transform.position, dir, out raycastHit);
-
-            Vector3 pos = Vector3.zero;
-
-            if (raycastHit.transform != null)
-               pos = raycastHit.point;
-
-            obj.SetActive(true);
-            obj.transform.position = pos;
+            WeaponController.Instance.Fire();
         }
 
         if (Input.GetButtonDown("RELOAD"))
