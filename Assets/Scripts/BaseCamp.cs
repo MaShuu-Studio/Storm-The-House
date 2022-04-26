@@ -11,7 +11,6 @@ public class BaseCamp : MonoBehaviour
     private Queue<GameObject> enemys;
 
     private Dictionary<string, IEnumerator> coroutines;
-    private List<string> keys;
 
     void Awake()
     {
@@ -24,34 +23,41 @@ public class BaseCamp : MonoBehaviour
         area.size = new Vector3(8, 2, 2);
 
         enemys = new Queue<GameObject>();
+    }
 
-        supporter = new Dictionary<string, int>()
-        {
-            {"GUNMAN", 0 },
-            {"REPAIRMAN", 0 },
-        };
-
+    void Start()
+    {
+        supporter = new Dictionary<string, int>();
         coroutines = new Dictionary<string, IEnumerator>();
-        keys = new List<string>();
-        foreach (string key in supporter.Keys)
+
+        foreach (string name in SupporterManager.Types)
         {
-            keys.Add(key);
-            coroutines.Add(key, null);
+            supporter.Add(name, 0);
+            coroutines.Add(name, null);
         }
     }
 
     void Update()
     {
-        for (int i = 0; i < keys.Count; i++)
+        for (int i = 0; i < SupporterManager.Types.Count; i++)
         {
-            string type = keys[i];
+            string type = SupporterManager.Types[i];
             if (coroutines[type] == null && supporter[type] > 0)
                 ActiveSupporter(type);
         }
     }
 
+    public void AddSupporter(string type)
+    {
+        if (!supporter.ContainsKey(type)) return;
+        
+        supporter[type]++;
+    }
+
     private void ActiveSupporter(string type)
     {
+        if (!supporter.ContainsKey(type)) return;
+
         Debug.Log("[SYSTEM] ACTIVE SUPPROTER " + type);
         coroutines[type] = Active(type);
         StartCoroutine(coroutines[type]);
@@ -59,9 +65,15 @@ public class BaseCamp : MonoBehaviour
 
     IEnumerator Active(string type)
     {
-        float time = SupporterManager.Delay(type, supporter[type]);
-        yield return new WaitForSeconds(time);
-        
+        float time = 0;
+        float waitingTime;
+        do
+        {
+            waitingTime = SupporterManager.Delay(type, supporter[type]);
+            time += Time.deltaTime;
+            yield return null;
+        } while (time < waitingTime);
+
         GameObject target;
         Vector3 pos = Vector3.zero; 
             
@@ -95,11 +107,15 @@ public class BaseCamp : MonoBehaviour
     GUIStyle style = new GUIStyle();
     private void OnGUI()
     {
-        style.fontSize = 50;
-        GUI.Label(new Rect(10, 210, 50, 50), "GUNMAN: " + supporter["GUNMAN"].ToString(), style);
-        if (GUI.Button(new Rect(120, 10, 100, 50), "Add GUNMAN"))
+        style.fontSize = 0;
+
+        for (int i = 0; i < SupporterManager.Types.Count; i++)
         {
-            supporter["GUNMAN"]++;
+            string type = SupporterManager.Types[i];
+            if (GUI.Button(new Rect(1810, 10 + i * 60, 100, 50), type + " " + supporter[type]))
+            {
+                AddSupporter(type);
+            }
         }
     }
 }

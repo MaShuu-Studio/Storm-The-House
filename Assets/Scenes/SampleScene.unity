@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponController: {fileID: 81899636}
+  baseCamp: {fileID: 1124556898}
 --- !u!4 &572003468
 Transform:
   m_ObjectHideFlags: 0

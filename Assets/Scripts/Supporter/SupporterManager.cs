@@ -1,51 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Data;
 
 public static class SupporterManager
 {
-    // 추후 데이터 테이블 통해 관리
-    public static List<string> supporterNames { get; private set; } =
-        new List<string>()
-        {
-            "GUNMAN",
-            "REPAIRMAN",
-        };
+    private static Dictionary<string, Supporter> _supporters;
+    public static List<string> Types { get; private set; }
 
-    private static Dictionary<string, Supporter> supporters =
-        new Dictionary<string, Supporter>()
+    public static void Initialize()
+    {
+        Debug.Log("[SYSTEM] LOAD SUPPORTER");
+        List<Supporter> list = DataManager.Deserialize<Supporter>();
+
+        _supporters = new Dictionary<string, Supporter>();
+
+        for(int i = 0; i < list.Count; i++)
         {
-            {
-                "GUNMAN", new Supporter()
-                {
-                    dmg = 1,
-                    accurancy = 0.7f,
-                    probablity = 0.7f,
-                    delay = 5.0f
-                }
-            },
-            {
-                "REPAIRMAN", new Supporter()
-                {
-                    dmg = 1,
-                    accurancy = 1,
-                    probablity = 1,
-                    delay = 5.0f
-                }
-            },
-        };
+            _supporters.Add(list[i].name, list[i]);
+        }
+
+        Types = _supporters.Keys.ToList();
+    }
 
     public static int Damage(string name)
     {
-        if (!supporters.ContainsKey(name)) return -1;
+        if (!_supporters.ContainsKey(name)) return -1;
         
-        return supporters[name].dmg;
+        return _supporters[name].dmg;
     }
 
     public static float Delay(string name, int amount)
     {
-        if (!supporters.ContainsKey(name)) return -1;
+        if (!_supporters.ContainsKey(name)) return -1;
         if (amount <= 0) return -1;
-        return supporters[name].delay / amount;
+        return _supporters[name].delay / amount;
     }
 }

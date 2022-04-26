@@ -56,7 +56,7 @@
     <Analyzer Include="D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Weapon\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Data\Weapon.cs" />
     <Compile Include="Assets\Scripts\Weapon\AttackPoint.cs" />
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttackArea.cs" />
@@ -65,8 +65,9 @@
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameControl\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\BaseCamp.cs" />
-    <Compile Include="Assets\Scripts\Supporter\Supporter.cs" />
+    <Compile Include="Assets\Scripts\Data\Supporter.cs" />
     <Compile Include="Assets\Scripts\Supporter\SupporterManager.cs" />
+    <Compile Include="Assets\Scripts\Data\DataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Kevin Iglesias\3DCharacterDummy\Readme.txt" />

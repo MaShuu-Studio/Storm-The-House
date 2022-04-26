@@ -1,0 +1,19 @@
+{
+    "list":
+    [
+        {
+            "name":"GUNMAN",
+            "dmg":1,
+            "accurancy":0.7,
+            "probablity":0.7,
+            "delay":5.0
+        },
+        {
+            "name":"REPAIRMAN",
+            "dmg":1,
+            "accurancy":1.0,
+            "probablity":1.0,
+            "delay":5.0
+        }
+    ]
+}
