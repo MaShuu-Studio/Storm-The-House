@@ -7,9 +7,19 @@ using Data;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private WeaponController weaponController;
-
+    public WeaponController WController { get { return weaponController; } }
+    public static GameController Instance { get { return instance; } }
+    private static GameController instance;
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         SupporterManager.Initialize();
     }
 

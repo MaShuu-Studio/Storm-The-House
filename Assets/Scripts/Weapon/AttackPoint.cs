@@ -23,9 +23,12 @@ public class AttackPoint : MonoBehaviour
         _isRemain = false;
         gameObject.SetActive(false);
     }
-    
+
     private IEnumerator _coroutine = null;
+    private int _damage;
+    public int Damage { get { return _damage; } }
     private bool _isRemain;
+    private bool _isAttack;
 
     public void Attack(float time, Vector3 pos, bool isRemain = false)
     {
@@ -35,6 +38,7 @@ public class AttackPoint : MonoBehaviour
             _coroutine = null;
         }
 
+        _isAttack = true;
         _isRemain = isRemain;
 
         transform.position = pos;
@@ -46,7 +50,7 @@ public class AttackPoint : MonoBehaviour
 
     IEnumerator AttackTimer(float time)
     {
-        while(time > 0)
+        while (time > 0)
         {
             time -= Time.deltaTime;
             yield return null;
@@ -55,19 +59,24 @@ public class AttackPoint : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void SetDamage(int damage)
     {
-        if (_isRemain) return;
+        _damage = damage;
+    }
 
-        if (other.tag == "Enemy")
+    public void EnemyDamaged(Enemy enemy)
+    {
+        if (_isAttack == false) return;
+
+        enemy.Damaged(_damage);
+
+        if (_coroutine != null)
         {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-                _coroutine = null;
-            }
-
-            gameObject.SetActive(false);
+            StopCoroutine(_coroutine);
+            _coroutine = null;
         }
+
+        gameObject.SetActive(false);
+        _isAttack = false;
     }
 }

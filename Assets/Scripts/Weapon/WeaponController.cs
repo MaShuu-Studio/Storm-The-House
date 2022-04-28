@@ -18,6 +18,7 @@ public class WeaponController : MonoBehaviour
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
     public int Ammo { get { return _ammo[_curWeapon]; } }
+    public int Damage { get { return _weapons[_usingWeapon[_curWeapon]].Damage; } }
 
     void Awake()
     {/*
@@ -34,8 +35,8 @@ public class WeaponController : MonoBehaviour
         // 후에 데이터 테이블을 통해 외부에서 불러올 예정
         _weapons = new List<Weapon>()
         {
-            new Weapon(7, 1.4f, 1.5f, 1, 1),
-            new Weapon(20, 2, 1.5f, 2, 1)
+            new Weapon(7, 1, 1.4f, 1.5f, 1, 1),
+            new Weapon(20, 1, 2, 1.5f, 2, 1)
         };
 
         _usingWeapon = new int[2] { 0, -1 };
@@ -58,6 +59,8 @@ public class WeaponController : MonoBehaviour
             { WeaponTimerType.FIRE, true },
             { WeaponTimerType.RELOAD, true },
         };
+
+        attackPoint.SetDamage(Damage);
     }
 
     public void Initialize()
@@ -81,11 +84,12 @@ public class WeaponController : MonoBehaviour
         if (_canUse[WeaponTimerType.FIRE] == false || _usingWeapon[nextIndex] == -1) return;
 
         _curWeapon = nextIndex;
+        attackPoint.SetDamage(Damage);
         Initialize();
     }
 
     [SerializeField] private AttackPoint attackPoint;
-
+    public AttackPoint APoint { get { return attackPoint; } }
     public void Fire()
     {
         if (_canUse[WeaponTimerType.FIRE] == false) return;

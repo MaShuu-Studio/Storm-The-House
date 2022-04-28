@@ -11,6 +11,7 @@ public struct Weapon
      * RANGE: 공격 범위
      */
     private int _ammo;
+    private int _damage;
     private float _accuracy;
     private float _reload;
     private float _fireRate;
@@ -27,7 +28,7 @@ public struct Weapon
     private float _acCost;
     private float _rlCost;
     */
-    
+
     public int Ammo
     {
         get { return _ammo; }
@@ -43,9 +44,14 @@ public struct Weapon
         get { return 1.0f / _fireRate; }
     }
 
-    public Weapon(int am, float ac, float rl, float fr, float rg)
+    public int Damage
+    {
+        get { return _damage; }
+    }
+    public Weapon(int am, int dmg, float ac, float rl, float fr, float rg)
     {
         _ammo = am;
+        _damage = dmg;
         _accuracy = ac;
         _reload = rl;
         _fireRate = fr;

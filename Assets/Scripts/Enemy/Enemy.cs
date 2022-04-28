@@ -27,13 +27,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_hp <= 0)
-        {
-            ObjectPool.ReturnObject(type, gameObject);
-
-            Initialize();
-        }
-
         if (_isMoving)
         {
             Move();
@@ -67,12 +60,24 @@ public class Enemy : MonoBehaviour
         _isMoving = isMoving;
     }
 
+    public void Damaged(int dmg)
+    {
+        _hp -= dmg;
+        Debug.Log("[SYSTEM] ENEMY DAMAGED" + _hp);
+
+        if (_hp <= 0)
+        {
+            ObjectPool.ReturnObject(type, gameObject);
+
+            Initialize();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Attack Point")
         {
-            _hp--;
-            Debug.Log("[SYSTEM] ENEMY HP: " + _hp);
+            GameController.Instance.WController.APoint.EnemyDamaged(this);
         }
     }
 }

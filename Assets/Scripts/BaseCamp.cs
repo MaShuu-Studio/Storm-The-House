@@ -65,6 +65,7 @@ public class BaseCamp : MonoBehaviour
 
     IEnumerator Active(string type)
     {
+        // 실시간 동기화를 위해 코루틴 중간에 서포터 수 체크
         float time = 0;
         float waitingTime;
         do
