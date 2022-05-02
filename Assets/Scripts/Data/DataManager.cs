@@ -22,9 +22,8 @@ namespace Data
         private static string dataPath = "Data/";
         private static string prefabPath = "Prefabs/";
 
-
         // Json 데이터 구조 틀을 만들기 위해 활용
-        public static void Serialize<T>(string name, List<T> objects)
+        public static void Serialize<T>(List<T> objects)
         {
             string json = JsonUtility.ToJson(new SerializedList<T>(objects));
             string fileName = typeof(T).Name + ".json";

@@ -8,8 +8,7 @@ public class WeaponController : MonoBehaviour
     public static WeaponController Instance { get { return instance; } }
     private static WeaponController instance;
 
-    [SerializeField] private AttackPoint attackPoint;
-    public AttackPoint APoint { get { return attackPoint; } }
+    private AttackPoint attackPoint;
 
     private List<Weapon> _weapons;
     private int[] _usingWeapon;
@@ -32,7 +31,7 @@ public class WeaponController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(attackPoint.gameObject);
+
         
         cam = Camera.main;
 
@@ -63,7 +62,12 @@ public class WeaponController : MonoBehaviour
             { WeaponTimerType.FIRE, true },
             { WeaponTimerType.RELOAD, true },
         };
+    }
 
+    void Start()
+    {
+        attackPoint = AttackPointManager.Instance.MakeAttackPoint();
+        DontDestroyOnLoad(attackPoint.gameObject);
         attackPoint.SetDamage(Damage);
     }
 

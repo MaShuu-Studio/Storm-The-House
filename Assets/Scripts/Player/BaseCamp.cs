@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnumData;
 
 [RequireComponent(typeof(BoxCollider))]
 public class BaseCamp : MonoBehaviour
 {
-    [SerializeField] private AttackPoint attackPoint;
     private BoxCollider area;
     private Dictionary<string, int> supporter;
+    private Dictionary<string, AttackPoint> attackPoints;
     private Queue<GameObject> enemys;
-
     private Dictionary<string, IEnumerator> coroutines;
 
     void Awake()
@@ -29,11 +29,17 @@ public class BaseCamp : MonoBehaviour
     {
         supporter = new Dictionary<string, int>();
         coroutines = new Dictionary<string, IEnumerator>();
+        attackPoints = new Dictionary<string, AttackPoint>();
 
         foreach (string name in SupporterManager.Types)
         {
             supporter.Add(name, 0);
             coroutines.Add(name, null);
+            if (SupporterManager.SupportType(name) == SupporterType.ATTACK)
+            {
+                attackPoints.Add(name, AttackPointManager.Instance.MakeAttackPoint());
+                attackPoints[name].SetDamage(SupporterManager.Damage(name));
+            }
         }
     }
 
@@ -86,7 +92,7 @@ public class BaseCamp : MonoBehaviour
             else
             {
                 pos = target.transform.position;
-                attackPoint.Attack(0.1f, pos);
+                attackPoints[type].Attack(0.1f, pos);
                 break;
             }
         } 

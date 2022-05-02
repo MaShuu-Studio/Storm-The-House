@@ -8,7 +8,7 @@ public static class SupporterManager
 {
     private static Dictionary<string, Supporter> _supporters;
     public static List<string> Types { get; private set; }
-
+    
     public static void Initialize()
     {
         Debug.Log("[SYSTEM] LOAD SUPPORTER");
@@ -16,11 +16,10 @@ public static class SupporterManager
 
         _supporters = new Dictionary<string, Supporter>();
 
-        for(int i = 0; i < list.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             _supporters.Add(list[i].name, list[i]);
         }
-
         Types = _supporters.Keys.ToList();
     }
 
@@ -36,5 +35,10 @@ public static class SupporterManager
         if (!_supporters.ContainsKey(name)) return -1;
         if (amount <= 0) return -1;
         return _supporters[name].delay / amount;
+    }
+
+    public static EnumData.SupporterType SupportType(string name)
+    {
+        return _supporters[name].supportType;
     }
 }

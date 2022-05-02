@@ -75,9 +75,9 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Attack Point")
+        if (other.tag == "AttackPoint")
         {
-            WeaponController.Instance.APoint.EnemyDamaged(this);
+            AttackPointManager.Instance.EnemyDamaged(this, other.gameObject);
         }
     }
 }
