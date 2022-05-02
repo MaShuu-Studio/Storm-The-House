@@ -4,22 +4,8 @@ using UnityEngine;
 
 public class AttackPoint : MonoBehaviour
 {
-    /*
-    public static AttackPoint Instance { get { return instance; } }
-    private static AttackPoint instance;
-    */
     void Awake()
     {
-        /*
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-
-        DontDestroyOnLoad(gameObject);
-        */
         _isRemain = false;
         gameObject.SetActive(false);
     }

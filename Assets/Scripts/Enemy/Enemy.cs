@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Attack Point")
         {
-            GameController.Instance.WController.APoint.EnemyDamaged(this);
+            WeaponController.Instance.APoint.EnemyDamaged(this);
         }
     }
 }

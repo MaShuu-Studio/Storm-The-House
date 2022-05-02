@@ -4,10 +4,13 @@ using UnityEngine;
 using EnumData;
 
 public class WeaponController : MonoBehaviour
-{/*
+{
     public static WeaponController Instance { get { return instance; } }
     private static WeaponController instance;
-    */
+
+    [SerializeField] private AttackPoint attackPoint;
+    public AttackPoint APoint { get { return attackPoint; } }
+
     private List<Weapon> _weapons;
     private int[] _usingWeapon;
     private int[] _ammo;
@@ -21,7 +24,7 @@ public class WeaponController : MonoBehaviour
     public int Damage { get { return _weapons[_usingWeapon[_curWeapon]].Damage; } }
 
     void Awake()
-    {/*
+    {
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -29,7 +32,8 @@ public class WeaponController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        */
+        DontDestroyOnLoad(attackPoint.gameObject);
+        
         cam = Camera.main;
 
         // 후에 데이터 테이블을 통해 외부에서 불러올 예정
@@ -88,8 +92,6 @@ public class WeaponController : MonoBehaviour
         Initialize();
     }
 
-    [SerializeField] private AttackPoint attackPoint;
-    public AttackPoint APoint { get { return attackPoint; } }
     public void Fire()
     {
         if (_canUse[WeaponTimerType.FIRE] == false) return;
@@ -107,7 +109,7 @@ public class WeaponController : MonoBehaviour
             Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
 
             RaycastHit raycastHit;
-            LayerMask mask = LayerMask.GetMask("Floor");
+            LayerMask mask = LayerMask.GetMask("Floor") | LayerMask.GetMask("Enemy");
             Physics.Raycast(cam.transform.position, dir, out raycastHit, Mathf.Infinity, mask);
 
             Vector3 pos = Vector3.zero;
@@ -116,7 +118,6 @@ public class WeaponController : MonoBehaviour
                 pos = raycastHit.point;
 
             attackPoint.Attack(0.5f, pos);
-            //AttackPoint.Instance.Attack(0.5f, pos);
         }
         else
         {
