@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            WeaponController.Instance.Fire();
+            AttackController.Instance.Fire();
         }
 
         if (Input.GetButtonDown("RELOAD"))

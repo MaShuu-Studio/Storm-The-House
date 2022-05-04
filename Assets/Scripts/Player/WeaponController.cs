@@ -8,9 +8,8 @@ public class WeaponController : MonoBehaviour
     public static WeaponController Instance { get { return instance; } }
     private static WeaponController instance;
 
-    private AttackPoint attackPoint;
-
     private List<Weapon> _weapons;
+
     private int[] _usingWeapon;
     private int[] _ammo;
     private int _curWeapon;
@@ -20,7 +19,7 @@ public class WeaponController : MonoBehaviour
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
     public int Ammo { get { return _ammo[_curWeapon]; } }
-    public int Damage { get { return _weapons[_usingWeapon[_curWeapon]].Damage; } }
+    public int Damage { get { return _weapons[_usingWeapon[_curWeapon]].damage; } }
 
     void Awake()
     {
@@ -31,11 +30,9 @@ public class WeaponController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-
         
         cam = Camera.main;
 
-        // 후에 데이터 테이블을 통해 외부에서 불러올 예정
         _weapons = new List<Weapon>()
         {
             new Weapon(7, 1, 1.4f, 1.5f, 1, 1),
@@ -45,7 +42,7 @@ public class WeaponController : MonoBehaviour
         _usingWeapon = new int[2] { 0, -1 };
         _ammo = new int[2]
         {
-            _weapons[0].Ammo,
+            _weapons[0].ammo,
             0,
         };
 
@@ -64,13 +61,6 @@ public class WeaponController : MonoBehaviour
         };
     }
 
-    void Start()
-    {
-        attackPoint = AttackPointManager.Instance.MakeAttackPoint();
-        DontDestroyOnLoad(attackPoint.gameObject);
-        attackPoint.SetDamage(Damage);
-    }
-
     public void Initialize()
     {
         _canUse[WeaponTimerType.FIRE] = true;
@@ -85,6 +75,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
     }
+
     public void SwitchWeapon()
     {
         int nextIndex = (_curWeapon + 1) % 2;
@@ -92,42 +83,30 @@ public class WeaponController : MonoBehaviour
         if (_canUse[WeaponTimerType.FIRE] == false || _usingWeapon[nextIndex] == -1) return;
 
         _curWeapon = nextIndex;
-        attackPoint.SetDamage(Damage);
+        AttackController.Instance.SetDamage();
         Initialize();
     }
 
-    public void Fire()
+    public bool Fire()
     {
-        if (_canUse[WeaponTimerType.FIRE] == false) return;
+        if (_canUse[WeaponTimerType.FIRE] == false) return false;
 
         if (_ammo[_curWeapon] > 0)
         {
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
-            float fireTime = _weapons[_usingWeapon[_curWeapon]].FireTime;
+            float fireTime = _weapons[_usingWeapon[_curWeapon]].firerate; ;
             _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
 
-            Vector3 mpos = Input.mousePosition;
-            mpos.z = cam.transform.position.z * -4;
-            Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
-
-            RaycastHit raycastHit;
-            LayerMask mask = LayerMask.GetMask("Floor") | LayerMask.GetMask("Enemy");
-            Physics.Raycast(cam.transform.position, dir, out raycastHit, Mathf.Infinity, mask);
-
-            Vector3 pos = Vector3.zero;
-
-            if (raycastHit.transform != null)
-                pos = raycastHit.point;
-
-            attackPoint.Attack(0.5f, pos);
+            return true;
         }
         else
         {
             // 총알이 부족하면 자동으로 장전
             Reload();
         }
+        return false;
     }
 
     public void Reload()
@@ -138,7 +117,7 @@ public class WeaponController : MonoBehaviour
         _canUse[WeaponTimerType.FIRE] = false;
         _canUse[WeaponTimerType.RELOAD] = false;
 
-        float reloadTime = _weapons[_usingWeapon[_curWeapon]].ReloadTime;
+        float reloadTime = _weapons[_usingWeapon[_curWeapon]].reload;
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
     }
@@ -153,7 +132,7 @@ public class WeaponController : MonoBehaviour
 
         if (type == WeaponTimerType.RELOAD)
         {
-            _ammo[_curWeapon] = _weapons[_curWeapon].Ammo;
+            _ammo[_curWeapon] = _weapons[_curWeapon].ammo;
             _canUse[WeaponTimerType.FIRE] = true;
         }
         _canUse[type] = true;
