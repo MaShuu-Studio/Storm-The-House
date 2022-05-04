@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public struct Weapon
 {
     /* AMMO: 탄창 수
@@ -10,51 +12,23 @@ public struct Weapon
      * RELOAD: 장전 속도
      * RANGE: 공격 범위
      */
-    private int _ammo;
-    private int _damage;
-    private float _accuracy;
-    private float _reload;
-    private float _fireRate;
-    private float _range;
+    public string name;
+    public int ammo;
+    public int damage;
+    public float accuracy;
+    public float reload;
+    public float firerate;
+    public float range;
 
     /*
-    private int _amUpgrade;
-    private float _frUpgrade;
-    private float _acUpgrade;
-    private float _rlUpgrade;
+    private int amUpgrade;
+    private float frUpgrade;
+    private float acUpgrade;
+    private float rlUpgrade;
     
-    private int _amCost;
-    private float _frCost;
-    private float _acCost;
-    private float _rlCost;
+    private int amCost;
+    private float frCost;
+    private float acCost;
+    private float rlCost;
     */
-
-    public int Ammo
-    {
-        get { return _ammo; }
-    }
-
-    public float ReloadTime
-    {
-        get { return 3.0f / _reload; }
-    }
-
-    public float FireTime
-    {
-        get { return 1.0f / _fireRate; }
-    }
-
-    public int Damage
-    {
-        get { return _damage; }
-    }
-    public Weapon(int am, int dmg, float ac, float rl, float fr, float rg)
-    {
-        _ammo = am;
-        _damage = dmg;
-        _accuracy = ac;
-        _reload = rl;
-        _fireRate = fr;
-        _range = rg;
-    }
 }

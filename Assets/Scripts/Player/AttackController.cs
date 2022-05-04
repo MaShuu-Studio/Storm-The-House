@@ -29,8 +29,6 @@ public class AttackController : MonoBehaviour
     {
         attackPoint = AttackPointManager.Instance.MakeAttackPoint();
         DontDestroyOnLoad(attackPoint.gameObject);
-
-        SetDamage();
     }
 
     public void SetDamage()

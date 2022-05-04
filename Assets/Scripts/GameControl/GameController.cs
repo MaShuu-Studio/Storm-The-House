@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         SupporterManager.Initialize();
+        WeaponManager.Initialize();
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class GameController : MonoBehaviour
         string ammo = WeaponController.Instance.Ammo.ToString();
         bool canFire = WeaponController.Instance._canUse[WeaponTimerType.FIRE];
         bool isReloading = WeaponController.Instance._canUse[WeaponTimerType.RELOAD];
-        
+
         style.fontSize = 50;
         GUI.Label(new Rect(10, 60, 50, 50), ammo, style);
         GUI.Label(new Rect(10, 110, 50, 50), canFire ? "CAN SHOOT" : "SHOOTING", style);

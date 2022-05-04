@@ -14,10 +14,9 @@ public class WeaponController : MonoBehaviour
     private int[] _ammo;
     private int _curWeapon;
 
-    private Camera cam;
-
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
+
     public int Ammo { get { return _ammo[_curWeapon]; } }
     public int Damage { get { return _weapons[_usingWeapon[_curWeapon]].damage; } }
 
@@ -30,14 +29,17 @@ public class WeaponController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        
-        cam = Camera.main;
+    }
 
-        _weapons = new List<Weapon>()
-        {
-            new Weapon(7, 1, 1.4f, 1.5f, 1, 1),
-            new Weapon(20, 1, 2, 1.5f, 2, 1)
-        };
+    void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        _weapons = new List<Weapon>();
+        _weapons.Add(WeaponManager.weapons[0]);
 
         _usingWeapon = new int[2] { 0, -1 };
         _ammo = new int[2]
@@ -59,10 +61,18 @@ public class WeaponController : MonoBehaviour
             { WeaponTimerType.FIRE, true },
             { WeaponTimerType.RELOAD, true },
         };
+
+        AttackController.Instance.SetDamage();
     }
 
-    public void Initialize()
+    public void SwitchWeapon()
     {
+        int nextIndex = (_curWeapon + 1) % 2;
+        // 발사 불가능 상태에서는 무기 교체 불가능.
+        if (_canUse[WeaponTimerType.FIRE] == false || _usingWeapon[nextIndex] == -1) return;
+
+        _curWeapon = nextIndex;
+
         _canUse[WeaponTimerType.FIRE] = true;
         if (_ammo[_curWeapon] <= 0)
         {
@@ -74,17 +84,8 @@ public class WeaponController : MonoBehaviour
 
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
-    }
 
-    public void SwitchWeapon()
-    {
-        int nextIndex = (_curWeapon + 1) % 2;
-        // 발사 불가능 상태에서는 무기 교체 불가능.
-        if (_canUse[WeaponTimerType.FIRE] == false || _usingWeapon[nextIndex] == -1) return;
-
-        _curWeapon = nextIndex;
         AttackController.Instance.SetDamage();
-        Initialize();
     }
 
     public bool Fire()

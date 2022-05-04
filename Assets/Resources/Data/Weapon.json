@@ -1,0 +1,23 @@
+{
+    "list":
+    [
+        {
+            "name":"DESERAT EAGLE",
+            "ammo":7,
+            "damage":1,
+            "accurancy":1.4,
+            "reload":1.5,
+            "firerate":1.0,
+            "range":1.0
+        },
+        {
+            "name":"UZI",
+            "ammo":20,
+            "damage":1,
+            "accurancy":2.0,
+            "reload":1.5,
+            "firerate":3.0,
+            "range":1.0
+        }
+    ]
+}
