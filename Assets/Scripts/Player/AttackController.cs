@@ -23,6 +23,7 @@ public class AttackController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         cam = Camera.main;
+        attackPoint = null;
     }
 
     void Start()
@@ -31,8 +32,23 @@ public class AttackController : MonoBehaviour
         DontDestroyOnLoad(attackPoint.gameObject);
     }
 
+    IEnumerator coroutine;
+
     public void SetDamage()
     {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = SetDMG();
+        StartCoroutine(coroutine);
+    }
+
+    IEnumerator SetDMG()
+    {
+        while (attackPoint == null) yield return null;
+
         attackPoint.SetDamage(WeaponController.Instance.Damage);
     }
 

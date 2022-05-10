@@ -12,6 +12,10 @@ public class BaseCamp : MonoBehaviour
     private Queue<GameObject> enemys;
     private Dictionary<string, IEnumerator> coroutines;
 
+    private int hp;
+    private int maxHp;
+    private float shield;
+
     void Awake()
     {
         area = GetComponent<BoxCollider>();
@@ -41,6 +45,12 @@ public class BaseCamp : MonoBehaviour
                 attackPoints[name].SetDamage(SupporterManager.Damage(name));
             }
         }
+
+        // 테스트용 임시 코드
+        hp = maxHp = 100;
+        shield = 0;
+        UIController.Instacne.SetHP(hp, maxHp);
+        UIController.Instacne.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     void Update()
@@ -58,6 +68,8 @@ public class BaseCamp : MonoBehaviour
         if (!supporter.ContainsKey(type)) return;
         
         supporter[type]++;
+
+        UIController.Instacne.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     private void ActiveSupporter(string type)
@@ -110,7 +122,7 @@ public class BaseCamp : MonoBehaviour
             enemys.Enqueue(other.gameObject);
         }
     }
-
+    
     GUIStyle style = new GUIStyle();
     private void OnGUI()
     {
@@ -119,7 +131,7 @@ public class BaseCamp : MonoBehaviour
         for (int i = 0; i < SupporterManager.Types.Count; i++)
         {
             string type = SupporterManager.Types[i];
-            if (GUI.Button(new Rect(1810, 10 + i * 60, 100, 50), type + " " + supporter[type]))
+            if (GUI.Button(new Rect(1810, 310 + i * 60, 100, 50), type))
             {
                 AddSupporter(type);
             }

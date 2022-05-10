@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
     void FixedUpdate()
     {
     }
-
+    /*
     GUIStyle style = new GUIStyle();
 
     private void OnGUI()
@@ -63,5 +63,5 @@ public class GameController : MonoBehaviour
 
             obj.transform.position = pos;
         }
-    }
+    }*/
 }

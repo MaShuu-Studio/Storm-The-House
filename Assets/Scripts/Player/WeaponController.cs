@@ -48,8 +48,6 @@ public class WeaponController : MonoBehaviour
             0,
         };
 
-        _curWeapon = 0;
-
         _timer = new Dictionary<WeaponTimerType, IEnumerator>()
         {
             { WeaponTimerType.FIRE, null },
@@ -62,7 +60,8 @@ public class WeaponController : MonoBehaviour
             { WeaponTimerType.RELOAD, true },
         };
 
-        AttackController.Instance.SetDamage();
+        _curWeapon = 1;
+        SwitchWeapon();
     }
 
     public void SwitchWeapon()
@@ -79,12 +78,13 @@ public class WeaponController : MonoBehaviour
             _canUse[WeaponTimerType.RELOAD] = true;
         }
 
-        StopCoroutine(_timer[WeaponTimerType.FIRE]);
-        StopCoroutine(_timer[WeaponTimerType.RELOAD]);
+        if (_timer[WeaponTimerType.FIRE] != null) StopCoroutine(_timer[WeaponTimerType.FIRE]);
+        if (_timer[WeaponTimerType.RELOAD] != null) StopCoroutine(_timer[WeaponTimerType.RELOAD]);
 
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
 
+        UIController.Instacne.SetAmmo(_ammo[_curWeapon], _weapons[_usingWeapon[_curWeapon]].ammo);
         AttackController.Instance.SetDamage();
     }
 
@@ -99,6 +99,7 @@ public class WeaponController : MonoBehaviour
             float fireTime = _weapons[_usingWeapon[_curWeapon]].firerate; ;
             _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
+            UIController.Instacne.UpdateAmmo(_ammo[_curWeapon]);
 
             return true;
         }
@@ -121,6 +122,7 @@ public class WeaponController : MonoBehaviour
         float reloadTime = _weapons[_usingWeapon[_curWeapon]].reload;
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
+        UIController.Instacne.Reload(reloadTime);
     }
 
     IEnumerator Timer(WeaponTimerType type, float time)
@@ -134,6 +136,7 @@ public class WeaponController : MonoBehaviour
         if (type == WeaponTimerType.RELOAD)
         {
             _ammo[_curWeapon] = _weapons[_curWeapon].ammo;
+            UIController.Instacne.UpdateAmmo(_ammo[_curWeapon]);
             _canUse[WeaponTimerType.FIRE] = true;
         }
         _canUse[type] = true;
