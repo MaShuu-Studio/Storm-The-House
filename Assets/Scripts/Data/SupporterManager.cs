@@ -11,7 +11,6 @@ public static class SupporterManager
     
     public static void Initialize()
     {
-        Debug.Log("[SYSTEM] LOAD SUPPORTER");
         List<Supporter> list = DataManager.Deserialize<Supporter>();
 
         _supporters = new Dictionary<string, Supporter>();
@@ -21,6 +20,7 @@ public static class SupporterManager
             _supporters.Add(list[i].name, list[i]);
         }
         Types = _supporters.Keys.ToList();
+        Debug.Log("[SYSTEM] LOAD SUPPORTER");
     }
 
     public static int Damage(string name)

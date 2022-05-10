@@ -9,8 +9,8 @@ public static class WeaponManager
 
     public static void Initialize()
     {
-        Debug.Log("[SYSTEM] LOAD WEAPON");
         weapons = DataManager.Deserialize<Weapon>();
+        Debug.Log("[SYSTEM] LOAD WEAPON");
     }
 
     public static float FireRate(int firerate)

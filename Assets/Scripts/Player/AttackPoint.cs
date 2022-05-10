@@ -11,8 +11,8 @@ public class AttackPoint : MonoBehaviour
     }
 
     private IEnumerator _coroutine = null;
-    private int _damage;
-    public int Damage { get { return _damage; } }
+    private float _damage;
+    public float Damage { get { return _damage; } }
     private bool _isRemain;
     private bool _isAttack;
 
@@ -45,7 +45,7 @@ public class AttackPoint : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         _damage = damage;
     }

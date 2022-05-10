@@ -2,33 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnumData;
+using Data;
 
 [Serializable]
-public struct Weapon
+public class Weapon
 {
-    /* AMMO: 탄창 수
-     * FIRE RATE: 발사 속도
-     * ACCURANCY: 탄퍼짐 정도
-     * RELOAD: 장전 속도
-     * RANGE: 공격 범위
+    /* 
+     * AMMO         0
+     * ACCURANCY    1
+     * RELOAD       2
+     * FIRERATE     3
+     * DAMAGE       4
+     * RANGE        5
      */
-    public string name;
-    public int ammo;
-    public int damage;
-    public float accuracy;
-    public float reload;
-    public float firerate;
-    public float range;
+    public string name = "";
+    public int cost = 0;
 
-    /*
-    private int amUpgrade;
-    private float frUpgrade;
-    private float acUpgrade;
-    private float rlUpgrade;
-    
-    private int amCost;
-    private float frCost;
-    private float acCost;
-    private float rlCost;
-    */
+    public SerializableDictionary<WeaponDataType, WeaponData> data;
+
+    public float GetValue(WeaponDataType type)
+    {
+        if (!data.ContainsKey(type)) return 1;
+
+        return data[type].currentValue;
+    }
+}
+
+[Serializable]
+public class WeaponData
+{
+    public float defaultValue;
+    public float currentValue;
+    public float upgradeValue;
+    public float maxValue;
+    public int cost;
 }

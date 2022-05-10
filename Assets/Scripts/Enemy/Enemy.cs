@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _originDmg;
     [SerializeField] private int _originSpeed;
 
-     private int _hp;
-     private int _dmg;
-     private int _speed;
+     private float _hp;
+     private float _dmg;
+     private float _speed;
 
     private bool _isMoving = true;
     private IEnumerator _motionCoroutine;
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         _isMoving = isMoving;
     }
 
-    public void Damaged(int dmg)
+    public void Damaged(float dmg)
     {
         _hp -= dmg;
         Debug.Log("[SYSTEM] ENEMY DAMAGED" + _hp);

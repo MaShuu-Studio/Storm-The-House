@@ -7,14 +7,42 @@ using UnityEngine;
 namespace Data
 {
     [Serializable]
-    public class SerializedList<T>
+    public class SerializableList<T>
     {
         public List<T> list;
-        public SerializedList(List<T> l)
+        public SerializableList(List<T> l)
         {
             list = l;
         }
     }
+
+    [Serializable]
+    public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+    {
+        public List<TKey> keys = new List<TKey>();
+        public List<TValue> values = new List<TValue>();
+
+        public void OnBeforeSerialize()
+        {
+            keys.Clear();
+            values.Clear();
+
+            foreach (var kvp in this)
+            {
+                keys.Add(kvp.Key);
+                values.Add(kvp.Value);
+            }
+        }
+
+        public void OnAfterDeserialize()
+        {
+            this.Clear();
+
+            for (int i = 0; i != keys.Count; i++)
+                this.Add(keys[i], values[i]);
+        }
+    }
+
 
     public static class DataManager
     {
@@ -25,7 +53,7 @@ namespace Data
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)
         {
-            string json = JsonUtility.ToJson(new SerializedList<T>(objects));
+            string json = JsonUtility.ToJson(new SerializableList<T>(objects));
             string fileName = typeof(T).Name + ".json";
 
             Debug.Log(json);
@@ -38,7 +66,7 @@ namespace Data
             fileName = basePath + dataPath + fileName;
             string json = File.ReadAllText(fileName);
 
-            SerializedList<T> list = JsonUtility.FromJson<SerializedList<T>>(json);
+            SerializableList<T> list = JsonUtility.FromJson<SerializableList<T>>(json);
 
             return list.list;
         }

@@ -1,23 +1,72 @@
 {
-    "list":
-    [
+    "list": [
         {
-            "name":"DESERAT EAGLE",
-            "ammo":7,
-            "damage":1,
-            "accurancy":1.4,
-            "reload":1.5,
-            "firerate":1.0,
-            "range":1.0
+            "name": "DESERAT EAGLE",
+            "cost": 0,
+            "data": {
+                "keys": [
+                    0,
+                    1,
+                    2
+                ],
+                "values": [
+                    {
+                        "defaultValue": 7,
+                        "currentValue": 7,
+                        "upgradeValue": 1,
+                        "maxValue": 14,
+                        "cost": 100
+                    },
+                    {
+                        "defaultValue": 1.4,
+                        "currentValue": 1.4,
+                        "upgradeValue": 0.9,
+                        "maxValue": 1.9,
+                        "cost": 200
+                    },
+                    {
+                        "defaultValue": 1.5,
+                        "currentValue": 1.5,
+                        "upgradeValue": 0.5,
+                        "maxValue": 4,
+                        "cost": 100
+                    }
+                ]
+            }
         },
         {
-            "name":"UZI",
-            "ammo":20,
-            "damage":1,
-            "accurancy":2.0,
-            "reload":1.5,
-            "firerate":3.0,
-            "range":1.0
+            "name": "UZI",
+            "cost": 300,
+            "data": {
+                "keys": [
+                    0,
+                    1,
+                    2
+                ],
+                "values": [
+                    {
+                        "defaultValue": 20,
+                        "currentValue": 20,
+                        "upgradeValue": 1,
+                        "maxValue": 30,
+                        "cost": 100
+                    },
+                    {
+                        "defaultValue": 2,
+                        "currentValue": 2,
+                        "upgradeValue": 0.05,
+                        "maxValue": 2.4,
+                        "cost": 400
+                    },
+                    {
+                        "defaultValue": 1.5,
+                        "currentValue": 1.5,
+                        "upgradeValue": 0.2,
+                        "maxValue": 2.5,
+                        "cost": 300
+                    }
+                ]
+            }
         }
     ]
 }

@@ -6,6 +6,6 @@ namespace EnumData
 {
     public enum EnemyType { DUMMY = 0,  };
     public enum SupporterType { ATTACK = 0, DEFENCE }
-    public enum WeaponType { DESERT_EAGLE = 0, }
+    public enum WeaponDataType { AMMO = 0, ACCURANCY, RELOAD, FIRERATE, DAMAGE, RANGE }
     public enum WeaponTimerType { FIRE, RELOAD }
 }
