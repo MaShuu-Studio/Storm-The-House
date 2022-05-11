@@ -18,6 +18,7 @@ public class Weapon
      */
     public string name = "";
     public int cost = 0;
+    public bool available = false;
 
     public SerializableDictionary<WeaponDataType, WeaponData> data;
 
@@ -37,4 +38,14 @@ public class WeaponData
     public float upgradeValue;
     public float maxValue;
     public int cost;
+
+    public void Upgrade(ref int money)
+    {
+        if (currentValue < maxValue && money >= cost)
+        {
+            money -= cost;
+            currentValue += upgradeValue;
+            cost += ((int)Math.Round(cost * 0.02f) * 10);
+        }
+    }
 }

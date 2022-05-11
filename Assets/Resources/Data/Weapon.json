@@ -3,6 +3,7 @@
         {
             "name": "DESERAT EAGLE",
             "cost": 0,
+            "available": true,
             "data": {
                 "keys": [
                     0,

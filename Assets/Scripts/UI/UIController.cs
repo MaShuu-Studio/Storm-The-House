@@ -21,6 +21,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpText;
     private int maxHp;
 
+    [SerializeField] private TextMeshProUGUI moneyText;
+
     [Space]
     [SerializeField] private TextMeshProUGUI baseText;
 
@@ -34,6 +36,11 @@ public class UIController : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(canvas);
+    }
+
+    public void UpdateMoney(int money)
+    {
+        moneyText.text = "$" + money;
     }
 
     public void SetAmmo(int cur, int max)

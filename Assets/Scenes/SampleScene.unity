@@ -4373,6 +4373,7 @@ MonoBehaviour:
   ammoText: {fileID: 922379908}
   hpSlider: {fileID: 799294681}
   hpText: {fileID: 522394106}
+  moneyText: {fileID: 1132090824}
   baseText: {fileID: 990608962}
 --- !u!1 &1261007473
 GameObject:

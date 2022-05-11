@@ -16,6 +16,10 @@ public class BaseCamp : MonoBehaviour
     private int maxHp;
     private float shield;
 
+    private int money;
+
+    public int Money { get { return money; } }
+
     void Awake()
     {
         area = GetComponent<BoxCollider>();
@@ -31,6 +35,9 @@ public class BaseCamp : MonoBehaviour
 
     void Start()
     {
+        money = 100;
+        UIController.Instacne.UpdateMoney(money);
+
         supporter = new Dictionary<string, int>();
         coroutines = new Dictionary<string, IEnumerator>();
         attackPoints = new Dictionary<string, AttackPoint>();
@@ -135,6 +142,18 @@ public class BaseCamp : MonoBehaviour
             {
                 AddSupporter(type);
             }
+        }
+
+        if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 100"))
+        {
+            money += 100;
+            UIController.Instacne.UpdateMoney(money);
+        }
+
+        if (GUI.Button(new Rect(1810, 310 + 180, 100, 50), "AMMO UPGRADE"))
+        {
+            WeaponController.Instance.Upgrade(0, WeaponDataType.AMMO, ref money);
+            UIController.Instacne.UpdateMoney(money);
         }
     }
 }

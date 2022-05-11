@@ -9,16 +9,15 @@ public class WeaponController : MonoBehaviour
     private static WeaponController instance;
 
     private List<Weapon> _weapons;
-
     private int[] _usingWeapon;
     private int[] _ammo;
     private int _curWeapon;
+    private int CurrentUsingWeapon { get { return _usingWeapon[_curWeapon]; } }
 
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
-
     public int Ammo { get { return _ammo[_curWeapon]; } }
-    public float Damage { get { return _weapons[_usingWeapon[_curWeapon]].GetValue(WeaponDataType.DAMAGE); } }
+    public float Damage { get { return _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.DAMAGE); } }
 
     void Awake()
     {
@@ -38,8 +37,8 @@ public class WeaponController : MonoBehaviour
 
     public void Initialize()
     {
-        _weapons = new List<Weapon>();
-        _weapons.Add(WeaponManager.weapons[0]);
+        if (_weapons != null) _weapons.Clear();
+        _weapons = new List<Weapon>(WeaponManager.weapons);
 
         _usingWeapon = new int[2] { 0, -1 };
         _ammo = new int[2]
@@ -84,7 +83,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
 
-        UIController.Instacne.SetAmmo(_ammo[_curWeapon], (int)_weapons[_usingWeapon[_curWeapon]].GetValue(WeaponDataType.AMMO));
+        UIController.Instacne.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
         AttackController.Instance.SetDamage();
     }
 
@@ -96,7 +95,7 @@ public class WeaponController : MonoBehaviour
         {
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
-            float fireTime = _weapons[_usingWeapon[_curWeapon]].GetValue(WeaponDataType.FIRERATE);
+            float fireTime = _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.FIRERATE);
             _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
             UIController.Instacne.UpdateAmmo(_ammo[_curWeapon]);
@@ -119,7 +118,7 @@ public class WeaponController : MonoBehaviour
         _canUse[WeaponTimerType.FIRE] = false;
         _canUse[WeaponTimerType.RELOAD] = false;
 
-        float reloadTime = _weapons[_usingWeapon[_curWeapon]].GetValue(WeaponDataType.RELOAD);
+        float reloadTime = _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.RELOAD);
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
         UIController.Instacne.Reload(reloadTime);
@@ -135,10 +134,17 @@ public class WeaponController : MonoBehaviour
 
         if (type == WeaponTimerType.RELOAD)
         {
-            _ammo[_curWeapon] = (int)_weapons[_usingWeapon[_curWeapon]].GetValue(WeaponDataType.AMMO);
+            _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO);
             UIController.Instacne.UpdateAmmo(_ammo[_curWeapon]);
             _canUse[WeaponTimerType.FIRE] = true;
         }
         _canUse[type] = true;
+    }
+
+    public void Upgrade(int index, WeaponDataType type, ref int money)
+    {
+        _weapons[index].data[type].Upgrade(ref money);
+
+        UIController.Instacne.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
     }
 }
