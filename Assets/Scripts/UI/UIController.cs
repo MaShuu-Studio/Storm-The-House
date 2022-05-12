@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using EnumData;
 
 public class UIController : MonoBehaviour
 {
@@ -26,6 +27,16 @@ public class UIController : MonoBehaviour
     [Space]
     [SerializeField] private TextMeshProUGUI baseText;
 
+    [Header("Shop")]
+    [SerializeField] private Transform supporterGrid;
+    [SerializeField] private Transform weaponsGrid;
+    [SerializeField] private Transform towersGrid;
+    
+    [Space]
+    [SerializeField] private GameObject supporterPrefab;
+    [SerializeField] private GameObject itemPrefab;
+    private int selectedItem;
+
     void Awake()
     {
         if (Instacne != null)
@@ -38,10 +49,12 @@ public class UIController : MonoBehaviour
         DontDestroyOnLoad(canvas);
     }
 
-    public void UpdateMoney(int money)
+    void Start()
     {
-        moneyText.text = "$" + money;
+        Initialize();
     }
+
+    #region Upside Panel
 
     public void SetAmmo(int cur, int max)
     {
@@ -87,6 +100,10 @@ public class UIController : MonoBehaviour
             yield return null;
         }
     }
+    public void UpdateMoney(int money)
+    {
+        moneyText.text = "$" + money;
+    }
 
     public void SetHP(int cur, int max)
     {
@@ -104,5 +121,59 @@ public class UIController : MonoBehaviour
     public void SetSupporter(int shield, int gun, int repair)
     {
         baseText.text = shield + "%" + "\n" + gun.ToString() + "\n" + repair.ToString();
+    }
+    #endregion
+
+    private void Initialize()
+    {
+        for (int i = 0; i < SupporterManager.Types.Count; i++)
+        {
+            GameObject go = Instantiate(supporterPrefab);
+            CustomButton si = go.GetComponent<CustomButton>();
+
+            si.SetButton(ButtonType.SUPPORTER, i);
+            si.SetIcon(SupporterManager.Types[i]);
+
+            go.transform.SetParent(supporterGrid);
+        }
+        
+        for (int i = 0; i < WeaponManager.Weapons.Count; i++)
+        {
+            GameObject go = Instantiate(itemPrefab);
+            CustomButton si = go.GetComponent<CustomButton>();
+
+            si.SetButton(ButtonType.WEAPON, i);
+            si.SetIcon(WeaponManager.Weapons[i].name);
+
+            go.transform.SetParent(weaponsGrid);
+        }
+    }
+
+    public void PressButton(ButtonType type, int index)
+    {
+        switch(type)
+        {
+            case ButtonType.SUPPORTER:
+                string name = SupporterManager.Types[index];
+                BaseCamp.Instacne.AddSupporter(name);
+                break;
+            case ButtonType.WEAPON:
+                if (WeaponController.Instance.WeaponIsAvailable(index))
+                {
+                    selectedItem = index;
+                    UpdateUpgradeView();
+                }
+                else WeaponController.Instance.AddWeapon(index, true);
+                break;
+            case ButtonType.UPGRADE:
+                break;
+            case ButtonType.TOWER:
+                break;
+        }
+    }
+
+    private void UpdateUpgradeView()
+    {
+        // 업그레이드 관련 창 표기
     }
 }

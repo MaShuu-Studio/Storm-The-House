@@ -5,7 +5,8 @@ using Data;
 
 public static class WeaponManager
 {
-    public static List<Weapon> weapons;
+    public static List<Weapon> Weapons { get { return weapons; } }
+    private static List<Weapon> weapons;
 
     public static void Initialize()
     {

@@ -34,6 +34,11 @@ public class GameController : MonoBehaviour
         {
             WeaponController.Instance.Reload();
         }
+
+        if (Input.GetButtonDown("SWITCH"))
+        {
+            WeaponController.Instance.SwitchWeapon();
+        }
     }
 
     void FixedUpdate()

@@ -38,7 +38,7 @@ public class WeaponController : MonoBehaviour
     public void Initialize()
     {
         if (_weapons != null) _weapons.Clear();
-        _weapons = new List<Weapon>(WeaponManager.weapons);
+        _weapons = new List<Weapon>(WeaponManager.Weapons);
 
         _usingWeapon = new int[2] { 0, -1 };
         _ammo = new int[2]
@@ -139,6 +139,19 @@ public class WeaponController : MonoBehaviour
             _canUse[WeaponTimerType.FIRE] = true;
         }
         _canUse[type] = true;
+    }
+
+    public bool WeaponIsAvailable(int index)
+    {
+        return _weapons[index].available;
+    }
+
+    public void AddWeapon(int index, bool b)
+    {
+        _weapons[index].available = b;
+
+        // 임시로 구매가 됐다는 것을 체크하기 위해 교체무기로 세팅
+        _usingWeapon[1] = index;
     }
 
     public void Upgrade(int index, WeaponDataType type, ref int money)

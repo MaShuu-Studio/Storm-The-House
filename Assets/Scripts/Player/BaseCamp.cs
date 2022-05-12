@@ -6,6 +6,9 @@ using EnumData;
 [RequireComponent(typeof(BoxCollider))]
 public class BaseCamp : MonoBehaviour
 {
+    public static BaseCamp Instacne { get { return instance; } }
+    private static BaseCamp instance;
+
     private BoxCollider area;
     private Dictionary<string, int> supporter;
     private Dictionary<string, AttackPoint> attackPoints;
@@ -22,6 +25,14 @@ public class BaseCamp : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         area = GetComponent<BoxCollider>();
         if (area == null)
             area = gameObject.AddComponent<BoxCollider>();
@@ -134,15 +145,6 @@ public class BaseCamp : MonoBehaviour
     private void OnGUI()
     {
         style.fontSize = 0;
-
-        for (int i = 0; i < SupporterManager.Types.Count; i++)
-        {
-            string type = SupporterManager.Types[i];
-            if (GUI.Button(new Rect(1810, 310 + i * 60, 100, 50), type))
-            {
-                AddSupporter(type);
-            }
-        }
 
         if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 100"))
         {
