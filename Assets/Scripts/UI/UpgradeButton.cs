@@ -12,7 +12,7 @@ public class UpgradeButton : CustomButton
     [SerializeField] private TextMeshProUGUI upgradeText;
     [SerializeField] private TextMeshProUGUI costText;
 
-    WeaponDataType _type;
+    WeaponDataType _dataType;
     WeaponData _data;
 
     public override void SetIcon(string name)
@@ -22,7 +22,7 @@ public class UpgradeButton : CustomButton
 
     public void SetUpgradeData(WeaponDataType type, WeaponData data)
     {
-        _type = type;
+        _dataType = type;
         _data = data;
 
         nameText.text = type.ToString();
@@ -37,7 +37,7 @@ public class UpgradeButton : CustomButton
     {
         if (_data == null) return;
 
-        UIController.Instacne.Upgrade(_type);
+        UIController.Instacne.Upgrade(_dataType);
 
         upgradeSlider.value = _data.currentValue;
         upgradeText.text = _data.currentValue.ToString();

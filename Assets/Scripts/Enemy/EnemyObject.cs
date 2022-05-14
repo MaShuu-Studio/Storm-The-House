@@ -2,28 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumData;
+using System;
 
-public class Enemy : MonoBehaviour
+public class EnemyObject : MonoBehaviour
 {
-    [SerializeField] private EnemyType type;
+    private float _originHp;
+    private float _originDmg;
+    private float _originSpeed;
 
-    [SerializeField] private int _originHp;
-    [SerializeField] private int _originDmg;
-    [SerializeField] private int _originSpeed;
-
-     private float _hp;
-     private float _dmg;
-     private float _speed;
+    private float _hp;
+    private float _dmg;
+    private float _speed;
 
     private bool _isMoving = true;
-    private IEnumerator _motionCoroutine;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        name = name.Substring(0, name.Length - 7);
         Initialize();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,13 +34,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    public void Initialize()
+    {
+        Enemy enemy = EnemyManager.Enemies[name];
+
+        _hp = enemy.hp;
+        _dmg = enemy.dmg;
+        _speed = enemy.speed;
+    }
+
+    private void Recover()
     {
         _hp = _originHp;
         _dmg = _originDmg;
         _speed = _originSpeed;
     }
-
 
     private void Move()
     {
@@ -67,9 +72,9 @@ public class Enemy : MonoBehaviour
 
         if (_hp <= 0)
         {
-            ObjectPool.ReturnObject(type, gameObject);
+            ObjectPool.ReturnObject(name, gameObject);
 
-            Initialize();
+            Recover();
         }
     }
 

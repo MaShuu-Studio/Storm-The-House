@@ -50,7 +50,7 @@ public class AttackPoint : MonoBehaviour
         _damage = damage;
     }
 
-    public void EnemyDamaged(Enemy enemy)
+    public void EnemyDamaged(EnemyObject enemy)
     {
         if (_isAttack == false) return;
 

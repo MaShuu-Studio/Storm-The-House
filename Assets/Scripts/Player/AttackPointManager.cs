@@ -35,7 +35,7 @@ public class AttackPointManager : MonoBehaviour
         return newAttackPoint;
     }
 
-    public void EnemyDamaged(Enemy enemy, GameObject attackPoint)
+    public void EnemyDamaged(EnemyObject enemy, GameObject attackPoint)
     {
         for (int i = 0; i < attackPoints.Count; i++)
         {

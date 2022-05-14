@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackArea : MonoBehaviour
 {
-    [SerializeField] private Enemy enemy;
+    [SerializeField] private EnemyObject enemy;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Barricade")

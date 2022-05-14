@@ -50,6 +50,9 @@ namespace Data
         private static string dataPath = "Data/";
         private static string prefabPath = "Prefabs/";
 
+        public static string DataPath { get { return basePath + dataPath; } }
+        public static string PrefabPath { get { return basePath + prefabPath; } }
+
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)
         {
@@ -57,18 +60,25 @@ namespace Data
             string fileName = typeof(T).Name + ".json";
 
             Debug.Log(json);
-            File.WriteAllText(basePath + dataPath + fileName, json);
+            File.WriteAllText(DataPath + fileName, json);
         }
 
         public static List<T> Deserialize<T>()
         {
             string fileName = typeof(T).Name + ".json";
-            fileName = basePath + dataPath + fileName;
+            fileName = DataPath + fileName;
             string json = File.ReadAllText(fileName);
 
             SerializableList<T> list = JsonUtility.FromJson<SerializableList<T>>(json);
 
             return list.list;
+        }
+
+        public static GameObject GetPrefab<T>(string name)
+        {
+            string typeName = typeof(T).Name + "/";
+
+            return Resources.Load<GameObject>(prefabPath + typeName + name);
         }
     }
 }

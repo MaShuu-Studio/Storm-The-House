@@ -150,6 +150,7 @@ public class WeaponController : MonoBehaviour
     {
         return _weapons[index];
     }
+
     public void BuyWeapon(int index, ref int money)
     {
         if (_weapons[index].cost <= money)
