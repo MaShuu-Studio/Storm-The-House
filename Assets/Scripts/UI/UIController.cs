@@ -35,7 +35,11 @@ public class UIController : MonoBehaviour
     [Space]
     [SerializeField] private GameObject supporterPrefab;
     [SerializeField] private GameObject itemPrefab;
+    private ButtonType selectedType;
     private int selectedItem;
+
+    [SerializeField] private UpgradeView upgradeView;
+
 
     void Awake()
     {
@@ -126,6 +130,10 @@ public class UIController : MonoBehaviour
 
     private void Initialize()
     {
+        selectedType = ButtonType.WEAPON;
+        selectedItem = 0;
+        UpdateUpgradeView();
+
         for (int i = 0; i < SupporterManager.Types.Count; i++)
         {
             GameObject go = Instantiate(supporterPrefab);
@@ -155,25 +163,31 @@ public class UIController : MonoBehaviour
         {
             case ButtonType.SUPPORTER:
                 string name = SupporterManager.Types[index];
-                BaseCamp.Instacne.AddSupporter(name);
+                Player.Instacne.AddSupporter(name);
                 break;
             case ButtonType.WEAPON:
-                if (WeaponController.Instance.WeaponIsAvailable(index))
-                {
-                    selectedItem = index;
-                    UpdateUpgradeView();
-                }
-                else WeaponController.Instance.AddWeapon(index, true);
-                break;
-            case ButtonType.UPGRADE:
+                selectedItem = index;
+                UpdateUpgradeView();
                 break;
             case ButtonType.TOWER:
                 break;
+            case ButtonType.BUY:
+                Player.Instacne.BuyWeapon(selectedItem);
+                UpdateUpgradeView();
+                break;
         }
+    }
+
+    public void Upgrade(WeaponDataType type)
+    {
+        // 타워인지 무기인지에 따라 다른 설정
+        Player.Instacne.Upgrade(selectedItem, type);
     }
 
     private void UpdateUpgradeView()
     {
         // 업그레이드 관련 창 표기
+        Weapon weapon = WeaponController.Instance.GetWeaponData(selectedItem);
+        upgradeView.SetUpgradeView(weapon);
     }
 }

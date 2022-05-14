@@ -4,10 +4,10 @@ using UnityEngine;
 using EnumData;
 
 [RequireComponent(typeof(BoxCollider))]
-public class BaseCamp : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public static BaseCamp Instacne { get { return instance; } }
-    private static BaseCamp instance;
+    public static Player Instacne { get { return instance; } }
+    private static Player instance;
 
     private BoxCollider area;
     private Dictionary<string, int> supporter;
@@ -84,7 +84,7 @@ public class BaseCamp : MonoBehaviour
     public void AddSupporter(string type)
     {
         if (!supporter.ContainsKey(type)) return;
-        
+
         supporter[type]++;
 
         UIController.Instacne.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
@@ -112,12 +112,12 @@ public class BaseCamp : MonoBehaviour
         } while (time < waitingTime);
 
         GameObject target;
-        Vector3 pos = Vector3.zero; 
-            
+        Vector3 pos = Vector3.zero;
+
         while (enemys.Count > 0)
         {
             target = enemys.Peek();
-            
+
             if (target == null || target.activeSelf == false) enemys.Dequeue();
             else
             {
@@ -125,12 +125,23 @@ public class BaseCamp : MonoBehaviour
                 attackPoints[type].Attack(0.1f, pos);
                 break;
             }
-        } 
+        }
 
         if (enemys.Count > 0)
             ActiveSupporter(type);
         else
             coroutines[type] = null;
+    }
+
+    public void Upgrade(int index, WeaponDataType type)
+    {
+        WeaponController.Instance.Upgrade(index, type, ref money);
+        UIController.Instacne.UpdateMoney(money);
+    }
+    public void BuyWeapon(int index)
+    {
+        WeaponController.Instance.BuyWeapon(index, ref money);
+        UIController.Instacne.UpdateMoney(money);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -140,7 +151,7 @@ public class BaseCamp : MonoBehaviour
             enemys.Enqueue(other.gameObject);
         }
     }
-    
+
     GUIStyle style = new GUIStyle();
     private void OnGUI()
     {
@@ -148,13 +159,7 @@ public class BaseCamp : MonoBehaviour
 
         if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 100"))
         {
-            money += 100;
-            UIController.Instacne.UpdateMoney(money);
-        }
-
-        if (GUI.Button(new Rect(1810, 310 + 180, 100, 50), "AMMO UPGRADE"))
-        {
-            WeaponController.Instance.Upgrade(0, WeaponDataType.AMMO, ref money);
+            money += 1000;
             UIController.Instacne.UpdateMoney(money);
         }
     }

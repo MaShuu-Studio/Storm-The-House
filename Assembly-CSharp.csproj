@@ -60,6 +60,8 @@
     <Compile Include="Assets\Scripts\Data\Weapon.cs" />
     <Compile Include="Assets\Scripts\Player\AttackPointManager.cs" />
     <Compile Include="Assets\Scripts\Player\AttackPoint.cs" />
+    <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
+    <Compile Include="Assets\Scripts\UI\CustomButton.cs" />
     <Compile Include="Assets\Scripts\Data\EnumData.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\Player\WeaponController.cs" />
@@ -67,14 +69,16 @@
     <Compile Include="Assets\Scripts\Data\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameControl\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Player\BaseCamp.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Data\Supporter.cs" />
     <Compile Include="Assets\Scripts\Data\SupporterManager.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager.cs" />
     <Compile Include="Assets\Scripts\Player\AttackController.cs" />
-    <Compile Include="Assets\Scripts\UI\CustomButton.cs" />
-    <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
+    <Compile Include="Assets\Scripts\Enemy\RoundController.cs" />
+    <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
+    <Compile Include="Assets\Scripts\UI\UpgradeView.cs" />
+    <Compile Include="Assets\Scripts\UI\BuyButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -16,7 +16,7 @@ public abstract class CustomButton : MonoBehaviour
         _button.onClick.AddListener(() => ClickEvent());
     }
 
-    private void ClickEvent()
+    protected virtual void ClickEvent()
     {
         UIController.Instacne.PressButton(_type, _index);
     }
@@ -26,5 +26,6 @@ public abstract class CustomButton : MonoBehaviour
         _index = i;
         _type = type;
     }
+
     public abstract void SetIcon(string name);
 }

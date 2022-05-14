@@ -21,7 +21,7 @@
                     {
                         "defaultValue": 1.4,
                         "currentValue": 1.4,
-                        "upgradeValue": 0.9,
+                        "upgradeValue": 0.1,
                         "maxValue": 1.9,
                         "cost": 200
                     },

@@ -146,12 +146,17 @@ public class WeaponController : MonoBehaviour
         return _weapons[index].available;
     }
 
-    public void AddWeapon(int index, bool b)
+    public Weapon GetWeaponData(int index)
     {
-        _weapons[index].available = b;
-
-        // 임시로 구매가 됐다는 것을 체크하기 위해 교체무기로 세팅
-        _usingWeapon[1] = index;
+        return _weapons[index];
+    }
+    public void BuyWeapon(int index, ref int money)
+    {
+        if (_weapons[index].cost <= money)
+        {
+            _weapons[index].available = true;
+            money -= _weapons[index].cost;
+        }
     }
 
     public void Upgrade(int index, WeaponDataType type, ref int money)
