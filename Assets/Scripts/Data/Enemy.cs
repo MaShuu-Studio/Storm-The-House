@@ -9,6 +9,10 @@ public class Enemy
     public string name;
 
     public float hp;
-    public float dmg;
+    public int dmg;
+    public float attackDelay = 1;
+    public float attackRange = 0.5f;
     public float speed;
+     
+    public int money;
 }

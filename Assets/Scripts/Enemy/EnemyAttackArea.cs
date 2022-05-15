@@ -2,21 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class EnemyAttackArea : MonoBehaviour
 {
-    [SerializeField] private EnemyObject enemy;
+    private EnemyObject _enemy;
+    private SphereCollider _collider;
+
+    private void Awake()
+    {
+        _collider = GetComponent<SphereCollider>();
+    }
+
+    public void Initialize(EnemyObject enemy, float size)
+    {
+        _enemy = enemy;
+
+        _collider.radius = 0.5f + size;
+        transform.localPosition = new Vector3(0, 0, 0);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Barricade")
         {
-            enemy.MoveOrAttack(false);
+            _enemy.MoveOrAttack(false);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Barricade")
         {
-            enemy.MoveOrAttack(true);
+            _enemy.MoveOrAttack(true);
         }
     }
 }

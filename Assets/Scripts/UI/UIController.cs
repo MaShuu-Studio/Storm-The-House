@@ -7,7 +7,7 @@ using EnumData;
 
 public class UIController : MonoBehaviour
 {
-    public static UIController Instacne { get { return instance; } }
+    public static UIController Instance { get { return instance; } }
     private static UIController instance;
 
     [Header("Base Object")]
@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour
 
     void Awake()
     {
-        if (Instacne != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -163,7 +163,7 @@ public class UIController : MonoBehaviour
         {
             case ButtonType.SUPPORTER:
                 string name = SupporterManager.Types[index];
-                Player.Instacne.AddSupporter(name);
+                Player.Instance.AddSupporter(name);
                 break;
             case ButtonType.WEAPON:
                 selectedItem = index;
@@ -172,7 +172,7 @@ public class UIController : MonoBehaviour
             case ButtonType.TOWER:
                 break;
             case ButtonType.BUY:
-                Player.Instacne.BuyWeapon(selectedItem);
+                Player.Instance.BuyWeapon(selectedItem);
                 UpdateUpgradeView();
                 break;
         }
@@ -181,7 +181,7 @@ public class UIController : MonoBehaviour
     public void Upgrade(WeaponDataType type)
     {
         // 타워인지 무기인지에 따라 다른 설정
-        Player.Instacne.Upgrade(selectedItem, type);
+        Player.Instance.Upgrade(selectedItem, type);
     }
 
     private void UpdateUpgradeView()

@@ -18,7 +18,7 @@ public abstract class CustomButton : MonoBehaviour
 
     protected virtual void ClickEvent()
     {
-        UIController.Instacne.PressButton(_type, _index);
+        UIController.Instance.PressButton(_type, _index);
     }
 
     public void SetButton(ButtonType type, int i)

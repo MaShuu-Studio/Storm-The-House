@@ -37,7 +37,7 @@ public class UpgradeButton : CustomButton
     {
         if (_data == null) return;
 
-        UIController.Instacne.Upgrade(_dataType);
+        UIController.Instance.Upgrade(_dataType);
 
         upgradeSlider.value = _data.currentValue;
         upgradeText.text = _data.currentValue.ToString();

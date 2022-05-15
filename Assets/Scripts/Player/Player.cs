@@ -6,7 +6,7 @@ using EnumData;
 [RequireComponent(typeof(BoxCollider))]
 public class Player : MonoBehaviour
 {
-    public static Player Instacne { get { return instance; } }
+    public static Player Instance { get { return instance; } }
     private static Player instance;
 
     private BoxCollider area;
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     public int Money { get { return money; } }
 
+    #region Awake, Start, Update
     void Awake()
     {
         if (instance != null)
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         money = 100;
-        UIController.Instacne.UpdateMoney(money);
+        UIController.Instance.UpdateMoney(money);
 
         supporter = new Dictionary<string, int>();
         coroutines = new Dictionary<string, IEnumerator>();
@@ -67,8 +68,8 @@ public class Player : MonoBehaviour
         // 테스트용 임시 코드
         hp = maxHp = 100;
         shield = 0;
-        UIController.Instacne.SetHP(hp, maxHp);
-        UIController.Instacne.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
+        UIController.Instance.SetHP(hp, maxHp);
+        UIController.Instance.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     void Update()
@@ -80,14 +81,16 @@ public class Player : MonoBehaviour
                 ActiveSupporter(type);
         }
     }
+    #endregion
 
+    #region Supporter
     public void AddSupporter(string type)
     {
         if (!supporter.ContainsKey(type)) return;
 
         supporter[type]++;
 
-        UIController.Instacne.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
+        UIController.Instance.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     private void ActiveSupporter(string type)
@@ -132,16 +135,24 @@ public class Player : MonoBehaviour
         else
             coroutines[type] = null;
     }
+    #endregion
+
+    public void Damaged(int dmg)
+    {
+        hp -= dmg;
+        UIController.Instance.UpdateHP(hp);
+    }
 
     public void Upgrade(int index, WeaponDataType type)
     {
         WeaponController.Instance.Upgrade(index, type, ref money);
-        UIController.Instacne.UpdateMoney(money);
+        UIController.Instance.UpdateMoney(money);
     }
+
     public void BuyWeapon(int index)
     {
         WeaponController.Instance.BuyWeapon(index, ref money);
-        UIController.Instacne.UpdateMoney(money);
+        UIController.Instance.UpdateMoney(money);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -160,7 +171,7 @@ public class Player : MonoBehaviour
         if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 100"))
         {
             money += 1000;
-            UIController.Instacne.UpdateMoney(money);
+            UIController.Instance.UpdateMoney(money);
         }
     }
 }

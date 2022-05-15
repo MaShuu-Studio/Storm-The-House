@@ -5,7 +5,10 @@
             "name":"BASIC",
             "hp":1,
             "dmg":1,
-            "speed":5
+            "speed":5,
+            "attackDelay":2,
+            "attackRange":0.25,
+            "money":10
         }
     ]
 }

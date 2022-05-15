@@ -83,7 +83,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
 
-        UIController.Instacne.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
+        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
         AttackController.Instance.SetDamage();
     }
 
@@ -98,7 +98,7 @@ public class WeaponController : MonoBehaviour
             float fireTime = _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.FIRERATE);
             _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
-            UIController.Instacne.UpdateAmmo(_ammo[_curWeapon]);
+            UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
 
             return true;
         }
@@ -121,7 +121,7 @@ public class WeaponController : MonoBehaviour
         float reloadTime = _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.RELOAD);
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
-        UIController.Instacne.Reload(reloadTime);
+        UIController.Instance.Reload(reloadTime);
     }
 
     IEnumerator Timer(WeaponTimerType type, float time)
@@ -135,7 +135,7 @@ public class WeaponController : MonoBehaviour
         if (type == WeaponTimerType.RELOAD)
         {
             _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO);
-            UIController.Instacne.UpdateAmmo(_ammo[_curWeapon]);
+            UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
             _canUse[WeaponTimerType.FIRE] = true;
         }
         _canUse[type] = true;
@@ -164,6 +164,6 @@ public class WeaponController : MonoBehaviour
     {
         _weapons[index].data[type].Upgrade(ref money);
 
-        UIController.Instacne.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
+        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
     }
 }

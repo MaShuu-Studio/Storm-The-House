@@ -2,67 +2,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumData;
-using System;
 
 public class EnemyObject : MonoBehaviour
 {
-    private float _originHp;
-    private float _originDmg;
-    private float _originSpeed;
+    [SerializeField] private EnemyAttackArea _attackArea;
+    private Enemy _enemy;
 
     private float _hp;
-    private float _dmg;
-    private float _speed;
 
     private bool _isMoving = true;
 
     void Awake()
     {
         name = name.Substring(0, name.Length - 7);
+    }
+
+    void Start()
+    {
         Initialize();
     }
+
     // Update is called once per frame
     void Update()
     {
         if (_isMoving)
-        {
             Move();
-        }
-        else
-        {
-            Attack();
-        }
     }
 
     public void Initialize()
     {
         Enemy enemy = EnemyManager.Enemies[name];
 
-        _hp = enemy.hp;
-        _dmg = enemy.dmg;
-        _speed = enemy.speed;
+        _enemy = enemy;
+        _attackArea.Initialize(this, enemy.attackRange);
+
+        _hp = _enemy.hp;
     }
 
     private void Recover()
     {
-        _hp = _originHp;
-        _dmg = _originDmg;
-        _speed = _originSpeed;
+        _hp = _enemy.hp;
     }
 
     private void Move()
     {
-        transform.position += Vector3.right * _speed * Time.deltaTime;
+        transform.position += Vector3.right * _enemy.speed * Time.deltaTime;
     }
+
+    IEnumerator attackCoroutine;
 
     private void Attack()
     {
+        StopAttack();
 
+        attackCoroutine = AttackTimer();
+        StartCoroutine(AttackTimer());
+    }
+
+    private void StopAttack()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+    }
+
+    IEnumerator AttackTimer()
+    {
+        yield return new WaitForSeconds(_enemy.attackDelay);
+
+        if (_isMoving == false)
+        {
+            Player.Instance.Damaged(_enemy.dmg);
+            Attack();
+        }
     }
 
     public void MoveOrAttack(bool isMoving)
     {
         _isMoving = isMoving;
+
+        if (_isMoving == false)
+            Attack();
+        else StopAttack();
     }
 
     public void Damaged(float dmg)
@@ -72,6 +95,8 @@ public class EnemyObject : MonoBehaviour
 
         if (_hp <= 0)
         {
+            StopAttack();
+
             ObjectPool.ReturnObject(name, gameObject);
 
             Recover();

@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
+    <Compile Include="Assets\Scripts\Data\Enemy.cs" />
     <Compile Include="Assets\Scripts\Data\Weapon.cs" />
     <Compile Include="Assets\Scripts\Player\AttackPointManager.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Assets\Scripts\GameControl\RoundController.cs" />
     <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
     <Compile Include="Assets\Scripts\UI\CustomButton.cs" />
+    <Compile Include="Assets\Scripts\ObjectPool\EnemyPool.cs" />
     <Compile Include="Assets\Scripts\Data\EnumData.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\Player\WeaponController.cs" />
@@ -73,15 +75,13 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyObject.cs" />
     <Compile Include="Assets\Scripts\ObjectPool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Data\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Data\Supporter.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeView.cs" />
     <Compile Include="Assets\Scripts\Data\SupporterManager.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager.cs" />
     <Compile Include="Assets\Scripts\Player\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
-    <Compile Include="Assets\Scripts\Data\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Data\EnemyManager.cs" />
-    <Compile Include="Assets\Scripts\ObjectPool\EnemyPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
