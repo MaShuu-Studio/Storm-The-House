@@ -1,0 +1,20 @@
+{
+    "list":
+    [
+        {
+            "enemies":
+            [
+                {
+                    "name":"BASIC",
+                    "delay":3,
+                    "delayRange":0.5
+                },
+                {
+                    "name":"BASIC2",
+                    "delay":5.5,
+                    "delayRange":0.5
+                }
+            ]
+        }
+    ]
+}

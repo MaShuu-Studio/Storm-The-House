@@ -35,7 +35,7 @@ public class WeaponData
 {
     public float defaultValue;
     public float currentValue;
-    public float upgradeValue;
+    public float upgradeValue = 0;
     public float maxValue;
     public int cost;
 
