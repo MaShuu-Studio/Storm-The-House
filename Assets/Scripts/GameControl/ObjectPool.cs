@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Data;
 
-public abstract class ObjectPool : MonoBehaviour
+public class ObjectPool : MonoBehaviour
 {
-    private static ObjectPool instance;
+    protected static ObjectPool instance;
     public static ObjectPool Instance { get { return instance; } }
 
     public Dictionary<string, Queue<GameObject>> Pool { get { return _pool; } }
@@ -21,6 +21,7 @@ public abstract class ObjectPool : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        DontDestroyOnLoad(gameObject);
         instance = this;
     }
 
@@ -29,7 +30,42 @@ public abstract class ObjectPool : MonoBehaviour
         Initialize();
     }
 
-    protected abstract void Initialize();
+    protected void Initialize()
+    {
+        _pool = new Dictionary<string, Queue<GameObject>>();
+        _poolParent = new Dictionary<string, Transform>();
+
+        // Enemy
+        for (int i = 0; i < EnemyManager.Enemies.Count; i++)
+        {
+            string name = EnemyManager.Types[i];
+
+            GameObject p = new GameObject(name);
+            p.transform.SetParent(transform);
+
+            _pool.Add(name, new Queue<GameObject>());
+            _poolParent.Add(name, p.transform);
+
+            for (int j = 0; j < 10; j++)
+            {
+                CreateNewObject<Enemy>(name);
+            }
+        }
+
+        // Tower
+        for (int i = 0; i < ItemManager.Towers.Count; i++)
+        {
+            string name = ItemManager.TowerNames[i];
+
+            GameObject p = new GameObject(name);
+            p.transform.SetParent(transform);
+
+            _pool.Add(name, new Queue<GameObject>());
+            _poolParent.Add(name, p.transform);
+
+            CreateNewObject<Item>(name);
+        }
+    }
     protected static void CreateNewObject<T>(string name)
     {
         GameObject gbo = Instantiate(DataManager.GetPrefab<T>(name));

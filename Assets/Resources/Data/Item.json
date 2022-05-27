@@ -2,6 +2,7 @@
     "list": 
     [
         {
+            "type": 0,
             "name": "DESERT EAGLE",
             "cost": 0,
             "available": true,
@@ -40,6 +41,7 @@
             }
         },
         {
+            "type": 0,
             "name": "UZI",
             "cost": 300,
             "data": 
@@ -76,6 +78,36 @@
                     },
                     {
                         "currentValue": 5.0
+                    }
+                ]
+            }
+        },
+        {
+            "type": 1,
+            "name": "FAN TOWER",
+            "cost": 2000,
+            "data": 
+            {
+                "keys": 
+                [
+                    6,
+                    5
+                ],
+                "values": 
+                [
+                    {
+                        "defaultValue": 0.04,
+                        "currentValue": 0.04,
+                        "upgradeValue": 0.01,
+                        "maxValue": 0.08,
+                        "cost": 700
+                    },
+                    {
+                        "defaultValue": 100,
+                        "currentValue": 100,
+                        "upgradeValue": 5,
+                        "maxValue": 130,
+                        "cost": 1000
                     }
                 ]
             }

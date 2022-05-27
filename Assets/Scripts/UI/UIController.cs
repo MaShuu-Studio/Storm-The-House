@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour
     [Space]
     [SerializeField] private GameObject supporterPrefab;
     [SerializeField] private GameObject itemPrefab;
-    private ButtonType selectedType;
+    private ItemType selectedItemType;
     private int selectedItem;
 
     [SerializeField] private UpgradeView upgradeView;
@@ -130,7 +130,7 @@ public class UIController : MonoBehaviour
 
     private void Initialize()
     {
-        selectedType = ButtonType.WEAPON;
+        selectedItemType = ItemType.WEAPON;
         selectedItem = 0;
         UpdateUpgradeView();
 
@@ -144,17 +144,37 @@ public class UIController : MonoBehaviour
 
             go.transform.SetParent(supporterGrid);
         }
-        
-        for (int i = 0; i < WeaponManager.Weapons.Count; i++)
+
+        for (int i = 0; i < ItemManager.Weapons.Count; i++)
         {
             GameObject go = Instantiate(itemPrefab);
             CustomButton si = go.GetComponent<CustomButton>();
 
             si.SetButton(ButtonType.WEAPON, i);
-            si.SetIcon(WeaponManager.Weapons[i].name);
+            si.SetIcon(ItemManager.Weapons[i].name);
 
             go.transform.SetParent(weaponsGrid);
         }
+
+        for (int i = 0; i < ItemManager.Towers.Count; i++)
+        {
+            string name = ItemManager.TowerNames[i];
+            GameObject go = Instantiate(itemPrefab);
+            CustomButton si = go.GetComponent<CustomButton>();
+
+            si.SetButton(ButtonType.TOWER, i);
+            si.SetIcon(ItemManager.Towers[name].name);
+
+            go.transform.SetParent(towersGrid);
+        }
+
+        SwitchTap(true);
+    }
+
+    public void SwitchTap(bool isWeapon)
+    {
+        weaponsGrid.gameObject.SetActive(isWeapon);
+        towersGrid.gameObject.SetActive(!isWeapon);
     }
 
     public void PressButton(ButtonType type, int index)
@@ -165,29 +185,45 @@ public class UIController : MonoBehaviour
                 string name = SupporterManager.Types[index];
                 Player.Instance.AddSupporter(name);
                 break;
+
+            case ButtonType.TOWER:
             case ButtonType.WEAPON:
+                if (type == ButtonType.WEAPON)
+                    selectedItemType = ItemType.WEAPON;
+                else
+                    selectedItemType = ItemType.TOWER;
                 selectedItem = index;
                 UpdateUpgradeView();
                 break;
-            case ButtonType.TOWER:
-                break;
+
             case ButtonType.BUY:
-                Player.Instance.BuyWeapon(selectedItem);
+                if (type == ButtonType.WEAPON)
+                    Player.Instance.BuyWeapon(selectedItem);
+                else
+                    Player.Instance.ReadyToBuyTower(selectedItem);
+
                 UpdateUpgradeView();
                 break;
         }
     }
 
-    public void Upgrade(WeaponDataType type)
+    public void Upgrade(UpgradeDataType type)
     {
-        // 타워인지 무기인지에 따라 다른 설정
-        Player.Instance.Upgrade(selectedItem, type);
+        Player.Instance.Upgrade(selectedItemType, selectedItem, type);
     }
 
     private void UpdateUpgradeView()
     {
+        Item item;
         // 업그레이드 관련 창 표기
-        Weapon weapon = WeaponController.Instance.GetWeaponData(selectedItem);
-        upgradeView.SetUpgradeView(weapon);
+        if (selectedItemType == ItemType.WEAPON)
+            item = WeaponController.Instance.GetWeaponData(selectedItem);
+        else
+        {
+            string name = ItemManager.TowerNames[selectedItem];
+            item = ItemManager.Towers[name];
+        }
+
+        upgradeView.SetUpgradeView(item);
     }
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace EnumData
 {
+    public enum ItemType { WEAPON = 0, TOWER }
     public enum ButtonType { SUPPORTER = 0, WEAPON, TOWER, BUY, UPGRADE };
     public enum SupporterType { ATTACK = 0, DEFENCE }
-    public enum WeaponDataType { AMMO = 0, ACCURANCY, RELOAD, FIRERATE, DAMAGE, RANGE }
-    public enum WeaponTimerType { FIRE, RELOAD }
+    public enum UpgradeDataType { AMMO = 0, ACCURANCY, RELOAD, FIRERATE, DAMAGE, RANGE, SLOW }
+    public enum WeaponTimerType { FIRE = 0, RELOAD }
 }

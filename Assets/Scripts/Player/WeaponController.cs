@@ -8,7 +8,7 @@ public class WeaponController : MonoBehaviour
     public static WeaponController Instance { get { return instance; } }
     private static WeaponController instance;
 
-    private List<Weapon> _weapons;
+    private List<Item> _weapons;
     private int[] _usingWeapon;
     private int[] _ammo;
     private int _curWeapon;
@@ -17,7 +17,7 @@ public class WeaponController : MonoBehaviour
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
     public int Ammo { get { return _ammo[_curWeapon]; } }
-    public float Damage { get { return _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.DAMAGE); } }
+    public float Damage { get { return _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.DAMAGE); } }
 
     void Awake()
     {
@@ -38,12 +38,12 @@ public class WeaponController : MonoBehaviour
     public void Initialize()
     {
         if (_weapons != null) _weapons.Clear();
-        _weapons = new List<Weapon>(WeaponManager.Weapons);
+        _weapons = new List<Item>(ItemManager.Weapons);
 
         _usingWeapon = new int[2] { 0, -1 };
         _ammo = new int[2]
         {
-            (int)_weapons[0].GetValue(WeaponDataType.AMMO),
+            (int)_weapons[0].GetValue(UpgradeDataType.AMMO),
             0,
         };
 
@@ -83,7 +83,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
 
-        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
+        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO));
         AttackController.Instance.SetDamage();
     }
 
@@ -95,7 +95,7 @@ public class WeaponController : MonoBehaviour
         {
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
-            float fireTime = _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.FIRERATE);
+            float fireTime = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.FIRERATE);
             _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
@@ -118,7 +118,7 @@ public class WeaponController : MonoBehaviour
         _canUse[WeaponTimerType.FIRE] = false;
         _canUse[WeaponTimerType.RELOAD] = false;
 
-        float reloadTime = _weapons[CurrentUsingWeapon].GetValue(WeaponDataType.RELOAD);
+        float reloadTime = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.RELOAD);
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
         UIController.Instance.Reload(reloadTime);
@@ -134,7 +134,7 @@ public class WeaponController : MonoBehaviour
 
         if (type == WeaponTimerType.RELOAD)
         {
-            _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO);
+            _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO);
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
             _canUse[WeaponTimerType.FIRE] = true;
         }
@@ -146,7 +146,7 @@ public class WeaponController : MonoBehaviour
         return _weapons[index].available;
     }
 
-    public Weapon GetWeaponData(int index)
+    public Item GetWeaponData(int index)
     {
         return _weapons[index];
     }
@@ -160,10 +160,10 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void Upgrade(int index, WeaponDataType type, ref int money)
+    public void Upgrade(int index, UpgradeDataType type, ref int money)
     {
         _weapons[index].data[type].Upgrade(ref money);
 
-        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(WeaponDataType.AMMO));
+        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO));
     }
 }

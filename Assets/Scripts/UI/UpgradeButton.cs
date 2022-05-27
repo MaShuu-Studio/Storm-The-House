@@ -12,15 +12,15 @@ public class UpgradeButton : CustomButton
     [SerializeField] private TextMeshProUGUI upgradeText;
     [SerializeField] private TextMeshProUGUI costText;
 
-    WeaponDataType _dataType;
-    WeaponData _data;
+    UpgradeDataType _dataType;
+    UpgradeData _data;
 
     public override void SetIcon(string name)
     {
         nameText.text = name;
     }
 
-    public void SetUpgradeData(WeaponDataType type, WeaponData data)
+    public void SetUpgradeData(UpgradeDataType type, UpgradeData data)
     {
         _dataType = type;
         _data = data;

@@ -6,7 +6,7 @@ using EnumData;
 using Data;
 
 [Serializable]
-public class Weapon
+public class Item
 {
     /* 
      * AMMO         0
@@ -16,13 +16,15 @@ public class Weapon
      * DAMAGE       4
      * RANGE        5
      */
+    public ItemType type;
     public string name = "";
     public int cost = 0;
+    public string description = "";
     public bool available = false;
 
-    public SerializableDictionary<WeaponDataType, WeaponData> data;
+    public SerializableDictionary<UpgradeDataType, UpgradeData> data;
 
-    public float GetValue(WeaponDataType type)
+    public float GetValue(UpgradeDataType type)
     {
         if (!data.ContainsKey(type)) return 1;
 
@@ -31,7 +33,7 @@ public class Weapon
 }
 
 [Serializable]
-public class WeaponData
+public class UpgradeData
 {
     public float defaultValue;
     public float currentValue;

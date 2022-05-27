@@ -20,23 +20,24 @@ public class UpgradeView : MonoBehaviour
         buyButton.gameObject.SetActive(false);
     }
 
-    public void SetUpgradeView(Weapon weapon)
+    public void SetUpgradeView(Item item)
     {
-        nameText.text = weapon.name;
-        costText.gameObject.SetActive(!weapon.available);
-        costText.text = "$" + weapon.cost.ToString();
-        descriptionText.gameObject.SetActive(!weapon.available);
-        buyButton.gameObject.SetActive(!weapon.available);
+        nameText.text = item.name;
+        costText.gameObject.SetActive(!item.available);
+        costText.text = "$" + item.cost.ToString();
+        descriptionText.text = item.description;
+        descriptionText.gameObject.SetActive(!item.available);
+        buyButton.gameObject.SetActive(!item.available);
 
         int i = 0;
-        if (weapon.available)
+        if (item.available)
         {
-            List<WeaponDataType> names = weapon.data.Keys.ToList();
+            List<UpgradeDataType> names = item.data.Keys.ToList();
 
-            for (; i < weapon.data.Count; i++)
+            for (; i < item.data.Count; i++)
             {
                 upgradeButtons[i].gameObject.SetActive(true);
-                upgradeButtons[i].SetUpgradeData(names[i], weapon.data[names[i]]);
+                upgradeButtons[i].SetUpgradeData(names[i], item.data[names[i]]);
             }
         }
 

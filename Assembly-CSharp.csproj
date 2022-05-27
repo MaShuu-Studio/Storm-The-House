@@ -56,34 +56,37 @@
     <Analyzer Include="D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Item\TowerObject.cs" />
+    <Compile Include="Assets\Scripts\Player\TowerController.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Data\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Data\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Player\TowerFloor.cs" />
+    <Compile Include="Assets\Scripts\Data\Item.cs" />
+    <Compile Include="Assets\Scripts\Data\RoundManager.cs" />
     <Compile Include="Assets\Scripts\Player\AttackPointManager.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\Player\AttackPoint.cs" />
+    <Compile Include="Assets\Scripts\Item\TowerAttackArea.cs" />
     <Compile Include="Assets\Scripts\GameControl\RoundController.cs" />
     <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
     <Compile Include="Assets\Scripts\UI\CustomButton.cs" />
-    <Compile Include="Assets\Scripts\ObjectPool\EnemyPool.cs" />
     <Compile Include="Assets\Scripts\Data\EnumData.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyAttackArea.cs" />
+    <Compile Include="Assets\Scripts\Item\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\Player\WeaponController.cs" />
     <Compile Include="Assets\Scripts\GameControl\GameController.cs" />
-    <Compile Include="Assets\Scripts\Data\WeaponManager.cs" />
+    <Compile Include="Assets\Scripts\Data\ItemManager.cs" />
     <Compile Include="Assets\Scripts\UI\BuyButton.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyObject.cs" />
-    <Compile Include="Assets\Scripts\ObjectPool\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\Item\EnemyObject.cs" />
+    <Compile Include="Assets\Scripts\GameControl\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Data\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Data\Round.cs" />
     <Compile Include="Assets\Scripts\Data\Supporter.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeView.cs" />
     <Compile Include="Assets\Scripts\Data\SupporterManager.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager.cs" />
     <Compile Include="Assets\Scripts\Player\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
-    <Compile Include="Assets\Scripts\Data\Round.cs" />
-    <Compile Include="Assets\Scripts\Data\RoundManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

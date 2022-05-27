@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnumData;
 
-[RequireComponent(typeof(BoxCollider))]
 public class Player : MonoBehaviour
 {
     public static Player Instance { get { return instance; } }
@@ -143,15 +142,46 @@ public class Player : MonoBehaviour
         UIController.Instance.UpdateHP(hp);
     }
 
-    public void Upgrade(int index, WeaponDataType type)
+    public void Upgrade(ItemType itemType, int index, UpgradeDataType type)
     {
-        WeaponController.Instance.Upgrade(index, type, ref money);
+        if (itemType == ItemType.WEAPON)
+            WeaponController.Instance.Upgrade(index, type, ref money);
+        else
+            TowerController.Instance.Upgrade(index, type, ref money);
         UIController.Instance.UpdateMoney(money);
     }
 
     public void BuyWeapon(int index)
     {
         WeaponController.Instance.BuyWeapon(index, ref money);
+        UIController.Instance.UpdateMoney(money);
+    }
+
+    public bool ReadyBuyTower { get; private set; } = false;
+    private string towerName = "";
+    private int towerCost;
+    public void ReadyToBuyTower(int index)
+    {
+        string name = ItemManager.TowerNames[index];
+        Item tower = ItemManager.Towers[name];
+        towerName = tower.name;
+        towerCost = tower.cost;
+
+        if (money >= towerCost)
+        {
+            Debug.Log("Ready To Buy Tower");
+            ReadyBuyTower = true;
+        }
+    }
+
+    public void BuyTower(int index)
+    {
+        ReadyBuyTower = false;
+        bool buy = TowerController.Instance.AddTower(index, towerName);
+
+        if (buy == false) return;
+
+        money -= towerCost;
         UIController.Instance.UpdateMoney(money);
     }
 
@@ -168,7 +198,7 @@ public class Player : MonoBehaviour
     {
         style.fontSize = 0;
 
-        if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 100"))
+        if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 1000"))
         {
             money += 1000;
             UIController.Instance.UpdateMoney(money);

@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         SupporterManager.Initialize();
-        WeaponManager.Initialize();
+        ItemManager.Initialize();
         EnemyManager.Initialize();
         RoundManager.Initialize();
     }
