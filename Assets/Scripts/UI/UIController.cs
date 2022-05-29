@@ -103,6 +103,7 @@ public class UIController : MonoBehaviour
         }
 
         shopDoneButton.SetButton(ButtonType.ROUNDSTART);
+        OpenShop(true);
     }
 
     #region Upside Panel

@@ -52,24 +52,41 @@ public class AttackController : MonoBehaviour
         attackPoint.SetDamage(WeaponController.Instance.Damage);
     }
 
-    public void Fire()
+    public void Click(bool isFire)
     {
-        if (WeaponController.Instance.Fire())
+        bool canClick = (!isFire || (isFire && WeaponController.Instance.Fire()));
+
+
+        if (canClick)
         {
-            Vector3 mpos = Input.mousePosition;
-            mpos.z = cam.transform.position.z * -4;
-            Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
+            Vector3 pos = ClickPos();
+            float remainTime = 0.1f;
 
-            RaycastHit raycastHit;
-            LayerMask mask = LayerMask.GetMask("Floor") | LayerMask.GetMask("Enemy");
-            Physics.Raycast(cam.transform.position, dir, out raycastHit, Mathf.Infinity, mask);
+            if (isFire)
+            {
+                // 무기의 공격이 남아있는 시간 입력
+                // remainTim = WeaponController.Instance.
+            }
 
-            Vector3 pos = Vector3.zero;
-
-            if (raycastHit.transform != null)
-                pos = raycastHit.point;
-
-            attackPoint.Attack(0.5f, pos);
+            attackPoint.Attack(remainTime, pos);
         }
+    }
+
+    private Vector3 ClickPos()
+    {
+        Vector3 mpos = Input.mousePosition;
+        mpos.z = cam.transform.position.z * -4;
+        Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
+
+        RaycastHit raycastHit;
+        LayerMask mask = LayerMask.GetMask("Floor") | LayerMask.GetMask("Enemy");
+        Physics.Raycast(cam.transform.position, dir, out raycastHit, Mathf.Infinity, mask);
+
+        Vector3 pos = Vector3.zero;
+
+        if (raycastHit.transform != null)
+            pos = raycastHit.point;
+
+        return pos;
     }
 }

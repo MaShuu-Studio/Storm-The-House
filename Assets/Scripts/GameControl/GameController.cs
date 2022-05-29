@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                AttackController.Instance.Fire();
+                AttackController.Instance.Click(true);
             }
 
             if (Input.GetButtonDown("RELOAD"))
@@ -45,9 +45,12 @@ public class GameController : MonoBehaviour
                 WeaponController.Instance.SwitchWeapon();
             }
         }
-        else
+        else if(Player.Instance.ReadyBuyTower)
         {
-
+            if (Input.GetMouseButtonDown(0))
+            {
+                AttackController.Instance.Click(false);
+            }
         }
     }
 }
