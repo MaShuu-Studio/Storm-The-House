@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using EnumData;
 
 [RequireComponent(typeof(Button))]
-public abstract class CustomButton : MonoBehaviour
+public class CustomButton : MonoBehaviour
 {
     private Button _button;
     private ButtonType _type;
@@ -21,11 +21,9 @@ public abstract class CustomButton : MonoBehaviour
         UIController.Instance.PressButton(_type, _index);
     }
 
-    public void SetButton(ButtonType type, int i)
+    public void SetButton(ButtonType type, int i = 0)
     {
         _index = i;
         _type = type;
     }
-
-    public abstract void SetIcon(string name);
 }

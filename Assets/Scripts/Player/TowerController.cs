@@ -53,31 +53,6 @@ public class TowerController : MonoBehaviour
             TowerFloor tf = floorObject.GetComponent<TowerFloor>();
             tf.SetIndex(i);
         }
-        /*
-        if (_weapons != null) _weapons.Clear();
-        _weapons = new List<Item>(ItemManager.Weapons);
-
-        _usingWeapon = new int[2] { 0, -1 };
-        _ammo = new int[2]
-        {
-            (int)_weapons[0].GetValue(UpgradeDataType.AMMO),
-            0,
-        };
-
-        _timer = new Dictionary<WeaponTimerType, IEnumerator>()
-        {
-            { WeaponTimerType.FIRE, null },
-            { WeaponTimerType.RELOAD, null },
-        };
-
-        _canUse = new Dictionary<WeaponTimerType, bool>()
-        {
-            { WeaponTimerType.FIRE, true },
-            { WeaponTimerType.RELOAD, true },
-        };
-
-        _curWeapon = 1;
-        SwitchWeapon();*/
     }
 
     public void SelectTower()

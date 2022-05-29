@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance { get { return instance; } }
     private static GameController instance;
+
     void Awake()
     {
         if (Instance != null)
@@ -27,19 +28,26 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (RoundController.Instance.ProgressRound)
         {
-            AttackController.Instance.Fire();
-        }
+            if (Input.GetMouseButton(0))
+            {
+                AttackController.Instance.Fire();
+            }
 
-        if (Input.GetButtonDown("RELOAD"))
-        {
-            WeaponController.Instance.Reload();
-        }
+            if (Input.GetButtonDown("RELOAD"))
+            {
+                WeaponController.Instance.Reload();
+            }
 
-        if (Input.GetButtonDown("SWITCH"))
+            if (Input.GetButtonDown("SWITCH"))
+            {
+                WeaponController.Instance.SwitchWeapon();
+            }
+        }
+        else
         {
-            WeaponController.Instance.SwitchWeapon();
+
         }
     }
 }

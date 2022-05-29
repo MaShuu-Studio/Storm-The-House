@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using EnumData;
 
-public class UpgradeButton : CustomButton
+public class UpgradeButton : ItemButton
 {
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Slider upgradeSlider;

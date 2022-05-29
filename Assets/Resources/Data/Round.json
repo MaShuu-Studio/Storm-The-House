@@ -15,6 +15,21 @@
                     "delayRange":0.5
                 }
             ]
+        },        
+        {
+            "enemies":
+            [
+                {
+                    "name":"BASIC",
+                    "delay":1,
+                    "delayRange":0.5
+                },
+                {
+                    "name":"BASIC2",
+                    "delay":1.5,
+                    "delayRange":0.5
+                }
+            ]
         }
     ]
 }

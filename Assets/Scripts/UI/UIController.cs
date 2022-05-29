@@ -28,6 +28,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI baseText;
 
     [Header("Shop")]
+    [SerializeField] private GameObject shopObject;
+
+    [Space]
     [SerializeField] private Transform supporterGrid;
     [SerializeField] private Transform weaponsGrid;
     [SerializeField] private Transform towersGrid;
@@ -39,6 +42,7 @@ public class UIController : MonoBehaviour
     private int selectedItem;
 
     [SerializeField] private UpgradeView upgradeView;
+    [SerializeField] private CustomButton shopDoneButton;
 
 
     void Awake()
@@ -56,6 +60,49 @@ public class UIController : MonoBehaviour
     void Start()
     {
         Initialize();
+    }
+
+    private void Initialize()
+    {
+        selectedItemType = ItemType.WEAPON;
+        selectedItem = 0;
+        UpdateUpgradeView();
+
+        for (int i = 0; i < SupporterManager.Types.Count; i++)
+        {
+            GameObject go = Instantiate(supporterPrefab);
+            ItemButton si = go.GetComponent<ItemButton>();
+
+            si.SetButton(ButtonType.SUPPORTER, i);
+            si.SetIcon(SupporterManager.Types[i]);
+
+            go.transform.SetParent(supporterGrid);
+        }
+
+        for (int i = 0; i < ItemManager.Weapons.Count; i++)
+        {
+            GameObject go = Instantiate(itemPrefab);
+            ItemButton si = go.GetComponent<ItemButton>();
+
+            si.SetButton(ButtonType.WEAPON, i);
+            si.SetIcon(ItemManager.Weapons[i].name);
+
+            go.transform.SetParent(weaponsGrid);
+        }
+
+        for (int i = 0; i < ItemManager.Towers.Count; i++)
+        {
+            string name = ItemManager.TowerNames[i];
+            GameObject go = Instantiate(itemPrefab);
+            ItemButton si = go.GetComponent<ItemButton>();
+
+            si.SetButton(ButtonType.TOWER, i);
+            si.SetIcon(ItemManager.Towers[name].name);
+
+            go.transform.SetParent(towersGrid);
+        }
+
+        shopDoneButton.SetButton(ButtonType.ROUNDSTART);
     }
 
     #region Upside Panel
@@ -128,46 +175,9 @@ public class UIController : MonoBehaviour
     }
     #endregion
 
-    private void Initialize()
+    public void OpenShop(bool b)
     {
-        selectedItemType = ItemType.WEAPON;
-        selectedItem = 0;
-        UpdateUpgradeView();
-
-        for (int i = 0; i < SupporterManager.Types.Count; i++)
-        {
-            GameObject go = Instantiate(supporterPrefab);
-            CustomButton si = go.GetComponent<CustomButton>();
-
-            si.SetButton(ButtonType.SUPPORTER, i);
-            si.SetIcon(SupporterManager.Types[i]);
-
-            go.transform.SetParent(supporterGrid);
-        }
-
-        for (int i = 0; i < ItemManager.Weapons.Count; i++)
-        {
-            GameObject go = Instantiate(itemPrefab);
-            CustomButton si = go.GetComponent<CustomButton>();
-
-            si.SetButton(ButtonType.WEAPON, i);
-            si.SetIcon(ItemManager.Weapons[i].name);
-
-            go.transform.SetParent(weaponsGrid);
-        }
-
-        for (int i = 0; i < ItemManager.Towers.Count; i++)
-        {
-            string name = ItemManager.TowerNames[i];
-            GameObject go = Instantiate(itemPrefab);
-            CustomButton si = go.GetComponent<CustomButton>();
-
-            si.SetButton(ButtonType.TOWER, i);
-            si.SetIcon(ItemManager.Towers[name].name);
-
-            go.transform.SetParent(towersGrid);
-        }
-
+        shopObject.SetActive(b);
         SwitchTap(true);
     }
 
@@ -203,6 +213,11 @@ public class UIController : MonoBehaviour
                     Player.Instance.ReadyToBuyTower(selectedItem);
 
                 UpdateUpgradeView();
+                break;
+
+            case ButtonType.ROUNDSTART:
+                OpenShop(false);
+                RoundController.Instance.NextRound();
                 break;
         }
     }

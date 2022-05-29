@@ -63,6 +63,20 @@ public class WeaponController : MonoBehaviour
         SwitchWeapon();
     }
 
+    public void RefillAmmo()
+    {
+        _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO);
+        int nextIndex = (_curWeapon + 1) % 2;
+
+        if (_usingWeapon[nextIndex] != -1)
+        {
+            int nextWeapon = _usingWeapon[nextIndex];
+            _ammo[nextIndex] = (int)_weapons[nextWeapon].GetValue(UpgradeDataType.AMMO);
+        }
+
+        UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
+    }
+
     public void SwitchWeapon()
     {
         int nextIndex = (_curWeapon + 1) % 2;

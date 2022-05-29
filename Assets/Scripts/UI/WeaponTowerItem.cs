@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class WeaponTowerItem : CustomButton
+public class WeaponTowerItem : ItemButton
 {
     [SerializeField] private TextMeshProUGUI nameText;
 

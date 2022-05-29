@@ -9,8 +9,4 @@ public class BuyButton : CustomButton
     {
        SetButton(ButtonType.BUY, 0);
     }
-
-    public override void SetIcon(string name)
-    {
-    }
 }
