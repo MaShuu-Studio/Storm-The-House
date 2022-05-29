@@ -30,6 +30,21 @@ public class Item
 
         return data[type].currentValue;
     }
+
+    public Item(Item item)
+    {
+        type = item.type;
+        name = item.name;
+        cost = item.cost;
+        description = item.description;
+        available = item.available;
+        data = new SerializableDictionary<UpgradeDataType, UpgradeData>();
+
+        foreach(UpgradeDataType t in item.data.Keys)
+        {
+            data.Add(t, new UpgradeData(item.data[t]));
+        }
+    }
 }
 
 [Serializable]
@@ -40,6 +55,15 @@ public class UpgradeData
     public float upgradeValue = 0;
     public float maxValue;
     public int cost;
+
+    public UpgradeData(UpgradeData data)
+    {
+        defaultValue = data.defaultValue;
+        currentValue = data.currentValue;
+        upgradeValue = data.upgradeValue;
+        maxValue = data.maxValue;
+        cost = data.cost;
+    }
 
     public void Upgrade(ref int money)
     {

@@ -223,6 +223,13 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void UpdateTowerUpgradeView()
+    {
+        selectedItemType = ItemType.TOWER;
+        selectedItem = TowerController.Instance.SelectedTowerIndex;
+        upgradeView.SetUpgradeView(TowerController.Instance.SelectedTower);
+    }
+
     public void Upgrade(UpgradeDataType type)
     {
         Player.Instance.Upgrade(selectedItemType, selectedItem, type);

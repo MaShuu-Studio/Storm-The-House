@@ -15,8 +15,9 @@ public class TowerController : MonoBehaviour
 
     private float zpos = 4.5f;
 
-    private int _selectedTower;
-    public int SelectedTower { get { return _selectedTower; } }
+    private int _selectedTowerIndex;
+    public int SelectedTowerIndex { get { return _selectedTowerIndex; } }
+    public Item SelectedTower { get { return _towers[_selectedTowerIndex]; } }
 
     void Awake()
     {
@@ -36,7 +37,7 @@ public class TowerController : MonoBehaviour
 
     public void Initialize(int towerAmount)
     {
-        _selectedTower = 0;
+        _selectedTowerIndex = 0;
         _towerPos = new Transform[towerAmount];
         _towers = new Item[towerAmount];
         _towerObjects = new TowerObject[towerAmount];
@@ -55,16 +56,21 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    public void SelectTower()
+    public void SelectTower(int index)
     {
+        _selectedTowerIndex = index;
 
+        if (_towers[index] == null) return;
+
+        UIController.Instance.UpdateTowerUpgradeView();
     }
 
     public bool AddTower(int index, string name)
     {
         if (_towers[index] != null) return false;
 
-        _towers[index] = ItemManager.Towers[name];
+        _towers[index] = new Item(ItemManager.Towers[name]);
+        _towers[index].available = true;
 
         GameObject obj = ObjectPool.GetObject<Item>(name);
         obj.transform.SetParent(_towerPos[index]);
@@ -77,16 +83,19 @@ public class TowerController : MonoBehaviour
         obj.transform.position = pos;
         obj.transform.SetParent(_towerPos[index]);
 
+        _towerObjects[index].UpdateTower(_towers[index]);
+
         return true;
     }
 
-    public void UpdateTower(int index)
+    public void RemoveTower()
     {
-        _towerObjects[index].UpdateTower(_towers[index]);
+        _towers[_selectedTowerIndex] = null;
+        Destroy(_towerObjects[_selectedTowerIndex]);
     }
 
     public void Upgrade(int index, UpgradeDataType type, ref int money)
     {
-
+        _towers[index].data[type].Upgrade(ref money);
     }
 }

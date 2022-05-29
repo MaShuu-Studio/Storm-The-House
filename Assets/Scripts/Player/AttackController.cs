@@ -56,7 +56,6 @@ public class AttackController : MonoBehaviour
     {
         bool canClick = (!isFire || (isFire && WeaponController.Instance.Fire()));
 
-
         if (canClick)
         {
             Vector3 pos = ClickPos();

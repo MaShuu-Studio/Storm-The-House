@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
                 WeaponController.Instance.SwitchWeapon();
             }
         }
-        else if(Player.Instance.ReadyBuyTower)
+        else
         {
             if (Input.GetMouseButtonDown(0))
             {

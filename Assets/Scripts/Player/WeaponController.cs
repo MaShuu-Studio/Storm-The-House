@@ -38,7 +38,12 @@ public class WeaponController : MonoBehaviour
     public void Initialize()
     {
         if (_weapons != null) _weapons.Clear();
-        _weapons = new List<Item>(ItemManager.Weapons);
+        _weapons = new List<Item>();
+
+        foreach(Item weapon in ItemManager.Weapons)
+        {
+            _weapons.Add(new Item(weapon));
+        }
 
         _usingWeapon = new int[2] { 0, -1 };
         _ammo = new int[2]

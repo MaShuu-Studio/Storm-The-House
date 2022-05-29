@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
             WeaponController.Instance.Upgrade(index, type, ref money);
         else
             TowerController.Instance.Upgrade(index, type, ref money);
+
         UIController.Instance.UpdateMoney(money);
     }
 
@@ -168,10 +169,7 @@ public class Player : MonoBehaviour
         towerCost = tower.cost;
 
         if (money >= towerCost)
-        {
-            Debug.Log("Ready To Buy Tower");
             ReadyBuyTower = true;
-        }
     }
 
     public void BuyTower(int index)

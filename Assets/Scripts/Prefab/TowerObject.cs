@@ -15,13 +15,18 @@ public class TowerObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void UpdateTower(Item tower)
     {
         _tower = tower;
     }
+
+    public void ActiveTower()
+    {
+
+    }
+
     /*
     IEnumerator attackCoroutine;
     

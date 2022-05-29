@@ -16,13 +16,9 @@ public class TowerFloor : MonoBehaviour
         if (other.tag == "AttackPoint")
         {
             if (Player.Instance.ReadyBuyTower)
-            {
                 Player.Instance.BuyTower(index);
-            }
-            else if (true)
-            {
-
-            }
+            else
+                TowerController.Instance.SelectTower(index);
         }
     }
 }
