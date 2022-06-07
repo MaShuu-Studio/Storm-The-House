@@ -34,7 +34,7 @@ public class AttackPointManager : MonoBehaviour
         attackPoints.Add(newAttackPoint);
         return newAttackPoint;
     }
-
+    /*
     public void EnemyDamaged(EnemyObject enemy, GameObject attackPoint)
     {
         for (int i = 0; i < attackPoints.Count; i++)
@@ -45,5 +45,5 @@ public class AttackPointManager : MonoBehaviour
                 return;
             }
         }
-    }
+    }*/
 }

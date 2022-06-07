@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
 
     private BoxCollider area;
     private Dictionary<string, int> supporter;
-    private Dictionary<string, AttackPoint> attackPoints;
     private Queue<GameObject> enemys;
     private Dictionary<string, IEnumerator> coroutines;
 
@@ -51,17 +50,11 @@ public class Player : MonoBehaviour
 
         supporter = new Dictionary<string, int>();
         coroutines = new Dictionary<string, IEnumerator>();
-        attackPoints = new Dictionary<string, AttackPoint>();
 
         foreach (string name in SupporterManager.Types)
         {
             supporter.Add(name, 0);
             coroutines.Add(name, null);
-            if (SupporterManager.SupportType(name) == SupporterType.ATTACK)
-            {
-                attackPoints.Add(name, AttackPointManager.Instance.MakeAttackPoint());
-                attackPoints[name].SetDamage(SupporterManager.Damage(name));
-            }
         }
 
         // 테스트용 임시 코드
@@ -124,7 +117,8 @@ public class Player : MonoBehaviour
             else
             {
                 pos = target.transform.position;
-                attackPoints[type].Attack(0.1f, pos);
+
+                AttackController.Instance.SupporterAttack(pos, type);
                 break;
             }
         }

@@ -20,13 +20,28 @@ public class Item
     public string name = "";
     public int cost = 0;
     public string description = "";
+    public bool isRemain = false;
     public bool available = false;
 
     public SerializableDictionary<UpgradeDataType, UpgradeData> data;
 
     public float GetValue(UpgradeDataType type)
     {
-        if (!data.ContainsKey(type)) return 1;
+        if (!data.ContainsKey(type))
+        {
+            float defaultValue = 1;
+            switch(type)
+            {
+                case UpgradeDataType.RANGE:
+                    defaultValue = 0.5f;
+                    break;
+
+                case UpgradeDataType.REMAINTIME:
+                    defaultValue = 0.1f;
+                    break;
+            }
+            return defaultValue;
+        }
 
         return data[type].currentValue;
     }

@@ -88,7 +88,7 @@ public class EnemyObject : MonoBehaviour
         else StopAttack();
     }
 
-    public void Damaged(float dmg)
+    public void Damage(float dmg)
     {
         _hp -= dmg;
         Debug.Log("[SYSTEM] ENEMY DAMAGED" + _hp);
@@ -107,7 +107,7 @@ public class EnemyObject : MonoBehaviour
     {
         if (other.tag == "AttackPoint")
         {
-            AttackPointManager.Instance.EnemyDamaged(this, other.gameObject);
+            AttackController.Instance.EnemyDamaged(this, other.gameObject);
         }
     }
 }

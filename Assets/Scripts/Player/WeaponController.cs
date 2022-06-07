@@ -16,8 +16,9 @@ public class WeaponController : MonoBehaviour
 
     private Dictionary<WeaponTimerType, IEnumerator> _timer;
     public Dictionary<WeaponTimerType, bool> _canUse { get; private set; }
+    public Item CurrentWeapon { get { return _weapons[CurrentUsingWeapon]; } }
     public int Ammo { get { return _ammo[_curWeapon]; } }
-    public float Damage { get { return _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.DAMAGE); } }
+    public float Damage { get { return CurrentWeapon.GetValue(UpgradeDataType.DAMAGE); } }
 
     void Awake()
     {
@@ -103,7 +104,6 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.RELOAD] = null;
 
         UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO));
-        AttackController.Instance.SetDamage();
     }
 
     public bool Fire()

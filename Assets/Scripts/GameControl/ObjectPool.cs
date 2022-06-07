@@ -65,6 +65,21 @@ public class ObjectPool : MonoBehaviour
 
             CreateNewObject<Item>(name);
         }
+
+        // AttackPoint
+        {
+            string name = AttackController.pointName.ToUpper();
+
+            GameObject p = new GameObject(name);
+            p.transform.SetParent(transform);
+
+            _pool.Add(name, new Queue<GameObject>());
+            _poolParent.Add(name, p.transform);
+            for (int i = 0; i < 50; i++)
+            {
+                CreateNewObject<GameObject>(name);
+            }
+        }
     }
     protected static void CreateNewObject<T>(string name)
     {
