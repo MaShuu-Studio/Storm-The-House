@@ -36,17 +36,18 @@ public class EnemyObject : MonoBehaviour
         _enemy = enemy;
         _attackArea.Initialize(this, enemy.attackRange);
 
-        _hp = _enemy.hp;
+        Recover();
     }
 
     private void Recover()
     {
         _hp = _enemy.hp;
+        slow = false;
     }
 
     private void Move()
     {
-        transform.position += Vector3.right * _enemy.speed * Time.deltaTime;
+        transform.position += Vector3.right * _enemy.speed * Time.deltaTime * (slow ? 0.5f : 1);
     }
 
     IEnumerator attackCoroutine;
@@ -57,6 +58,18 @@ public class EnemyObject : MonoBehaviour
 
         attackCoroutine = AttackTimer();
         StartCoroutine(AttackTimer());
+    }
+
+    bool slow = false;
+    public void Slow()
+    {
+        slow = true;
+        Debug.Log("Slow");
+    }
+
+    public void Down()
+    {
+        Debug.Log("Down");
     }
 
     private void StopAttack()

@@ -33,7 +33,8 @@ public class Item
             switch(type)
             {
                 case UpgradeDataType.RANGE:
-                    defaultValue = 0.5f;
+                    if (this.type == ItemType.WEAPON) defaultValue = 0.5f;
+                    else defaultValue = 50;
                     break;
 
                 case UpgradeDataType.REMAINTIME:

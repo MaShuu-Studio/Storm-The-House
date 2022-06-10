@@ -58,12 +58,42 @@ public class AttackController : MonoBehaviour
         StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
     }
 
+    public void TowerAttack(Vector3 pos, float damge, List<UpgradeDataType> attackTypes)
+    {
+        float dmg = damge;
+        float accurancy = 100;
+        float remainTime = 0.1f;
+        float range = 0.5f;
+        bool remain = false;
+
+        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain, attackTypes));
+
+    }
+
     // 결과적으로 작동시킬 코루틴
-    private IEnumerator Attack(Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false)
+    private IEnumerator Attack(Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false, List<UpgradeDataType> attackTypes = null)
     {
         GameObject point = ObjectPool.GetObject<GameObject>(pointName);
 
-        point.name = (remain ? "T" : "F") + dmg.ToString();
+        point.name = "";
+        if (attackTypes != null)
+        {
+            foreach (UpgradeDataType type in attackTypes)
+            {
+                if (type == UpgradeDataType.SLOW)
+                {
+                    point.name += "S";
+                }
+
+                if (type == UpgradeDataType.DOWN)
+                {
+                    point.name += "D";
+                }
+            }
+        }
+        point.name += (remain ? "T" : "F");
+        point.name += dmg.ToString();
+
         point.transform.SetParent(null);
         point.transform.position = new Vector3(
             pos.x + Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
@@ -123,17 +153,42 @@ public class AttackController : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             KeyValuePair<EnemyObject, GameObject> kv = enemyQueue.Dequeue();
+            EnemyObject enemy = kv.Key;
             GameObject point = kv.Value;
 
             if (point.name != pointName)
             {
-                bool remain = (point.name[0] == 'T');
+                bool remain = false;
+                bool slow = false;
+                bool down = false;
+                char c = 'a';
+
+                int j = 0;
+
+                for(; j < point.name.Length && c > '9'; j++)
+                {
+                    c = point.name[j];
+
+                    if (c == 'S') slow = true;
+                    else if (c == 'D') down = true;
+                    else if (c == 'T')
+                    {
+                        remain = true;
+                        break;
+                    }
+                    else if (c == 'F') break;
+                }
+
+
                 float dmg;
 
-                if (float.TryParse(point.name.Substring(1), out dmg) == false) continue;
-                else kv.Key.Damage(dmg);
+                if (slow) enemy.Slow();
+                if (down) enemy.Down();
 
                 if (remain == false) ReturnPoint(point);
+
+                if (float.TryParse(point.name.Substring(j), out dmg) == false) continue;
+                else enemy.Damage(dmg);
             }
 
         }

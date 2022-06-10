@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\Player\TowerFloor.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Data\RoundManager.cs" />
-    <Compile Include="Assets\Scripts\Player\AttackPointManager.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\Player\AttackPoint.cs" />
     <Compile Include="Assets\Scripts\Prefab\TowerAttackArea.cs" />

@@ -81,6 +81,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
     }
+
     protected static void CreateNewObject<T>(string name)
     {
         GameObject gbo = Instantiate(DataManager.GetPrefab<T>(name));

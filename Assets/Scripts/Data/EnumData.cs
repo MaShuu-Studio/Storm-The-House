@@ -7,6 +7,6 @@ namespace EnumData
     public enum ItemType { WEAPON = 0, TOWER }
     public enum ButtonType { SUPPORTER = 0, WEAPON, TOWER, BUY, UPGRADE, ROUNDSTART };
     public enum SupporterType { ATTACK = 0, DEFENCE }
-    public enum UpgradeDataType { AMMO = 0, ACCURANCY, RELOAD, FIRERATE, DAMAGE, RANGE, SLOW, REMAINTIME }
+    public enum UpgradeDataType { AMMO = 0, ACCURANCY, RELOAD, FIRERATE, DAMAGE, RANGE, REMAINTIME, MISSILES, SHIELD = 100, SLOW, DOWN }
     public enum WeaponTimerType { FIRE = 0, RELOAD }
 }
