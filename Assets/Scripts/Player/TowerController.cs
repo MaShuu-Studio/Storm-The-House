@@ -81,7 +81,7 @@ public class TowerController : MonoBehaviour
         pos.y = obj.transform.lossyScale.y / 2;
 
         obj.transform.position = pos;
-        obj.transform.SetParent(_towerPos[index]);
+        obj.transform.SetParent(_towerPos[index].parent);
 
         _towerObjects[index].UpdateTower(_towers[index]);
 
