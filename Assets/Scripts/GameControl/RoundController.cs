@@ -57,6 +57,7 @@ public class RoundController : MonoBehaviour
     {
         _round++;
         _progressRound = true;
+        Player.Instance.StartRound();
 
         if (_roundCoroutine != null)
         {

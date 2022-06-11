@@ -155,6 +155,12 @@ public class Player : MonoBehaviour
     public bool ReadyBuyTower { get; private set; } = false;
     private string towerName = "";
     private int towerCost;
+
+    public void StartRound()
+    {
+        ReadyBuyTower = false;
+    }
+
     public void ReadyToBuyTower(int index)
     {
         string name = ItemManager.TowerNames[index];
