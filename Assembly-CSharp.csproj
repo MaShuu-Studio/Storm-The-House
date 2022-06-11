@@ -64,7 +64,7 @@
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Data\RoundManager.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
-    <Compile Include="Assets\Scripts\Player\AttackPoint.cs" />
+    <Compile Include="Assets\Scripts\GameControl\AttackPoint.cs" />
     <Compile Include="Assets\Scripts\Prefab\TowerAttackArea.cs" />
     <Compile Include="Assets\Scripts\GameControl\RoundController.cs" />
     <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="Assets\Scripts\UI\UpgradeView.cs" />
     <Compile Include="Assets\Scripts\Data\SupporterManager.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager.cs" />
-    <Compile Include="Assets\Scripts\Player\AttackController.cs" />
+    <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
   </ItemGroup>

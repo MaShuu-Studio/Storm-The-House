@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumData;
+using System;
 
 public class AttackController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class AttackController : MonoBehaviour
 
     private Camera cam;
 
-    private Queue<KeyValuePair<EnemyObject, GameObject>> enemyQueue;
+    private Queue<Tuple<EnemyObject, GameObject, string>> enemyQueue;
 
     void Awake()
     {
@@ -25,7 +26,7 @@ public class AttackController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         cam = Camera.main;
-        enemyQueue = new Queue<KeyValuePair<EnemyObject, GameObject>>();
+        enemyQueue = new Queue<Tuple<EnemyObject, GameObject, string>>();
     }
 
     // 마우스 상호작용으로 작동하는 형태
@@ -93,12 +94,11 @@ public class AttackController : MonoBehaviour
         }
         point.name += (remain ? "T" : "F");
         point.name += dmg.ToString();
-
         point.transform.SetParent(null);
         point.transform.position = new Vector3(
-            pos.x + Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
-            pos.y + Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
-            pos.z + Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)));
+            pos.x + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
+            pos.y + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
+            pos.z + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)));
         point.transform.localScale = new Vector3(range, range, range);
 
         while (time > 0)
@@ -136,7 +136,7 @@ public class AttackController : MonoBehaviour
 
     public void EnemyDamaged(EnemyObject enemy, GameObject point)
     {
-        enemyQueue.Enqueue(new KeyValuePair<EnemyObject, GameObject>(enemy, point));
+        enemyQueue.Enqueue(new Tuple<EnemyObject, GameObject, string>(enemy, point, point.name));
 
         if (flushCoroutine == null)
         {
@@ -152,11 +152,12 @@ public class AttackController : MonoBehaviour
         int count = enemyQueue.Count;
         for (int i = 0; i < count; i++)
         {
-            KeyValuePair<EnemyObject, GameObject> kv = enemyQueue.Dequeue();
-            EnemyObject enemy = kv.Key;
-            GameObject point = kv.Value;
+            Tuple<EnemyObject, GameObject, string> kv = enemyQueue.Dequeue();
+            EnemyObject enemy = kv.Item1;
+            GameObject point = kv.Item2;
+            string pn = kv.Item3;
 
-            if (point.name != pointName)
+            if (pn != pointName)
             {
                 bool remain = false;
                 bool slow = false;
@@ -165,29 +166,33 @@ public class AttackController : MonoBehaviour
 
                 int j = 0;
 
-                for(; j < point.name.Length && c > '9'; j++)
+                for (; j < pn.Length && c > '9'; j++)
                 {
-                    c = point.name[j];
+                    c = pn[j];
 
                     if (c == 'S') slow = true;
                     else if (c == 'D') down = true;
                     else if (c == 'T')
                     {
                         remain = true;
+                        j++;
                         break;
                     }
-                    else if (c == 'F') break;
+                    else if (c == 'F')
+                    {
+                        j++;
+                        break;
+                    }
                 }
 
-
-                float dmg;
+                float dmg = 0;
 
                 if (slow) enemy.Slow();
                 if (down) enemy.Down();
 
                 if (remain == false) ReturnPoint(point);
 
-                if (float.TryParse(point.name.Substring(j), out dmg) == false) continue;
+                if (float.TryParse(pn.Substring(j), out dmg) == false) continue;
                 else enemy.Damage(dmg);
             }
 
