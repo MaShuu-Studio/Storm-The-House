@@ -7,7 +7,7 @@ public class TowerObject : MonoBehaviour
 {
     [SerializeField] private TowerAttackArea _attackArea;
     private Item _tower;
-    private List<UpgradeDataType> _attackTypes = new List<UpgradeDataType>();
+    private Dictionary<UpgradeDataType, float> _attackTypes = new Dictionary<UpgradeDataType, float>();
     private bool _attackTower;
     private bool _shield;
 
@@ -27,7 +27,7 @@ public class TowerObject : MonoBehaviour
                 _shield = true;
             else if (type >= UpgradeDataType.SLOW)
             {
-                _attackTypes.Add(type);
+                _attackTypes.Add(type, tower.GetValue(type));
             }
         }
 
@@ -55,7 +55,7 @@ public class TowerObject : MonoBehaviour
             AttackController.Instance.TowerAttack(_enemies[i].transform.position, dmg, _attackTypes);
         }
 
-        yield return new WaitForSeconds(_tower.GetValue(UpgradeDataType.FIRERATE));
+        yield return new WaitForSeconds(1 / _tower.GetValue(UpgradeDataType.FIRERATE));
 
         coroutine = null;
         if (_enemies.Count > 0) ActiveTower();

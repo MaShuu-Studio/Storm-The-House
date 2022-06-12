@@ -36,7 +36,11 @@ public class UpgradeView : MonoBehaviour
 
             for (; i < item.data.Count; i++)
             {
-                if (item.data[names[i]] == null) continue;
+                if (item.data[names[i]] == null || item.data[names[i]].defaultValue == -1)
+                {
+                    upgradeButtons[i].gameObject.SetActive(false);
+                    continue;
+                }
 
                 upgradeButtons[i].gameObject.SetActive(true);
                 upgradeButtons[i].SetUpgradeData(names[i], item.data[names[i]]);

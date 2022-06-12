@@ -96,10 +96,10 @@
                 "values": 
                 [
                     {
-                        "defaultValue": 0.04,
-                        "currentValue": 0.04,
-                        "upgradeValue": 0.01,
-                        "maxValue": 0.08,
+                        "defaultValue": 0.4,
+                        "currentValue": 0.4,
+                        "upgradeValue": 0.1,
+                        "maxValue": 0.8,
                         "cost": 700
                     },
                     {
@@ -108,6 +108,30 @@
                         "upgradeValue": 5,
                         "maxValue": 130,
                         "cost": 1000
+                    }
+                ]
+            }
+        },
+        {
+            "type": 1,
+            "name": "QUAKE BOX",
+            "cost": 2000,
+            "data": 
+            {
+                "keys": 
+                [
+                    102,
+                    3
+                ],
+                "values": 
+                [
+                    null,
+                    {
+                        "defaultValue": 1,
+                        "currentValue": 1,
+                        "upgradeValue": 1,
+                        "maxValue": 8,
+                        "cost": 500
                     }
                 ]
             }

@@ -10,6 +10,7 @@ public class EnemyObject : MonoBehaviour
 
     private float _hp;
 
+    private bool _meetBarricade = false;
     private bool _isMoving = true;
 
     void Awake()
@@ -25,7 +26,7 @@ public class EnemyObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isMoving)
+        if (_isMoving && !_meetBarricade)
             Move();
     }
 
@@ -42,12 +43,12 @@ public class EnemyObject : MonoBehaviour
     private void Recover()
     {
         _hp = _enemy.hp;
-        slow = false;
+        slowAmount = 0;
     }
 
     private void Move()
     {
-        transform.position += Vector3.right * _enemy.speed * Time.deltaTime * (slow ? 0.5f : 1);
+        transform.position += Vector3.right * _enemy.speed * Time.deltaTime * (1 - slowAmount);
     }
 
     IEnumerator attackCoroutine;
@@ -60,16 +61,31 @@ public class EnemyObject : MonoBehaviour
         StartCoroutine(AttackTimer());
     }
 
-    bool slow = false;
-    public void Slow()
+    float slowAmount = 0;
+    public void Slow(float amount)
     {
-        slow = true;
-        Debug.Log("Slow");
+        slowAmount = amount;
     }
 
     public void Down()
     {
-        Debug.Log("Down");
+        // 추후 애니메이션 관련 조절
+        StartCoroutine(DownTestCoroutine());
+    }
+
+    // 애니메이션으로 캐릭의 다운을 조정하기 위한 함수
+    private void CharacterDown(bool down)
+    {
+        _isMoving = !down;
+    }
+
+    // 애니메이션을 대체할 코루틴
+    IEnumerator DownTestCoroutine()
+    {
+        CharacterDown(true);
+        yield return new WaitForSeconds(1.5f);
+
+        CharacterDown(false);
     }
 
     private void StopAttack()
@@ -85,18 +101,19 @@ public class EnemyObject : MonoBehaviour
     {
         yield return new WaitForSeconds(_enemy.attackDelay);
 
-        if (_isMoving == false)
+        if (_meetBarricade)
         {
             Player.Instance.Damaged(_enemy.dmg);
             Attack();
         }
     }
 
-    public void MoveOrAttack(bool isMoving)
+    public void MeetBrricade(bool meet)
     {
-        _isMoving = isMoving;
+        _meetBarricade = meet;
+        _isMoving = !meet;
 
-        if (_isMoving == false)
+        if (meet)
             Attack();
         else StopAttack();
     }
@@ -104,7 +121,7 @@ public class EnemyObject : MonoBehaviour
     public void Damage(float dmg)
     {
         _hp -= dmg;
-        Debug.Log("[SYSTEM] ENEMY DAMAGED" + _hp);
+        Debug.Log("[SYSTEM] ENEMY DAMAGED" + dmg);
 
         if (_hp <= 0)
         {

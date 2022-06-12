@@ -66,11 +66,15 @@ public class Item
 [Serializable]
 public class UpgradeData
 {
-    public float defaultValue;
+    public float defaultValue = -1;
     public float currentValue;
     public float upgradeValue = 0;
     public float maxValue;
-    public int cost;
+    public int cost = 0;
+
+    public UpgradeData()
+    {
+    }
 
     public UpgradeData(UpgradeData data)
     {

@@ -59,7 +59,7 @@ public class AttackController : MonoBehaviour
         StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
     }
 
-    public void TowerAttack(Vector3 pos, float damge, List<UpgradeDataType> attackTypes)
+    public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes)
     {
         float dmg = damge;
         float accurancy = 100;
@@ -72,18 +72,19 @@ public class AttackController : MonoBehaviour
     }
 
     // 결과적으로 작동시킬 코루틴
-    private IEnumerator Attack(Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false, List<UpgradeDataType> attackTypes = null)
+    private IEnumerator Attack(Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false, Dictionary<UpgradeDataType, float> attackTypes = null)
     {
         GameObject point = ObjectPool.GetObject<GameObject>(pointName);
 
         point.name = "";
         if (attackTypes != null)
         {
-            foreach (UpgradeDataType type in attackTypes)
+            foreach (UpgradeDataType type in attackTypes.Keys)
             {
                 if (type == UpgradeDataType.SLOW)
                 {
                     point.name += "S";
+                    point.name += string.Format("{0:0.00}", attackTypes[type]);
                 }
 
                 if (type == UpgradeDataType.DOWN)
@@ -160,17 +161,21 @@ public class AttackController : MonoBehaviour
             if (pn != pointName)
             {
                 bool remain = false;
-                bool slow = false;
+                float slowAmount = 0;
                 bool down = false;
                 char c = 'a';
 
                 int j = 0;
-
                 for (; j < pn.Length && c > '9'; j++)
                 {
                     c = pn[j];
 
-                    if (c == 'S') slow = true;
+                    if (c == 'S')
+                    {
+                        j++;
+                        float.TryParse(pn.Substring(j, j + 3), out slowAmount);
+                        j += 3;
+                    }
                     else if (c == 'D') down = true;
                     else if (c == 'T')
                     {
@@ -187,12 +192,12 @@ public class AttackController : MonoBehaviour
 
                 float dmg = 0;
 
-                if (slow) enemy.Slow();
+                if (slowAmount != 0) enemy.Slow(slowAmount);
                 if (down) enemy.Down();
 
                 if (remain == false) ReturnPoint(point);
 
-                if (float.TryParse(pn.Substring(j), out dmg) == false) continue;
+                if (float.TryParse(pn.Substring(j), out dmg) == false && dmg != 0) continue;
                 else enemy.Damage(dmg);
             }
 

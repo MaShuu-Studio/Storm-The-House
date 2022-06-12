@@ -25,14 +25,14 @@ public class EnemyAttackArea : MonoBehaviour
     {
         if (other.tag == "Barricade")
         {
-            _enemy.MoveOrAttack(false);
+            _enemy.MeetBrricade(true);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Barricade")
         {
-            _enemy.MoveOrAttack(true);
+            _enemy.MeetBrricade(false);
         }
     }
 }
