@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private Slider hpSlider;
     [SerializeField] private TextMeshProUGUI hpText;
-    private int maxHp;
+    private float maxHp;
 
     [SerializeField] private TextMeshProUGUI moneyText;
 
@@ -157,22 +157,22 @@ public class UIController : MonoBehaviour
         moneyText.text = "$" + money;
     }
 
-    public void SetHP(int cur, int max)
+    public void SetHP(float cur, float max)
     {
         maxHp = max;
         hpSlider.maxValue = max;
 
         UpdateHP(cur);
     }
-    public void UpdateHP(int cur)
+    public void UpdateHP(float cur)
     {
-        hpText.text = cur + "/" + maxHp;
+        hpText.text = string.Format("{0:#}", cur) + "/" + string.Format("{0:#}", maxHp);
         hpSlider.value = cur;
     }
 
-    public void SetSupporter(int shield, int gun, int repair)
+    public void SetSupporter(float shield, int gun, int repair)
     {
-        baseText.text = shield + "%" + "\n" + gun.ToString() + "\n" + repair.ToString();
+        baseText.text = string.Format("{0:#}", shield) + "%" + "\n" + gun.ToString() + "\n" + repair.ToString();
     }
     #endregion
 

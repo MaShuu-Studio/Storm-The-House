@@ -38,6 +38,8 @@ public class TowerObject : MonoBehaviour
 
     public void ActiveTower()
     {
+        if (_shield) return;
+
         if (_enemies.Count > 0 && coroutine == null)
         {
             coroutine = Active();

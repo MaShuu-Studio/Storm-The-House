@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     private Queue<GameObject> enemys;
     private Dictionary<string, IEnumerator> coroutines;
 
-    private int hp;
-    private int maxHp;
+    private float hp;
+    private float maxHp;
     private float shield;
 
     private int money;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         hp = maxHp = 100;
         shield = 0;
         UIController.Instance.SetHP(hp, maxHp);
-        UIController.Instance.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
+        UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     void Update()
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
 
         supporter[type]++;
 
-        UIController.Instance.SetSupporter((int)shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
+        UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     private void ActiveSupporter(string type)
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
 
     public void Damaged(int dmg)
     {
-        hp -= dmg;
+        hp -= dmg * (1 - (shield / 100));
         UIController.Instance.UpdateHP(hp);
     }
 
@@ -181,6 +181,12 @@ public class Player : MonoBehaviour
 
         money -= towerCost;
         UIController.Instance.UpdateMoney(money);
+    }
+
+    public void UpdateShield(float s)
+    {
+        shield = s;
+        UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
     private void OnTriggerEnter(Collider other)

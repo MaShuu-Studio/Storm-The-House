@@ -135,6 +135,28 @@
                     }
                 ]
             }
+        },
+        {
+            "type": 1,
+            "name": "SHIELD GENERATOR",
+            "cost": 3000,
+            "data": 
+            {
+                "keys": 
+                [
+                    100
+                ],
+                "values": 
+                [
+                    {
+                        "defaultValue": 20,
+                        "currentValue": 20,
+                        "upgradeValue": 5,
+                        "maxValue": 60,
+                        "cost": 1000
+                    }
+                ]
+            }
         }
     ]
 }

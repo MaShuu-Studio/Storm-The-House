@@ -85,6 +85,8 @@ public class TowerController : MonoBehaviour
 
         _towerObjects[index].UpdateTower(_towers[index]);
 
+        UpdateShield();
+
         return true;
     }
 
@@ -97,5 +99,23 @@ public class TowerController : MonoBehaviour
     public void Upgrade(int index, UpgradeDataType type, ref int money)
     {
         _towers[index].data[type].Upgrade(ref money);
+
+        if (type == UpgradeDataType.SHIELD) UpdateShield();
+    }
+
+    private void UpdateShield()
+    {
+        float shield = 1;
+
+        for (int i = 0; i < _towers.Length; i++)
+        {
+            if (_towers[i] == null) continue;
+
+            float ts = 1 - _towers[i].GetValue(UpgradeDataType.SHIELD) / 100;
+
+            shield *= ts;
+        }
+        shield = (1 - shield) * 100;
+        Player.Instance.UpdateShield(shield);
     }
 }

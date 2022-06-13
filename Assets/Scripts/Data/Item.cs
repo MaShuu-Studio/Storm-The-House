@@ -32,6 +32,9 @@ public class Item
             float defaultValue = 1;
             switch(type)
             {
+                case UpgradeDataType.SHIELD:
+                    defaultValue = 0;
+                    break;
                 case UpgradeDataType.RANGE:
                     if (this.type == ItemType.WEAPON) defaultValue = 0.5f;
                     else defaultValue = 50;
