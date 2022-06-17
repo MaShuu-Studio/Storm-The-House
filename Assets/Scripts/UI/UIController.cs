@@ -208,7 +208,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case ButtonType.BUY:
-                if (type == ButtonType.WEAPON)
+                if (selectedItemType == ItemType.WEAPON)
                     Player.Instance.BuyWeapon(selectedItem);
                 else
                     Player.Instance.ReadyToBuyTower(selectedItem);
