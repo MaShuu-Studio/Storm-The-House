@@ -84,7 +84,10 @@ public class ObjectPool : MonoBehaviour
 
     protected static void CreateNewObject<T>(string name)
     {
-        GameObject gbo = Instantiate(DataManager.GetPrefab<T>(name));
+        GameObject bo = DataManager.GetPrefab<T>(name);
+        if (bo == null) return;
+
+        GameObject gbo = Instantiate(bo);
 
         gbo.transform.SetParent(Instance.PoolParent[name]);
         gbo.SetActive(false);

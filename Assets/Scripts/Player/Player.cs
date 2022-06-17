@@ -202,9 +202,9 @@ public class Player : MonoBehaviour
     {
         style.fontSize = 0;
 
-        if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 1000"))
+        if (GUI.Button(new Rect(1810, 310 + 120, 100, 50), "ADD MONEY 100000"))
         {
-            money += 1000;
+            money += 100000;
             UIController.Instance.UpdateMoney(money);
         }
     }
