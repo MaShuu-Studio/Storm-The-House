@@ -34,6 +34,12 @@ public class UIController : MonoBehaviour
     [SerializeField] private Transform supporterGrid;
     [SerializeField] private Transform weaponsGrid;
     [SerializeField] private Transform towersGrid;
+
+    [Space]
+    [SerializeField] private UsedWeaponItem[] usedItems;
+    [SerializeField] private DraggedItem draggedItemObject;
+    private string draggedItem;
+    private int draggedItemIndex;
     
     [Space]
     [SerializeField] private GameObject supporterPrefab;
@@ -101,6 +107,14 @@ public class UIController : MonoBehaviour
 
             go.transform.SetParent(towersGrid);
         }
+
+        for(int i = 0; i < usedItems.Length; i++)
+        {
+            usedItems[i].SetIndex(i);
+        }
+        UpdateUsedWeapons();
+
+        draggedItemObject.gameObject.SetActive(false);
 
         shopDoneButton.SetButton(ButtonType.ROUNDSTART);
         OpenShop(true);
@@ -248,5 +262,47 @@ public class UIController : MonoBehaviour
         }
 
         upgradeView.SetUpgradeView(item);
+    }
+
+    public void BeginDrag(int index)
+    {
+        Item item = WeaponController.Instance.GetWeaponData(index);
+        if (draggedItem == null || item.available == false) return;
+
+        draggedItem = item.name;
+        draggedItemIndex = index;
+
+        draggedItemObject.SetIcon(draggedItem);
+        draggedItemObject.gameObject.SetActive(true);
+    }
+
+    public void Dragging(Vector3 pos)
+    {
+        draggedItemObject.transform.position = pos;
+    }
+
+    public void EndDrag()
+    {
+        draggedItem = "";
+        draggedItemIndex = 0;
+        draggedItemObject.gameObject.SetActive(false);
+    }
+
+    public void DropItem(int pos)
+    {
+        WeaponController.Instance.SetWeapon(pos, draggedItemIndex);
+        UpdateUsedWeapons();
+    }
+
+    private void UpdateUsedWeapons()
+    {
+        for (int i = 0; i < usedItems.Length; i++)
+        {
+            Item item = WeaponController.Instance.UsingWeapon(i);
+            string name = "";
+            if (item != null) name = item.name;
+            usedItems[i].SetIcon(name);
+        }
+        
     }
 }

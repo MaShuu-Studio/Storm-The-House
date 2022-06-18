@@ -103,7 +103,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
 
-        UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO));
+        UpdateAmmoUI();
     }
 
     public bool Fire()
@@ -160,14 +160,40 @@ public class WeaponController : MonoBehaviour
         _canUse[type] = true;
     }
 
-    public bool WeaponIsAvailable(int index)
+    public Item UsingWeapon(int index)
     {
-        return _weapons[index].available;
+        int i = _usingWeapon[index];
+        if (i == -1) return null;
+        return _weapons[i];
+    }
+
+    public int UsingWeaponIndex(int index)
+    {
+        return _usingWeapon[index];
     }
 
     public Item GetWeaponData(int index)
     {
+        if (index < 0 || index >= _weapons.Count) return null;
+
         return _weapons[index];
+    }
+
+    public void SetWeapon(int index, int item)
+    {
+        int next = (index + 1) % 2;
+        if (_usingWeapon[next] == item)
+        {
+            // 스왑을 해야하는 상황에서 다음 무기가 없으면 스왑X
+            if (_usingWeapon[index] == -1) return;
+            _usingWeapon[next] = _usingWeapon[index];
+        }
+
+        _usingWeapon[index] = item;
+
+        // 웨폰 세팅을 했으니 총알 충전 및 재표기
+        RefillAmmo();
+        UpdateAmmoUI();
     }
 
     public void BuyWeapon(int index, ref int money)
@@ -183,6 +209,12 @@ public class WeaponController : MonoBehaviour
     {
         _weapons[index].data[type].Upgrade(ref money);
 
+        RefillAmmo();
+        UpdateAmmoUI();
+    }
+
+    private void UpdateAmmoUI()
+    {
         UIController.Instance.SetAmmo(_ammo[_curWeapon], (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO));
     }
 }
