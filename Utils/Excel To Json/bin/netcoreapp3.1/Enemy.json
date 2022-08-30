@@ -1,0 +1,96 @@
+
+{
+    "list": 
+    [
+        
+{
+    "name": "SWORD",
+"hp": 2,
+"dmg": 1,
+"speed": 5,
+"attackdelay": 2,
+"attackrange": 0.25,
+"money": 20
+},
+
+{
+    "name": "GUN",
+"hp": 3,
+"dmg": 1,
+"speed": 5,
+"attackdelay": 2,
+"attackrange": 3,
+"money": 50
+},
+
+{
+    "name": "CAR",
+"hp": 8,
+"dmg": 1,
+"speed": 10,
+"attackdelay": 2,
+"attackrange": 6,
+"money": 100
+},
+
+{
+    "name": "PARATROOPER",
+"hp": 7,
+"dmg": 1,
+"speed": 7,
+"attackdelay": 2,
+"attackrange": 6,
+"money": 60
+},
+
+{
+    "name": "BOMBCAR",
+"hp": 5,
+"dmg": 1,
+"speed": 20,
+"attackdelay": 2,
+"attackrange": 0.1,
+"money": 150
+},
+
+{
+    "name": "FLAMETHROWER",
+"hp": 35,
+"dmg": 1,
+"speed": 3,
+"attackdelay": 2,
+"attackrange": 0.5,
+"money": 130
+},
+
+{
+    "name": "TANK",
+"hp": 150,
+"dmg": 1,
+"speed": 3,
+"attackdelay": 2,
+"attackrange": 13,
+"money": 180
+},
+
+{
+    "name": "HELICOPTER",
+"hp": 20,
+"dmg": 1,
+"speed": 5,
+"attackdelay": 2,
+"attackrange": 10,
+"money": 100
+},
+
+{
+    "name": "ROBOT",
+"hp": 270,
+"dmg": 1,
+"speed": 3,
+"attackdelay": 2,
+"attackrange": 1,
+"money": 1000
+}
+    ]
+}

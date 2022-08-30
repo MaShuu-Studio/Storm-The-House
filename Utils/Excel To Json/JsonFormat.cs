@@ -16,6 +16,12 @@ namespace Excel_To_Json
     ]
 }}
 ";
+        // {0} 데이터 내용(vauleFormat)
+        public static string contentsFormat =
+@"
+{{
+    {0}
+}}";
 
         // {0} 기본 변수(valueFormats)
         // {1} 데이터 타입(enum)
@@ -42,19 +48,13 @@ namespace Excel_To_Json
 @"""{0}"": {1}";
 
         // {0} 데이터 내용(valueFormat)
-        public static string enemyContentsFormat =
+        public static string roundContentsFormat =
 @"
 {{
     ""enemies"":
     [
         {0}
     ]
-}}";
-        // {0} 데이터 내용(vauleFormat)
-        public static string basicContentsFormat =
-@"
-{{
-    {0}
 }}";
     }
 }

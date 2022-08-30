@@ -1,0 +1,23 @@
+{
+    "list":
+    [
+        {
+            "name":"BASIC",
+            "hp":1,
+            "dmg":1,
+            "speed":5,
+            "attackDelay":2,
+            "attackRange":0.25,
+            "money":10
+        },
+        {
+            "name":"BASIC2",
+            "hp":1,
+            "dmg":2,
+            "speed":4,
+            "attackDelay":3,
+            "attackRange":1,
+            "money":10
+        }
+    ]
+}

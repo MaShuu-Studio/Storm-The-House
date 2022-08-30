@@ -1,35 +1,1228 @@
 {
-    "list":
-    [
+  "list": [
+    {
+      "enemies": [
         {
-            "enemies":
-            [
-                {
-                    "name":"BASIC",
-                    "delay":3,
-                    "delayRange":0.5
-                },
-                {
-                    "name":"BASIC2",
-                    "delay":5.5,
-                    "delayRange":0.5
-                }
-            ]
-        },        
-        {
-            "enemies":
-            [
-                {
-                    "name":"BASIC",
-                    "delay":1,
-                    "delayRange":0.5
-                },
-                {
-                    "name":"BASIC2",
-                    "delay":1.5,
-                    "delayRange":0.5
-                }
-            ]
+          "name": "SWORD",
+          "amount": 50
         }
-    ]
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 75
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 100
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 125
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 150
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 175
+        },
+
+        {
+          "name": "GUN",
+          "amount": 6
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 200
+        },
+
+        {
+          "name": "GUN",
+          "amount": 12
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 225
+        },
+
+        {
+          "name": "GUN",
+          "amount": 18
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 250
+        },
+
+        {
+          "name": "GUN",
+          "amount": 24
+        },
+
+        {
+          "name": "CAR",
+          "amount": 5
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 275
+        },
+
+        {
+          "name": "GUN",
+          "amount": 30
+        },
+
+        {
+          "name": "CAR",
+          "amount": 10
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 300
+        },
+
+        {
+          "name": "GUN",
+          "amount": 36
+        },
+
+        {
+          "name": "CAR",
+          "amount": 15
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 325
+        },
+
+        {
+          "name": "GUN",
+          "amount": 42
+        },
+
+        {
+          "name": "CAR",
+          "amount": 20
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 350
+        },
+
+        {
+          "name": "GUN",
+          "amount": 48
+        },
+
+        {
+          "name": "CAR",
+          "amount": 25
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 375
+        },
+
+        {
+          "name": "GUN",
+          "amount": 54
+        },
+
+        {
+          "name": "CAR",
+          "amount": 30
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 400
+        },
+
+        {
+          "name": "GUN",
+          "amount": 60
+        },
+
+        {
+          "name": "CAR",
+          "amount": 35
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 425
+        },
+
+        {
+          "name": "GUN",
+          "amount": 66
+        },
+
+        {
+          "name": "CAR",
+          "amount": 40
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 10
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 2
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 450
+        },
+
+        {
+          "name": "GUN",
+          "amount": 72
+        },
+
+        {
+          "name": "CAR",
+          "amount": 45
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 15
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 2
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 475
+        },
+
+        {
+          "name": "GUN",
+          "amount": 78
+        },
+
+        {
+          "name": "CAR",
+          "amount": 50
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 20
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 2
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 500
+        },
+
+        {
+          "name": "GUN",
+          "amount": 84
+        },
+
+        {
+          "name": "CAR",
+          "amount": 55
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 25
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 2
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 10
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 525
+        },
+
+        {
+          "name": "GUN",
+          "amount": 90
+        },
+
+        {
+          "name": "CAR",
+          "amount": 60
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 30
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 2
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 12
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 550
+        },
+
+        {
+          "name": "GUN",
+          "amount": 96
+        },
+
+        {
+          "name": "CAR",
+          "amount": 65
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 35
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 3
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 14
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 575
+        },
+
+        {
+          "name": "GUN",
+          "amount": 102
+        },
+
+        {
+          "name": "CAR",
+          "amount": 70
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 40
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 3
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 16
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 600
+        },
+
+        {
+          "name": "GUN",
+          "amount": 108
+        },
+
+        {
+          "name": "CAR",
+          "amount": 75
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 45
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 3
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 18
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 625
+        },
+
+        {
+          "name": "GUN",
+          "amount": 114
+        },
+
+        {
+          "name": "CAR",
+          "amount": 80
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 50
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 3
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 20
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 650
+        },
+
+        {
+          "name": "GUN",
+          "amount": 120
+        },
+
+        {
+          "name": "CAR",
+          "amount": 85
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 55
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 3
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 22
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 675
+        },
+
+        {
+          "name": "GUN",
+          "amount": 126
+        },
+
+        {
+          "name": "CAR",
+          "amount": 90
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 60
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 4
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 24
+        },
+
+        {
+          "name": "TANK",
+          "amount": 10
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 700
+        },
+
+        {
+          "name": "GUN",
+          "amount": 132
+        },
+
+        {
+          "name": "CAR",
+          "amount": 95
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 65
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 4
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 26
+        },
+
+        {
+          "name": "TANK",
+          "amount": 12
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 725
+        },
+
+        {
+          "name": "GUN",
+          "amount": 138
+        },
+
+        {
+          "name": "CAR",
+          "amount": 100
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 70
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 4
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 28
+        },
+
+        {
+          "name": "TANK",
+          "amount": 14
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 750
+        },
+
+        {
+          "name": "GUN",
+          "amount": 144
+        },
+
+        {
+          "name": "CAR",
+          "amount": 105
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 75
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 4
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 30
+        },
+
+        {
+          "name": "TANK",
+          "amount": 16
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 10
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 775
+        },
+
+        {
+          "name": "GUN",
+          "amount": 150
+        },
+
+        {
+          "name": "CAR",
+          "amount": 110
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 80
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 4
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 32
+        },
+
+        {
+          "name": "TANK",
+          "amount": 18
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 12
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 800
+        },
+
+        {
+          "name": "GUN",
+          "amount": 156
+        },
+
+        {
+          "name": "CAR",
+          "amount": 115
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 85
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 5
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 34
+        },
+
+        {
+          "name": "TANK",
+          "amount": 20
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 14
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 825
+        },
+
+        {
+          "name": "GUN",
+          "amount": 162
+        },
+
+        {
+          "name": "CAR",
+          "amount": 120
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 90
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 5
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 36
+        },
+
+        {
+          "name": "TANK",
+          "amount": 22
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 16
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 850
+        },
+
+        {
+          "name": "GUN",
+          "amount": 168
+        },
+
+        {
+          "name": "CAR",
+          "amount": 125
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 95
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 5
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 38
+        },
+
+        {
+          "name": "TANK",
+          "amount": 24
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 18
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 875
+        },
+
+        {
+          "name": "GUN",
+          "amount": 174
+        },
+
+        {
+          "name": "CAR",
+          "amount": 130
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 100
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 5
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 40
+        },
+
+        {
+          "name": "TANK",
+          "amount": 26
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 20
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 5
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 900
+        },
+
+        {
+          "name": "GUN",
+          "amount": 180
+        },
+
+        {
+          "name": "CAR",
+          "amount": 135
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 105
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 5
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 42
+        },
+
+        {
+          "name": "TANK",
+          "amount": 28
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 22
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 8
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 925
+        },
+
+        {
+          "name": "GUN",
+          "amount": 186
+        },
+
+        {
+          "name": "CAR",
+          "amount": 140
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 110
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 6
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 44
+        },
+
+        {
+          "name": "TANK",
+          "amount": 30
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 24
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 11
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 950
+        },
+
+        {
+          "name": "GUN",
+          "amount": 192
+        },
+
+        {
+          "name": "CAR",
+          "amount": 145
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 115
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 6
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 46
+        },
+
+        {
+          "name": "TANK",
+          "amount": 32
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 26
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 14
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 975
+        },
+
+        {
+          "name": "GUN",
+          "amount": 198
+        },
+
+        {
+          "name": "CAR",
+          "amount": 150
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 120
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 6
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 48
+        },
+
+        {
+          "name": "TANK",
+          "amount": 34
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 28
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 17
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 1000
+        },
+
+        {
+          "name": "GUN",
+          "amount": 204
+        },
+
+        {
+          "name": "CAR",
+          "amount": 155
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 125
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 6
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 50
+        },
+
+        {
+          "name": "TANK",
+          "amount": 36
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 30
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 20
+        }
+      ]
+    },
+
+    {
+      "enemies": [
+        {
+          "name": "SWORD",
+          "amount": 1025
+        },
+
+        {
+          "name": "GUN",
+          "amount": 210
+        },
+
+        {
+          "name": "CAR",
+          "amount": 160
+        },
+
+        {
+          "name": "PARATROOPER",
+          "amount": 130
+        },
+
+        {
+          "name": "BOMBCAR",
+          "amount": 6
+        },
+
+        {
+          "name": "FLAMETHROWER",
+          "amount": 52
+        },
+
+        {
+          "name": "TANK",
+          "amount": 38
+        },
+
+        {
+          "name": "HELICOPTER",
+          "amount": 32
+        },
+
+        {
+          "name": "ROBOT",
+          "amount": 23
+        }
+      ]
+    }
+  ]
 }

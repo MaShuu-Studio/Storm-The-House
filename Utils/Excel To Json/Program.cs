@@ -29,6 +29,12 @@ namespace Excel_To_Json
                         case "item":
                             contents = string.Format(JsonFormat.jsonFormat, ParseItem(range));
                             break;
+                        case "enemy":
+                            contents = string.Format(JsonFormat.jsonFormat, ParseEnemy(range));
+                            break;
+                        case "round":
+                            contents = string.Format(JsonFormat.jsonFormat, ParseRound(range));
+                            break;
                     }
 
                     File.WriteAllText(Path.Combine(Environment.CurrentDirectory, filename), contents);
@@ -52,6 +58,7 @@ namespace Excel_To_Json
         private static string ParseItem(Excel.Range range)
         {
             string contents = "";
+            int count = 1;
 
             // row 1: type's name
             // 
@@ -84,29 +91,88 @@ namespace Excel_To_Json
                                 keys += ",\n";
                                 values += ",\n";
                             }
-                            
-                            keys += (column - 6).ToString();
-                            values +=ParseUpgradeData(o.ToString());
-                        }
-                    }
-                        /*
-                        string s = o.ToString();
-                        if (s.ToLower() != "true" && s.ToUpper() != "false" && && row > 1)
-                        {
-                            Tuple<float, float, float, int> t = ParseUpgradeData(s);
-                            Console.Write(t.Item1.ToString() + "," + t.Item2.ToString() + "," + t.Item3.ToString() + "," + t.Item4.ToString() + " ");
 
+                            keys += (column - 6).ToString();
+                            values += ParseUpgradeData(o.ToString());
                         }
-                        else Console.Write(s + " ");
                     }
-                    else Console.Write(" " + " ");*/
+                    /*
+                    string s = o.ToString();
+                    if (s.ToLower() != "true" && s.ToUpper() != "false" && && row > 1)
+                    {
+                        Tuple<float, float, float, int> t = ParseUpgradeData(s);
+                        Console.Write(t.Item1.ToString() + "," + t.Item2.ToString() + "," + t.Item3.ToString() + "," + t.Item4.ToString() + " ");
+
+                    }
+                    else Console.Write(s + " ");
+                }
+                else Console.Write(" " + " ");*/
                 }
                 if (datas != "")
                 {
                     if (contents != "") contents += ",\n";
                     contents += string.Format(JsonFormat.itemContentsFormat, datas, keys, values);
                 }
-                Console.WriteLine();
+                Console.WriteLine($"Progress Item {count++}");
+            }
+            return contents;
+        }
+
+        private static string ParseEnemy(Excel.Range range)
+        {
+            string contents = "";
+            int count = 1;
+
+            // 하나의 row는 하나의 데이터를 나타내고 있음.
+            for (int row = 2; row <= range.Rows.Count; row++)
+            {
+                string datas = "";
+
+                for (int column = 1; column <= range.Columns.Count; column++)
+                {
+                    object o = (range.Cells[row, column] as Excel.Range).Value2;
+                    string type = (range.Cells[1, column] as Excel.Range).Value2;
+                    datas += ParseValue(type.ToLower(), o);
+                    if (column < range.Columns.Count) datas += ",\n";
+                }
+                if (datas != "")
+                {
+                    if (contents != "") contents += ",\n";
+                    contents += string.Format(JsonFormat.contentsFormat, datas);
+                }
+                Console.WriteLine($"Progress Enemy {count++}");
+            }
+            return contents;
+        }
+        private static string ParseRound(Excel.Range range)
+        {
+            string contents = "";
+            int count = 1;
+
+            // 하나의 row는 하나의 라운드 데이터를 나타내고 있음.
+            // 첫번째 row는 Enemy의 이름을 나타냄.
+            // 첫번째 column은 몇 번째 라운드인지에 대한 표기임.
+            for (int row = 2; row <= range.Rows.Count; row++)
+            {
+                string datas = "";
+
+                for (int column = 2; column <= range.Columns.Count; column++)
+                {
+                    object o = (range.Cells[row, column] as Excel.Range).Value2;
+                    if (o != null)
+                    {
+                        string type = (range.Cells[1, column] as Excel.Range).Value2;
+                        if (type.ToUpper() == "VALUE") break;
+                        else if (column != 2) datas += ",\n";
+                        datas += ParseRoundEnemyData(type, o);                    
+                    }
+                }
+                if (datas != "")
+                {
+                    if (contents != "") contents += ",\n";
+                    contents += string.Format(JsonFormat.roundContentsFormat, datas);
+                }
+                Console.WriteLine($"Progress Round {count++}");
             }
             return contents;
         }
@@ -173,9 +239,21 @@ namespace Excel_To_Json
                     ParseValue("upgradeValue", values[1]) + ",\n" +
                     ParseValue("maxValue", values[2]) + ",\n" +
                     ParseValue("cost", upgradeCost) + "\n";
-                upgradeContents = string.Format(JsonFormat.basicContentsFormat, upgradeContents);
+                upgradeContents = string.Format(JsonFormat.contentsFormat, upgradeContents);
             }
             return upgradeContents;
+        }
+
+        private static string ParseRoundEnemyData(string name, object o)
+        {
+            string contents = "";
+
+            contents = ParseValue("name", name) + ",\n" + ParseValue("amount", o);
+
+            contents = string.Format(JsonFormat.contentsFormat, contents);
+
+            return contents;
+
         }
 
         private static void ReleaseObject(object obj)

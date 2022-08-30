@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Prefab\TowerObject.cs" />
     <Compile Include="Assets\Scripts\Player\TowerController.cs" />
+    <Compile Include="Assets\Scripts\UI\UsedWeaponItem.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Data\Enemy.cs" />
     <Compile Include="Assets\Scripts\Player\TowerFloor.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\Data\EnumData.cs" />
     <Compile Include="Assets\Scripts\Prefab\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\Player\WeaponController.cs" />
+    <Compile Include="Assets\Scripts\UI\DraggedItem.cs" />
     <Compile Include="Assets\Scripts\GameControl\GameController.cs" />
     <Compile Include="Assets\Scripts\Data\ItemManager.cs" />
     <Compile Include="Assets\Scripts\UI\BuyButton.cs" />
@@ -87,8 +89,6 @@
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\UI\UsedWeaponItem.cs" />
-    <Compile Include="Assets\Scripts\UI\DraggedItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

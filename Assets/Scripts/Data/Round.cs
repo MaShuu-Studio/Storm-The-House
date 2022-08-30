@@ -13,6 +13,5 @@ public class Round
 public class RoundEnemyData
 {
     public string name;
-    public float delay;
-    public float delayRange;
+    public int amount;
 }

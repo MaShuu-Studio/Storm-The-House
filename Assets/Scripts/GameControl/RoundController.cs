@@ -88,7 +88,7 @@ public class RoundController : MonoBehaviour
         if (roundData != null)
             foreach (RoundEnemyData data in roundData)
             {
-                _spawnCoroutines.Add(data.name, Spawn(data.name, data.delay, data.delayRange));
+                _spawnCoroutines.Add(data.name, Spawn(data.name, data.amount));
                 StartCoroutine(_spawnCoroutines[data.name]);
             }
     }
@@ -130,9 +130,12 @@ public class RoundController : MonoBehaviour
         RoundEnd();
     }
 
-    private IEnumerator Spawn(string name, float delay, float delayRange)
+    private IEnumerator Spawn(string name, int amount)
     {
+        float delay = _roundTime / (float)amount;
+        float delayRange = delay * 0.2f;
         float time = Random.Range(delay - delayRange, delay + delayRange);
+
         yield return new WaitForSeconds(time);
 
         float zpos = Random.Range(5f, -5f);
@@ -143,7 +146,7 @@ public class RoundController : MonoBehaviour
         obj.transform.SetParent(enemiesParent.transform);
         obj.transform.position = pos;
 
-        _spawnCoroutines[name] = Spawn(name, delay, delayRange);
+        _spawnCoroutines[name] = Spawn(name, amount);
         StartCoroutine(_spawnCoroutines[name]);
     }
 }
