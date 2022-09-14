@@ -31,11 +31,6 @@ public class WeaponController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        Initialize();
-    }
-
     public void Initialize()
     {
         if (_weapons != null) _weapons.Clear();

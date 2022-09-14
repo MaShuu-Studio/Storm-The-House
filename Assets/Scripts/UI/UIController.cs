@@ -13,6 +13,12 @@ public class UIController : MonoBehaviour
     [Header("Base Object")]
     [SerializeField] private GameObject canvas;
 
+    [Header("View")]
+    [SerializeField] private GameObject mainView;
+    [SerializeField] private GameObject gameView;
+    [SerializeField] private GameObject gameOverView;
+    [Space]
+
     [Header("Data")]
     [SerializeField] private Slider ammoSlider;
     [SerializeField] private TextMeshProUGUI ammoText;
@@ -61,11 +67,8 @@ public class UIController : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(canvas);
-    }
 
-    void Start()
-    {
-        Initialize();
+        OpenMainView();
     }
 
     private void Initialize()
@@ -117,8 +120,56 @@ public class UIController : MonoBehaviour
         draggedItemObject.gameObject.SetActive(false);
 
         shopDoneButton.SetButton(ButtonType.ROUNDSTART);
+    }
+
+    public void OpenMainView()
+    {
+        SwitchView("MAIN");
+    }
+
+    public void StartGame()
+    {
+        GameController.Instance.StartGame();
+        SwitchView("GAME");
+        Initialize();
         OpenShop(true);
     }
+
+    public void GameOver()
+    {
+        SwitchView("OVER");
+    }
+
+    public void ReturnToMain()
+    {
+        GameController.Instance.ReturnToMain();
+        OpenMainView();
+    }
+
+    private void SwitchView(string str)
+    {
+        mainView.SetActive(false);
+        gameView.SetActive(false);
+        gameOverView.SetActive(false);
+
+        switch (str.ToUpper())
+        {
+            case "MAIN": mainView.SetActive(true);
+                break;
+            case "GAME": gameView.SetActive(true);
+                break;
+            case "OVER": gameOverView.SetActive(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    #region Main View
+    
+    #endregion
+
+    #region Game View
 
     #region Upside Panel
 
@@ -234,6 +285,10 @@ public class UIController : MonoBehaviour
                 OpenShop(false);
                 RoundController.Instance.NextRound();
                 break;
+
+            case ButtonType.GAMESTART:
+                GameController.Instance.StartGame();
+                break;
         }
     }
 
@@ -305,4 +360,6 @@ public class UIController : MonoBehaviour
         }
         
     }
+
+#endregion
 }

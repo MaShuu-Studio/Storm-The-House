@@ -30,11 +30,6 @@ public class TowerController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        Initialize(3);
-    }
-
     public void Initialize(int towerAmount)
     {
         _selectedTowerIndex = 0;

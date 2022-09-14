@@ -45,11 +45,31 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        money = 100;
-        UIController.Instance.UpdateMoney(money);
-
         supporter = new Dictionary<string, int>();
         coroutines = new Dictionary<string, IEnumerator>();
+    }
+
+    void Update()
+    {
+        if (GameController.Instance.ProgressGame == false) return;
+
+        if (hp <= 0)
+        {
+            GameController.Instance.GameOver();
+        }
+        else
+            for (int i = 0; i < SupporterManager.Types.Count; i++)
+            {
+                string type = SupporterManager.Types[i];
+                if (coroutines[type] == null && supporter[type] > 0)
+                    ActiveSupporter(type);
+            }
+    }
+
+    public void NewGame()
+    {
+        supporter.Clear();
+        coroutines.Clear();
 
         foreach (string name in SupporterManager.Types)
         {
@@ -57,21 +77,13 @@ public class Player : MonoBehaviour
             coroutines.Add(name, null);
         }
 
-        // 테스트용 임시 코드
         hp = maxHp = 100;
         shield = 0;
+        money = 100;
+
+        UIController.Instance.UpdateMoney(money);
         UIController.Instance.SetHP(hp, maxHp);
         UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
-    }
-
-    void Update()
-    {
-        for (int i = 0; i < SupporterManager.Types.Count; i++)
-        {
-            string type = SupporterManager.Types[i];
-            if (coroutines[type] == null && supporter[type] > 0)
-                ActiveSupporter(type);
-        }
     }
     #endregion
 

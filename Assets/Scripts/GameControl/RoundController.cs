@@ -42,15 +42,32 @@ public class RoundController : MonoBehaviour
         //sun.transform.LookAt(transform.position);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        NewRound();
-    }
-
-    public void NewRound()
+    public void NewGame()
     {
         _round = 0;
+
+        ResetSunPos();
+    }
+
+    public void GameEnd()
+    {
+        RemoveEnemies();
+
+        if (_roundCoroutine != null)
+        {
+            StopCoroutine(_roundCoroutine);
+            _roundCoroutine = null;
+        }
+
+        ResetSunPos();
+    }
+
+    private void ResetSunPos()
+    {
+        float radian = Mathf.PI;
+
+        sun.transform.position = new Vector3(maxXpos * Mathf.Cos(radian), minYpos + maxYpos * Mathf.Sin(radian), zpos);
+        sun.transform.LookAt(transform.position);
     }
 
     public void NextRound()
@@ -98,9 +115,14 @@ public class RoundController : MonoBehaviour
         UIController.Instance.OpenShop(true);
         WeaponController.Instance.RefillAmmo();
 
+        RemoveEnemies();
+    }
+
+    private void RemoveEnemies()
+    {
         StopSpawn();
 
-        while(enemiesParent.transform.childCount > 0)
+        while (enemiesParent.transform.childCount > 0)
         {
             GameObject child = enemiesParent.transform.GetChild(0).gameObject;
 
