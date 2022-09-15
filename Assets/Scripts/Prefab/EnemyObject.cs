@@ -44,6 +44,7 @@ public class EnemyObject : MonoBehaviour
     {
         _hp = _enemy.hp;
         slowAmount = 0;
+        MeetBrricade(false);
     }
 
     private void Move()

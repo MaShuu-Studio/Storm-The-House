@@ -70,6 +70,16 @@ public class RoundController : MonoBehaviour
         sun.transform.LookAt(transform.position);
     }
 
+    private void StopSpawn()
+    {
+        foreach (IEnumerator coroutine in _spawnCoroutines.Values)
+        {
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+        }
+        _spawnCoroutines.Clear();
+    }
+
     public void NextRound()
     {
         _round++;
@@ -84,16 +94,6 @@ public class RoundController : MonoBehaviour
         _roundCoroutine = Progress();
 
         StartCoroutine(_roundCoroutine);
-    }
-
-    private void StopSpawn()
-    {
-        foreach (IEnumerator coroutine in _spawnCoroutines.Values)
-        {
-            if (coroutine != null)
-                StopCoroutine(coroutine);
-        }
-        _spawnCoroutines.Clear();
     }
 
     private void SetData()
@@ -125,8 +125,9 @@ public class RoundController : MonoBehaviour
         while (enemiesParent.transform.childCount > 0)
         {
             GameObject child = enemiesParent.transform.GetChild(0).gameObject;
+            EnemyObject enemy = child.GetComponent<EnemyObject>();
 
-            ObjectPool.ReturnObject(child.name, child);
+            if (enemy != null) enemy.Damage(99999);
         }
 
         _progressRound = false;
