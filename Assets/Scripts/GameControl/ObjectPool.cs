@@ -25,12 +25,7 @@ public class ObjectPool : MonoBehaviour
         instance = this;
     }
 
-    void Start()
-    {
-        Initialize();
-    }
-
-    protected void Initialize()
+    public void Initialize()
     {
         _pool = new Dictionary<string, Queue<GameObject>>();
         _poolParent = new Dictionary<string, Transform>();

@@ -20,11 +20,6 @@ public class GameController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-
-        SupporterManager.Initialize();
-        ItemManager.Initialize();
-        EnemyManager.Initialize();
-        RoundManager.Initialize();
     }
 
     // Update is called once per frame

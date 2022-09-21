@@ -27,7 +27,7 @@ public class TowerController : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
     }
 
     public void Initialize(int towerAmount)
