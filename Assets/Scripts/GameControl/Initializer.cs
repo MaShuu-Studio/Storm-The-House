@@ -21,10 +21,12 @@ public class Initializer : MonoBehaviour
         ItemManager.Initialize();
         EnemyManager.Initialize();
         RoundManager.Initialize();
+        SoundManager.Initialize();
     }
     // Start is called before the first frame update
     void Start()
     {
         ObjectPool.Instance.Initialize();
+        SoundController.Instance.Initialize();
     }
 }

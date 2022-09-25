@@ -43,7 +43,8 @@ public class AttackController : MonoBehaviour
             float remainTime = weapon.GetValue(UpgradeDataType.REMAINTIME);
             float range = weapon.GetValue(UpgradeDataType.RANGE);
             bool remain = weapon.isRemain;
-            StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
+            string weaponName = weapon.name;
+            StartCoroutine(Attack(weaponName, pos, dmg, range, accurancy, remainTime, remain));
         }
     }
 
@@ -55,8 +56,9 @@ public class AttackController : MonoBehaviour
         float remainTime = 0.1f;
         float range = 0.5f;
         bool remain = false;
+        string weaponName = "";
 
-        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
+        StartCoroutine(Attack(weaponName, pos, dmg, range, accurancy, remainTime, remain));
     }
 
     public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes)
@@ -66,13 +68,14 @@ public class AttackController : MonoBehaviour
         float remainTime = 0.1f;
         float range = 0.5f;
         bool remain = false;
+        string weaponName = "";
 
-        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain, attackTypes));
+        StartCoroutine(Attack(weaponName, pos, dmg, range, accurancy, remainTime, remain, attackTypes));
 
     }
 
     // 결과적으로 작동시킬 코루틴
-    private IEnumerator Attack(Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false, Dictionary<UpgradeDataType, float> attackTypes = null)
+    private IEnumerator Attack(string weaponName, Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false, Dictionary<UpgradeDataType, float> attackTypes = null)
     {
         GameObject point = ObjectPool.GetObject<GameObject>(pointName);
 
@@ -102,6 +105,7 @@ public class AttackController : MonoBehaviour
             pos.z + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)));
         point.transform.localScale = new Vector3(range, range, range);
 
+        SoundController.Instance.PlayAudio(weaponName);
         while (time > 0)
         {
             time -= Time.deltaTime;

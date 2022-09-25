@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Data
 {
@@ -52,6 +53,7 @@ namespace Data
 
         public static string DataPath { get { return basePath + dataPath; } }
         public static string PrefabPath { get { return basePath + prefabPath; } }
+        public static string SoundPath { get { return "Sounds/Data/"; } }
 
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)
@@ -79,6 +81,11 @@ namespace Data
             string typeName = typeof(T).Name + "/";
 
             return Resources.Load<GameObject>(prefabPath + typeName + name);
+        }
+
+        public static List<T> GetObjects<T>(string filePath) where T : UnityEngine.Object
+        {
+            return Resources.LoadAll<T>(filePath).ToList();
         }
     }
 }
