@@ -68,11 +68,14 @@
     <Compile Include="Assets\Scripts\GameControl\AttackPoint.cs" />
     <Compile Include="Assets\Scripts\Prefab\TowerAttackArea.cs" />
     <Compile Include="Assets\Scripts\GameControl\RoundController.cs" />
+    <Compile Include="Assets\Scripts\GameControl\CustomAudioSource.cs" />
     <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
     <Compile Include="Assets\Scripts\UI\CustomButton.cs" />
+    <Compile Include="Assets\Scripts\Data\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Data\EnumData.cs" />
     <Compile Include="Assets\Scripts\Prefab\EnemyAttackArea.cs" />
     <Compile Include="Assets\Scripts\Player\WeaponController.cs" />
+    <Compile Include="Assets\Scripts\GameControl\SoundPool.cs" />
     <Compile Include="Assets\Scripts\UI\DraggedItem.cs" />
     <Compile Include="Assets\Scripts\GameControl\GameController.cs" />
     <Compile Include="Assets\Scripts\Data\ItemManager.cs" />
@@ -91,9 +94,6 @@
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Data\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\GameControl\SoundPool.cs" />
-    <Compile Include="Assets\Scripts\GameControl\CustomAudioSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
