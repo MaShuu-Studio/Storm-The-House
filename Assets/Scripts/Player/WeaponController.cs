@@ -110,10 +110,10 @@ public class WeaponController : MonoBehaviour
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
             float fireTime = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.FIRERATE);
-            _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireTime);
+            _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, 1/fireTime);
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
-
+            SoundController.Instance.PlayAudio(CurrentWeapon.name);
             return true;
         }
         else
@@ -136,6 +136,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
         UIController.Instance.Reload(reloadTime);
+        SoundController.Instance.PlayAudio("Reload");
     }
 
     IEnumerator Timer(WeaponTimerType type, float time)

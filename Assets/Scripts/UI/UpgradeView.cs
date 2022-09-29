@@ -34,16 +34,19 @@ public class UpgradeView : MonoBehaviour
         {
             List<UpgradeDataType> names = item.data.Keys.ToList();
 
+            int contentsAmount = 0;
             for (; i < item.data.Count; i++)
             {
-                if (item.data[names[i]] == null || item.data[names[i]].defaultValue == -1)
+                if (item.data[names[i]] == null || item.data[names[i]].defaultValue >= item.data[names[i]].maxValue)
                 {
+                    if (i > 2) continue;
                     upgradeButtons[i].gameObject.SetActive(false);
+                    contentsAmount--;
                     continue;
                 }
-
-                upgradeButtons[i].gameObject.SetActive(true);
-                upgradeButtons[i].SetUpgradeData(names[i], item.data[names[i]]);
+                upgradeButtons[contentsAmount].gameObject.SetActive(true);
+                upgradeButtons[contentsAmount].SetUpgradeData(names[i], item.data[names[i]]);
+                contentsAmount++;
             }
         }
 

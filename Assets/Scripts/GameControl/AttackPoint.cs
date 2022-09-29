@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnumData;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(BoxCollider))]
 public class AttackPoint : MonoBehaviour
 {
 
