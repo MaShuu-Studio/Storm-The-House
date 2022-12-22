@@ -50,10 +50,11 @@ namespace Data
         private static string basePath = "Assets/Resources/";
         private static string dataPath = "Data/";
         private static string prefabPath = "Prefabs/";
+        private static string soundPath = "Sounds/";
 
-        public static string DataPath { get { return basePath + dataPath; } }
-        public static string PrefabPath { get { return basePath + prefabPath; } }
-        public static string SoundPath { get { return "Sounds/"; } }
+        public static string DataPath { get { return dataPath; } }
+        public static string PrefabPath { get { return prefabPath; } }
+        public static string SoundPath { get { return soundPath; } }
 
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)
@@ -67,9 +68,9 @@ namespace Data
 
         public static List<T> Deserialize<T>()
         {
-            string fileName = typeof(T).Name + ".json";
+            string fileName = typeof(T).Name;
             fileName = DataPath + fileName;
-            string json = File.ReadAllText(fileName);
+            string json = Resources.Load<TextAsset>(fileName).text;
 
             SerializableList<T> list = JsonUtility.FromJson<SerializableList<T>>(json);
 
