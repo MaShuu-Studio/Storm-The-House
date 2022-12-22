@@ -53,7 +53,7 @@ namespace Data
 
         public static string DataPath { get { return basePath + dataPath; } }
         public static string PrefabPath { get { return basePath + prefabPath; } }
-        public static string SoundPath { get { return "Sounds/Data/"; } }
+        public static string SoundPath { get { return "Sounds/"; } }
 
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)

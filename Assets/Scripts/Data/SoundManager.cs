@@ -5,7 +5,7 @@ using Data;
 
 public static class SoundManager
 {
-    public static Dictionary<string, AudioClip> Sounds { get { return sounds; } }
+    public static int SoundsSize { get { return sounds.Count; } }
     private static Dictionary<string, AudioClip> sounds;
 
     private static List<string> names;
@@ -26,5 +26,13 @@ public static class SoundManager
             names.Add(name);
         }
         Debug.Log("[SYSTEM] LOAD SOUND DATA");
+    }
+
+    public static AudioClip GetSound(string name)
+    {
+        name = name.ToUpper();
+
+        if (!sounds.ContainsKey(name)) return null;
+        return sounds[name];
     }
 }

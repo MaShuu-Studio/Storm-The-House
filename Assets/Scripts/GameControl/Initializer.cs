@@ -28,5 +28,7 @@ public class Initializer : MonoBehaviour
     {
         ObjectPool.Instance.Initialize();
         SoundController.Instance.Initialize();
+
+        GameController.Instance.EndLoading();
     }
 }

@@ -14,10 +14,13 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject canvas;
 
     [Header("View")]
+    [SerializeField] private GameObject loadingView;
     [SerializeField] private GameObject mainView;
     [SerializeField] private GameObject gameView;
     [SerializeField] private GameObject gameOverView;
     [Space]
+    [SerializeField] private GameObject roundView;
+    [SerializeField] private TextMeshProUGUI roundText;
 
     [Header("Data")]
     [SerializeField] private Slider ammoSlider;
@@ -46,7 +49,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private DraggedItem draggedItemObject;
     private string draggedItem;
     private int draggedItemIndex;
-    
+
     [Space]
     [SerializeField] private GameObject supporterPrefab;
     [SerializeField] private GameObject itemPrefab;
@@ -67,8 +70,7 @@ public class UIController : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(canvas);
-
-        OpenMainView();
+        SwitchView("LOADING");
     }
 
     private void Initialize()
@@ -111,7 +113,7 @@ public class UIController : MonoBehaviour
             go.transform.SetParent(towersGrid);
         }
 
-        for(int i = 0; i < usedItems.Length; i++)
+        for (int i = 0; i < usedItems.Length; i++)
         {
             usedItems[i].SetIndex(i);
         }
@@ -125,6 +127,7 @@ public class UIController : MonoBehaviour
     public void OpenMainView()
     {
         SwitchView("MAIN");
+        SoundController.Instance.PlayBGM("Main");
     }
 
     public void StartGame()
@@ -148,17 +151,25 @@ public class UIController : MonoBehaviour
 
     private void SwitchView(string str)
     {
+        str = str.ToUpper();
+        loadingView.SetActive(false);
         mainView.SetActive(false);
         gameView.SetActive(false);
         gameOverView.SetActive(false);
 
         switch (str.ToUpper())
         {
-            case "MAIN": mainView.SetActive(true);
+            case "LOADING":
+                loadingView.SetActive(true);
                 break;
-            case "GAME": gameView.SetActive(true);
+            case "MAIN":
+                mainView.SetActive(true);
                 break;
-            case "OVER": gameOverView.SetActive(true);
+            case "GAME":
+                gameView.SetActive(true);
+                break;
+            case "OVER":
+                gameOverView.SetActive(true);
                 break;
             default:
                 break;
@@ -166,7 +177,7 @@ public class UIController : MonoBehaviour
     }
 
     #region Main View
-    
+
     #endregion
 
     #region Game View
@@ -241,6 +252,53 @@ public class UIController : MonoBehaviour
     }
     #endregion
 
+    #region Round
+
+    IEnumerator coroutine;
+    bool showRoundView;
+
+    private void RoundStart()
+    {
+        int round = RoundController.Instance.Round;
+        roundText.text = "ROUND " + round + 1;
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+
+        coroutine = ShowRoundView();
+        showRoundView = true;
+        StartCoroutine(coroutine);
+    }
+
+    public void SkipRoundView()
+    {
+        showRoundView = false;
+    }
+
+    private IEnumerator ShowRoundView()
+    {
+        float time = 0;
+        float maxTime = 3.5f;
+
+        roundView.SetActive(true);
+        SoundController.Instance.StopBGM();
+        SoundController.Instance.PlayAudio("RoundStart");
+
+        while (showRoundView && time < maxTime)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        roundView.SetActive(false);
+        SoundController.Instance.PlayBGM();
+        RoundController.Instance.NextRound();
+    }
+    #endregion
+
     public void OpenShop(bool b)
     {
         shopObject.SetActive(b);
@@ -255,7 +313,7 @@ public class UIController : MonoBehaviour
 
     public void PressButton(ButtonType type, int index)
     {
-        switch(type)
+        switch (type)
         {
             case ButtonType.SUPPORTER:
                 string name = SupporterManager.Types[index];
@@ -283,7 +341,7 @@ public class UIController : MonoBehaviour
 
             case ButtonType.ROUNDSTART:
                 OpenShop(false);
-                RoundController.Instance.NextRound();
+                RoundStart();
                 break;
 
             case ButtonType.GAMESTART:
@@ -358,8 +416,8 @@ public class UIController : MonoBehaviour
             if (item != null) name = item.name;
             usedItems[i].SetIcon(name);
         }
-        
+
     }
 
-#endregion
+    #endregion
 }

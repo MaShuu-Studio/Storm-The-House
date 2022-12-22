@@ -53,6 +53,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void EndLoading()
+    {
+        UIController.Instance.OpenMainView();
+    }
+
     public void StartGame()
     {
         RoundController.Instance.NewGame();

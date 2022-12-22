@@ -15,6 +15,7 @@ public class RoundController : MonoBehaviour
 
     IEnumerator _roundCoroutine;
 
+    public int Round { get { return _round; } }
     private int _round;
     private float _roundTime = 90;
     private bool _progressRound;

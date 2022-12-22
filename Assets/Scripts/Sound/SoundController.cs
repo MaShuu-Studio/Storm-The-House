@@ -8,6 +8,7 @@ public class SoundController : MonoBehaviour
     private static SoundController instance;
 
     [SerializeField] private SoundPool soundPool;
+    [SerializeField] private AudioSource bgm;
     private List<CustomAudioSource> audios = new List<CustomAudioSource>();
 
     private float sfxVolume;
@@ -53,5 +54,35 @@ public class SoundController : MonoBehaviour
         audios.Add(audio);
 
         audio.Play(sfxVolume);
+    }
+
+    public void PlayBGM(string name)
+    {
+        name = name.ToUpper();
+        bgm.clip = SoundManager.GetSound(name);
+        bgm.volume = bgmVolume;
+        bgm.loop = true;
+
+        bgm.Play();
+    }
+
+    public void PlayBGM()
+    {
+        bgm.Play();
+    }
+
+    public void StopBGM()
+    {
+        bgm.Stop();
+    }
+
+    public void PauseBGM()
+    {
+        bgm.Pause();
+    }
+
+    public void RestartBGM()
+    {
+        bgm.UnPause();
     }
 }

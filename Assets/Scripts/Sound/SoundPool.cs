@@ -15,7 +15,7 @@ public class SoundPool : MonoBehaviour
         _pool = new Dictionary<string, Queue<CustomAudioSource>>();
         _poolParent = new Dictionary<string, Transform>();
 
-        for (int i = 0; i < SoundManager.Sounds.Count; i++)
+        for (int i = 0; i < SoundManager.SoundsSize; i++)
         {
             string name = SoundManager.Names[i];
             _pool.Add(name, new Queue<CustomAudioSource>());
@@ -32,7 +32,7 @@ public class SoundPool : MonoBehaviour
     {
         GameObject gbo = Instantiate(prefab);
         CustomAudioSource audio = gbo.GetComponent<CustomAudioSource>();
-        AudioClip clip = SoundManager.Sounds[name];
+        AudioClip clip = SoundManager.GetSound(name);
 
         gbo.transform.SetParent(_poolParent[name]);
         audio.SetClip(name, clip);
