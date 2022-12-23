@@ -26,8 +26,10 @@ public class UpgradeView : MonoBehaviour
         costText.gameObject.SetActive(!item.available);
         costText.text = "$" + item.cost.ToString();
         descriptionText.text = item.description;
+        upgradeItemImage.sprite = SpriteManager.GetImage(item.name);
+
         descriptionText.gameObject.SetActive(!item.available);
-        buyButton.gameObject.SetActive(!item.available);
+        buyButton.gameObject.SetActive(!item.available && (Player.Instance.Money > item.cost));
 
         int i = 0;
         if (item.available)

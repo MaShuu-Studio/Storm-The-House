@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
+    <Compile Include="Assets\Scripts\Data\SpriteManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

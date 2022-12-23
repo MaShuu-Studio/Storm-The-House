@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using TMPro;
+using UnityEngine.UI;
 
 public class WeaponTowerItem : ItemButton, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Image image;
 
     private string _name;
     public string Name { get { return _name; } }
@@ -14,7 +14,7 @@ public class WeaponTowerItem : ItemButton, IBeginDragHandler, IDragHandler, IEnd
     public override void SetIcon(string name)
     {
         _name = name;
-        nameText.text = name;
+        image.sprite = SpriteManager.GetIcon(name);
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)

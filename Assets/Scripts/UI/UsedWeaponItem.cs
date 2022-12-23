@@ -7,21 +7,23 @@ using TMPro;
 
 public class UsedWeaponItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
 {
-    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Image image;
+    private string wName;
     private int _index;
 
     public void SetIndex(int index)
     {
-        _index = index; 
+        _index = index;
     }
     public void SetIcon(string name)
     {
-        nameText.text = name;
+        wName = name;
+        image.sprite = SpriteManager.GetIcon(name);
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
-        if (nameText.text == "") return;
+        if (wName == "") return;
 
         UIController.Instance.BeginDrag(WeaponController.Instance.UsingWeaponIndex(_index));
     }

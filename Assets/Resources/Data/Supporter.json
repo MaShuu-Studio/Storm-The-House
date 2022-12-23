@@ -16,6 +16,22 @@
             "accurancy":1.0,
             "probablity":1.0,
             "delay":5.0
+        },
+        {
+            "name":"UPGRADE WALL",
+            "supportType":1,
+            "dmg":1,
+            "accurancy":1.0,
+            "probablity":1.0,
+            "delay":5.0
+        },
+        {
+            "name":"REPAIR HOUSE",
+            "supportType":1,
+            "dmg":1,
+            "accurancy":1.0,
+            "probablity":1.0,
+            "delay":5.0
         }
     ]
 }
