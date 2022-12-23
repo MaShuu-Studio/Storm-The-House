@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\Data\Enemy.cs" />
     <Compile Include="Assets\Scripts\Player\TowerFloor.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
     <Compile Include="Assets\Scripts\Data\Item.cs" />
     <Compile Include="Assets\Scripts\Data\RoundManager.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
@@ -93,7 +94,6 @@
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

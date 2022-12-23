@@ -88,6 +88,7 @@ public class UIController : MonoBehaviour
             si.SetIcon(SupporterManager.Types[i]);
 
             go.transform.SetParent(supporterGrid);
+            go.transform.localScale = new Vector3(1, 1, 1);
         }
 
         for (int i = 0; i < ItemManager.Weapons.Count; i++)
@@ -99,6 +100,7 @@ public class UIController : MonoBehaviour
             si.SetIcon(ItemManager.Weapons[i].name);
 
             go.transform.SetParent(weaponsGrid);
+            go.transform.localScale = new Vector3(1, 1, 1);
         }
 
         for (int i = 0; i < ItemManager.Towers.Count; i++)
@@ -111,6 +113,7 @@ public class UIController : MonoBehaviour
             si.SetIcon(ItemManager.Towers[name].name);
 
             go.transform.SetParent(towersGrid);
+            go.transform.localScale = new Vector3(1, 1, 1);
         }
 
         for (int i = 0; i < usedItems.Length; i++)
@@ -151,7 +154,6 @@ public class UIController : MonoBehaviour
 
     private void SwitchView(string str)
     {
-        str = str.ToUpper();
         loadingView.SetActive(false);
         mainView.SetActive(false);
         gameView.SetActive(false);
