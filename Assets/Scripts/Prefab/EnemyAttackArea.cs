@@ -17,7 +17,7 @@ public class EnemyAttackArea : MonoBehaviour
     {
         _enemy = enemy;
 
-        _collider.radius = 0.5f + size;
+        _collider.radius = size;
         transform.localPosition = new Vector3(0, 0, 0);
     }
 

@@ -6,6 +6,7 @@ using EnumData;
 public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyAttackArea _attackArea;
+    private Animator animator;
     private Enemy _enemy;
 
     private float _hp;
@@ -16,6 +17,7 @@ public class EnemyObject : MonoBehaviour
     void Awake()
     {
         name = name.Substring(0, name.Length - 7);
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -35,7 +37,7 @@ public class EnemyObject : MonoBehaviour
         Enemy enemy = EnemyManager.Enemies[name];
 
         _enemy = enemy;
-        _attackArea.Initialize(this, enemy.attackRange);
+        _attackArea.Initialize(this, enemy.attackrange);
 
         Recover();
     }
@@ -56,10 +58,8 @@ public class EnemyObject : MonoBehaviour
 
     private void Attack()
     {
-        StopAttack();
-
-        attackCoroutine = AttackTimer();
-        StartCoroutine(AttackTimer());
+        SoundController.Instance.PlayAudio("ENEMY " + _enemy.name.ToUpper());
+        if (_meetBarricade) Player.Instance.Damaged(_enemy.dmg);
     }
 
     float slowAmount = 0;
@@ -78,6 +78,7 @@ public class EnemyObject : MonoBehaviour
     private void CharacterDown(bool down)
     {
         _isMoving = !down;
+        animator.SetBool("ATTACK", !_isMoving);
     }
 
     // 애니메이션을 대체할 코루틴
@@ -89,34 +90,11 @@ public class EnemyObject : MonoBehaviour
         CharacterDown(false);
     }
 
-    private void StopAttack()
-    {
-        if (attackCoroutine != null)
-        {
-            StopCoroutine(attackCoroutine);
-            attackCoroutine = null;
-        }
-    }
-
-    IEnumerator AttackTimer()
-    {
-        yield return new WaitForSeconds(_enemy.attackDelay);
-
-        if (_meetBarricade)
-        {
-            Player.Instance.Damaged(_enemy.dmg);
-            Attack();
-        }
-    }
-
     public void MeetBrricade(bool meet)
     {
         _meetBarricade = meet;
         _isMoving = !meet;
-
-        if (meet)
-            Attack();
-        else StopAttack();
+        animator.SetBool("ATTACK", !_isMoving);
     }
 
     public void Damage(float dmg)
@@ -126,8 +104,6 @@ public class EnemyObject : MonoBehaviour
 
         if (_hp <= 0)
         {
-            StopAttack();
-
             ObjectPool.ReturnObject(name, gameObject);
 
             Recover();

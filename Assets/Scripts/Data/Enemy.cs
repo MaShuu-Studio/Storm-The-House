@@ -10,9 +10,9 @@ public class Enemy
 
     public float hp;
     public int dmg;
-    public float attackDelay = 1;
-    public float attackRange = 0.5f;
     public float speed;
+    public float attackdelay = 1;
+    public float attackrange = 0.5f;
      
     public int money;
 }
