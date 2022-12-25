@@ -45,7 +45,7 @@ public class RoundController : MonoBehaviour
 
     public void NewGame()
     {
-        _round = 0;
+        _round = 10;
 
         ResetSunPos();
     }
@@ -164,7 +164,7 @@ public class RoundController : MonoBehaviour
 
         float zpos = Random.Range(5f, -5f);
 
-        Vector3 pos = new Vector3(-30, 0.75f, zpos);
+        Vector3 pos = new Vector3(-30, 0f, zpos);
 
         GameObject obj = ObjectPool.GetObject<Enemy>(name);
         obj.transform.SetParent(enemiesParent.transform);

@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: e9a6fb98f4b56044fbfb57f11128b6c6
+guid: 64241aeabdf46dd478281e82cee9c876
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -2987361744789658669
-    second: Sword|Attack
+      74: 4418949691175979683
+    second: Gun|Attack
   - first:
-      74: 7100334003186554525
-    second: Sword|Walk
+      74: 8714723829453138602
+    second: Gun|Idle
   - first:
-      74: -2557296502046836226
-    second: Sword|Idle
+      74: -3642039339843538845
+    second: Gun|Walk
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -42,8 +42,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sword|Attack
-      takeName: Sword|Attack
+      name: Gun|Attack
+      takeName: Gun|Attack
       internalID: 0
       firstFrame: 0
       lastFrame: 119
@@ -71,11 +71,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Sword|Walk
-      takeName: Sword|Walk
+      name: Gun|Walk
+      takeName: Gun|Walk
       internalID: 0
       firstFrame: 0
-      lastFrame: 88
+      lastFrame: 89
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

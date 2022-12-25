@@ -4,9 +4,9 @@
       "name": "SWORD",
       "hp": 2,
       "dmg": 1,
-      "speed": 5,
+      "speed": 2.5,
       "attackdelay": 2,
-      "attackrange": 1.5,
+      "attackrange": 3,
       "money": 20
     },
 
@@ -14,9 +14,9 @@
       "name": "GUN",
       "hp": 3,
       "dmg": 1,
-      "speed": 5,
+      "speed": 2.5,
       "attackdelay": 2,
-      "attackrange": 4,
+      "attackrange": 16,
       "money": 50
     },
 
