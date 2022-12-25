@@ -262,7 +262,7 @@ public class UIController : MonoBehaviour
     private void RoundStart()
     {
         int round = RoundController.Instance.Round;
-        roundText.text = "ROUND " + round + 1;
+        roundText.text = "ROUND " + (round + 1);
 
         if (coroutine != null)
         {
