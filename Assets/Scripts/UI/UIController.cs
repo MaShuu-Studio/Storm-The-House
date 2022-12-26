@@ -47,8 +47,8 @@ public class UIController : MonoBehaviour
     [Space]
     [SerializeField] private UsedWeaponItem[] usedItems;
     [SerializeField] private DraggedItem draggedItemObject;
-    private string draggedItem;
-    private int draggedItemIndex;
+    private string draggedItem = "";
+    private int draggedItemIndex = 0;
 
     [Space]
     [SerializeField] private GameObject supporterPrefab;
@@ -73,12 +73,8 @@ public class UIController : MonoBehaviour
         SwitchView("LOADING");
     }
 
-    private void Initialize()
+    public void Initialize()
     {
-        selectedItemType = ItemType.WEAPON;
-        selectedItem = 0;
-        UpdateUpgradeView();
-
         for (int i = 0; i < SupporterManager.Types.Count; i++)
         {
             GameObject go = Instantiate(supporterPrefab);
@@ -116,14 +112,6 @@ public class UIController : MonoBehaviour
             go.transform.localScale = new Vector3(1, 1, 1);
         }
 
-        for (int i = 0; i < usedItems.Length; i++)
-        {
-            usedItems[i].SetIndex(i);
-        }
-        UpdateUsedWeapons();
-
-        draggedItemObject.gameObject.SetActive(false);
-
         shopDoneButton.SetButton(ButtonType.ROUNDSTART);
     }
 
@@ -136,9 +124,22 @@ public class UIController : MonoBehaviour
     public void StartGame()
     {
         GameController.Instance.StartGame();
-        SwitchView("GAME");
-        Initialize();
+
+        selectedItemType = ItemType.WEAPON;
+        selectedItem = 0;
+        UpdateUpgradeView();
+
+        for (int i = 0; i < usedItems.Length; i++)
+        {
+            usedItems[i].SetIndex(i);
+        }
+        UpdateUsedWeapons();
+
+        draggedItemObject.gameObject.SetActive(false);
+
         OpenShop(true);
+
+        SwitchView("GAME");
     }
 
     public void GameOver()
