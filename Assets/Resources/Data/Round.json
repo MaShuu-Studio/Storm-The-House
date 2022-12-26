@@ -14,16 +14,20 @@
         
         {
           "name": "CAR",
-          "amount": 50
+          "amount": 20
         },
         
         {
           "name": "TANK",
-          "amount": 50
+          "amount": 20
         },
         {
           "name": "BOMBCAR",
-          "amount": 50
+          "amount": 10
+        },
+        {
+          "name": "HELICOPTER",
+          "amount": 20
         }
       ]
     },
