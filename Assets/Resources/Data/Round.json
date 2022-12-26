@@ -20,6 +20,10 @@
         {
           "name": "TANK",
           "amount": 50
+        },
+        {
+          "name": "BOMBCAR",
+          "amount": 50
         }
       ]
     },

@@ -43,10 +43,10 @@
     {
       "name": "BOMBCAR",
       "hp": 5,
-      "dmg": 1,
+      "dmg": 5,
       "speed": 20,
       "attackdelay": 2,
-      "attackrange": 0.1,
+      "attackrange": 5,
       "money": 150
     },
 
