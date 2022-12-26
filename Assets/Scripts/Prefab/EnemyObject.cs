@@ -16,7 +16,7 @@ public class EnemyObject : MonoBehaviour
 
     void Awake()
     {
-        name = name.Substring(0, name.Length - 7);
+        name = name.Substring(0, name.Length - 7).ToUpper();
         animator = GetComponent<Animator>();
     }
 

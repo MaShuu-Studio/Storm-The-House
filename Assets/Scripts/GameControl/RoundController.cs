@@ -45,7 +45,7 @@ public class RoundController : MonoBehaviour
 
     public void NewGame()
     {
-        _round = 10;
+        _round = 0;
 
         ResetSunPos();
     }

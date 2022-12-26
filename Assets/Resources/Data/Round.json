@@ -5,6 +5,21 @@
         {
           "name": "SWORD",
           "amount": 50
+        },
+        
+        {
+          "name": "GUN",
+          "amount": 50
+        },
+        
+        {
+          "name": "CAR",
+          "amount": 50
+        },
+        
+        {
+          "name": "TANK",
+          "amount": 50
         }
       ]
     },
