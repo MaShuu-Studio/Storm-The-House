@@ -15,7 +15,12 @@ ModelImporter:
   - first:
       74: -5812281370324527051
     second: Light|Tail PropAction
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 41f43fafe35e002448b1967f31155c32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

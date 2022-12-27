@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\UI\UpgradeButton.cs" />
     <Compile Include="Assets\Scripts\GameControl\AttackPoint.cs" />
     <Compile Include="Assets\Scripts\Prefab\TowerAttackArea.cs" />
+    <Compile Include="Assets\Scripts\Prefab\EnemyHitBox.cs" />
     <Compile Include="Assets\Scripts\GameControl\RoundController.cs" />
     <Compile Include="Assets\Scripts\Data\SpriteManager.cs" />
     <Compile Include="Assets\Scripts\Sound\CustomAudioSource.cs" />
@@ -91,12 +92,11 @@
     <Compile Include="Assets\Scripts\Data\Supporter.cs" />
     <Compile Include="Assets\Scripts\UI\UpgradeView.cs" />
     <Compile Include="Assets\Scripts\Data\SupporterManager.cs" />
+    <Compile Include="Assets\Scripts\Prefab\TowerHitBox.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager.cs" />
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Prefab\TowerHitBox.cs" />
-    <Compile Include="Assets\Scripts\Prefab\EnemyHitBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
