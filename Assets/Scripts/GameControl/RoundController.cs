@@ -11,7 +11,7 @@ public class RoundController : MonoBehaviour
     private float maxXpos = 35;
     private float minYpos = -5;
     private float maxYpos = 15;
-    private float zpos = 10;
+    private float zpos = 20;
 
     IEnumerator _roundCoroutine;
 
@@ -162,9 +162,9 @@ public class RoundController : MonoBehaviour
 
         yield return new WaitForSeconds(time);
 
-        float zpos = Random.Range(5f, -5f);
+        float z = Random.Range(zpos / 2, zpos / 2 * -1);
 
-        Vector3 pos = new Vector3(-30, 0f, zpos);
+        Vector3 pos = new Vector3(-40, 0f, z);
 
         GameObject obj = ObjectPool.GetObject<Enemy>(name);
         obj.transform.SetParent(enemiesParent.transform);

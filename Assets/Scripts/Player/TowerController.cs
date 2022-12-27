@@ -13,7 +13,7 @@ public class TowerController : MonoBehaviour
     private Item[] _towers;
     private TowerObject[] _towerObjects;
 
-    private float zpos = 4.5f;
+    private float zpos = 7.5f;
 
     private int _selectedTowerIndex;
     public int SelectedTowerIndex { get { return _selectedTowerIndex; } }
@@ -43,7 +43,7 @@ public class TowerController : MonoBehaviour
             float z = zpos - (zpos * 2 * i / (towerAmount - 1));
 
             floorObject.transform.SetParent(this.transform);
-            floorObject.transform.localPosition = new Vector3(0, floorObject.transform.localScale.y / 2, z);
+            floorObject.transform.localPosition = new Vector3(-1, floorObject.transform.localScale.y / 2, z);
             _towerPos[i] = floorObject.transform;
 
             TowerFloor tf = floorObject.GetComponent<TowerFloor>();

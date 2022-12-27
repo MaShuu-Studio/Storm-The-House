@@ -100,7 +100,7 @@ public class EnemyObject : MonoBehaviour
     public void Damage(float dmg)
     {
         _hp -= dmg;
-        Debug.Log("[SYSTEM] ENEMY DAMAGED" + dmg);
+        Debug.Log($"[SYSTEM] {gameObject.name} DAMAGED {dmg}| HP: {_hp}");
 
         if (_hp <= 0)
         {

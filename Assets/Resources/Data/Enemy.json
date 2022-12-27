@@ -16,7 +16,7 @@
       "dmg": 1,
       "speed": 2.5,
       "attackdelay": 2,
-      "attackrange": 7,
+      "attackrange": 6,
       "money": 50
     },
 
@@ -26,7 +26,7 @@
       "dmg": 1,
       "speed": 10,
       "attackdelay": 2,
-      "attackrange": 15,
+      "attackrange": 17,
       "money": 100
     },
 
@@ -66,7 +66,7 @@
       "dmg": 1,
       "speed": 3,
       "attackdelay": 2,
-      "attackrange": 25,
+      "attackrange": 30,
       "money": 180
     },
 
@@ -76,7 +76,7 @@
       "dmg": 1,
       "speed": 5,
       "attackdelay": 2,
-      "attackrange": 21,
+      "attackrange": 27,
       "money": 100
     },
 

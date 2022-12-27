@@ -122,12 +122,23 @@ public class AttackController : MonoBehaviour
     private Vector3 ClickPos()
     {
         Vector3 mpos = Input.mousePosition;
+        /* 
+        // Perspective Camera
         mpos.z = cam.transform.position.z * -4;
         Vector3 dir = Vector3.Normalize(cam.ScreenToWorldPoint(mpos) - cam.transform.position);
+        */
+
+        // Orthographic Camera
+        mpos = cam.ScreenToWorldPoint(mpos);
+
+        Vector3 dirpos = mpos;
+        dirpos.z -= 1;
+        dirpos.y += Mathf.Tan(Mathf.Deg2Rad * cam.transform.rotation.eulerAngles.x);
+        Vector3 dir = Vector3.Normalize(mpos - dirpos);
 
         RaycastHit raycastHit;
-        LayerMask mask = LayerMask.GetMask("Floor") | LayerMask.GetMask("Enemy");
-        Physics.Raycast(cam.transform.position, dir, out raycastHit, Mathf.Infinity, mask);
+        LayerMask mask = LayerMask.GetMask("Floor") | LayerMask.GetMask("Object");
+        Physics.Raycast(mpos, dir, out raycastHit, Mathf.Infinity, mask);
 
         Vector3 pos = Vector3.zero;
 

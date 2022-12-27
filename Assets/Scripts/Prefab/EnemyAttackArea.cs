@@ -17,7 +17,7 @@ public class EnemyAttackArea : MonoBehaviour
     {
         _enemy = enemy;
 
-        float rand = Random.Range(0.75f, 1.25f);
+        float rand = Random.Range(0.85f, 1.15f);
         _collider.radius = size * rand;
         transform.localPosition = new Vector3(0, 0, 0);
     }

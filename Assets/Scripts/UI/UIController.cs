@@ -419,7 +419,6 @@ public class UIController : MonoBehaviour
             if (item != null) name = item.name;
             usedItems[i].SetIcon(name);
         }
-
     }
 
     #endregion
