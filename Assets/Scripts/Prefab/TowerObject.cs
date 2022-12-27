@@ -6,6 +6,7 @@ using EnumData;
 public class TowerObject : MonoBehaviour
 {
     [SerializeField] private TowerAttackArea _attackArea;
+    [SerializeField] private TowerHitBox _hitbox;
     private Item _tower;
     private Dictionary<UpgradeDataType, float> _attackTypes = new Dictionary<UpgradeDataType, float>();
     private bool _attackTower;
@@ -13,7 +14,7 @@ public class TowerObject : MonoBehaviour
 
     private List<GameObject> _enemies = new List<GameObject>();
 
-    public void UpdateTower(Item tower)
+    public void UpdateTower(Item tower, int index)
     {
         _tower = tower;
         name = _tower.name;
@@ -31,6 +32,7 @@ public class TowerObject : MonoBehaviour
             }
         }
 
+        _hitbox.Initialize(index);
         _attackArea.Initialize(this, tower.GetValue(UpgradeDataType.RANGE));
     }
 

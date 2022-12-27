@@ -141,6 +141,65 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1018913616856691130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5116239232939630926}
+  - component: {fileID: 2323417942180136210}
+  - component: {fileID: 3993171859487858132}
+  m_Layer: 7
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5116239232939630926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018913616856691130}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.018105794, z: -0.004}
+  m_LocalScale: {x: 0.0046883104, y: 0.0046883095, z: 0.004688309}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1059653021011766953}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &2323417942180136210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018913616856691130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e1d107aceff8447927562f8e5259a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4296692287200680414}
+--- !u!65 &3993171859487858132
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018913616856691130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 4.5, z: 26}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1954747309018829100
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,8 +377,6 @@ GameObject:
   - component: {fileID: 3524975396081730424}
   - component: {fileID: 4296692287200680414}
   - component: {fileID: 4296692287200680385}
-  - component: {fileID: 4296692287200680384}
-  - component: {fileID: 4296692287200680387}
   m_Layer: 0
   m_Name: HELICOPTER
   m_TagString: Untagged
@@ -378,35 +435,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &4296692287200680384
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4296692287200680386}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7, y: 4.5, z: 26}
-  m_Center: {x: 0, y: 32.5, z: -3.5}
---- !u!54 &4296692287200680387
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4296692287200680386}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1 &4589282599528530171
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +473,7 @@ Transform:
   - {fileID: 6859651675366841741}
   - {fileID: 7038062720225264489}
   - {fileID: 1716343803706322756}
+  - {fileID: 5116239232939630926}
   m_Father: {fileID: 3524975396081730424}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -70.034, y: 0, z: 0}

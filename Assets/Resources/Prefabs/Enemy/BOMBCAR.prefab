@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6038916644903363248}
   - component: {fileID: 2393279937290514530}
   - component: {fileID: 6195523997123015570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +507,65 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3355052215529840494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3458356972215884926}
+  - component: {fileID: 99257448188984626}
+  - component: {fileID: 6328135561452987627}
+  m_Layer: 7
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3458356972215884926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355052215529840494}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4700384229697004932}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &99257448188984626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355052215529840494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e1d107aceff8447927562f8e5259a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4700384229697004928}
+--- !u!65 &6328135561452987627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355052215529840494}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 8, z: 27}
+  m_Center: {x: 0, y: 4, z: -1}
 --- !u!1 &4499777413411761640
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +660,7 @@ GameObject:
   - component: {fileID: 2244079483116544088}
   - component: {fileID: 4596536549295985164}
   - component: {fileID: 1310256763668569035}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,8 +743,6 @@ GameObject:
   - component: {fileID: 4700384229697004932}
   - component: {fileID: 4700384229697004928}
   - component: {fileID: 4700384229697004929}
-  - component: {fileID: 4700384229697004930}
-  - component: {fileID: 4700384229697004931}
   m_Layer: 0
   m_Name: BOMBCAR
   m_TagString: Untagged
@@ -708,6 +765,7 @@ Transform:
   - {fileID: 4744524298017620074}
   - {fileID: 276007913931325255}
   - {fileID: 8917108757517677118}
+  - {fileID: 3458356972215884926}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -744,35 +802,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &4700384229697004930
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5364013797398839102}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7, y: 8, z: 27}
-  m_Center: {x: 0, y: 4, z: -1}
---- !u!54 &4700384229697004931
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5364013797398839102}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1 &8082884167161308395
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +813,7 @@ GameObject:
   - component: {fileID: 276007913931325255}
   - component: {fileID: 2436161386692049294}
   - component: {fileID: 2940898102029863049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Car Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}

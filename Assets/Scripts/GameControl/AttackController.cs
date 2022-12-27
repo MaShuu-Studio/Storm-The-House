@@ -145,6 +145,9 @@ public class AttackController : MonoBehaviour
         if (raycastHit.transform != null)
             pos = raycastHit.point;
 
+        // 더 안쪽으로 파고들도록 약간의 보정 작업
+        pos += dir/5;
+
         return pos;
     }
 

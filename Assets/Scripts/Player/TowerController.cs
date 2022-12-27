@@ -78,7 +78,7 @@ public class TowerController : MonoBehaviour
         obj.transform.position = pos;
         obj.transform.SetParent(_towerPos[index].parent);
 
-        _towerObjects[index].UpdateTower(_towers[index]);
+        _towerObjects[index].UpdateTower(_towers[index], index);
 
         UpdateShield();
 

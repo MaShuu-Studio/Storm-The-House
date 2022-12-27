@@ -109,12 +109,4 @@ public class EnemyObject : MonoBehaviour
             Recover();
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "AttackPoint")
-        {
-            AttackController.Instance.EnemyDamaged(this, other.gameObject);
-        }
-    }
 }
