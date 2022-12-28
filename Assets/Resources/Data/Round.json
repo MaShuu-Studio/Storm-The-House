@@ -36,6 +36,10 @@
         {
           "name": "FLAMETHROWER",
           "amount": 50
+        },
+        {
+          "name": "ROBOT",
+          "amount": 10
         }
       ]
     },

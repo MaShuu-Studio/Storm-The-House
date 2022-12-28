@@ -4,7 +4,7 @@
       "name": "SWORD",
       "hp": 2,
       "dmg": 1,
-      "speed": 2.5,
+      "speed": 3.5,
       "attackdelay": 2,
       "attackrange": 1.5,
       "money": 20
@@ -14,7 +14,7 @@
       "name": "GUN",
       "hp": 3,
       "dmg": 1,
-      "speed": 2.5,
+      "speed": 3.5,
       "attackdelay": 2,
       "attackrange": 10,
       "money": 50
@@ -64,7 +64,7 @@
       "name": "TANK",
       "hp": 150,
       "dmg": 1,
-      "speed": 3,
+      "speed": 2.5,
       "attackdelay": 2,
       "attackrange": 30,
       "money": 180
@@ -86,7 +86,7 @@
       "dmg": 1,
       "speed": 3,
       "attackdelay": 2,
-      "attackrange": 5,
+      "attackrange": 10,
       "money": 1000
     }
   ]
