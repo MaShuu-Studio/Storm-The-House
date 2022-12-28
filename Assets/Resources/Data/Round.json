@@ -32,6 +32,10 @@
         {
           "name": "HELICOPTER",
           "amount": 10
+        },
+        {
+          "name": "FLAMETHROWER",
+          "amount": 50
         }
       ]
     },
