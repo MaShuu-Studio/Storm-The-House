@@ -63,6 +63,9 @@ public class GameController : MonoBehaviour
     private const int StartingDay = 1;
     private const int AvailableTower = 3;
 
+    private const int LastDay = 40;
+    public int MaxRound { get { return LastDay; } }
+
     public void StartGame(GameMode mode)
     {
         int money = StartingMoney;
@@ -99,6 +102,12 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         ProgressGame = false;
-        UIController.Instance.GameOver();
+        UIController.Instance.GameEnd(false);
+    }
+
+    public void GameClear()
+    {
+        ProgressGame = false;
+        UIController.Instance.GameEnd(true);
     }
 }

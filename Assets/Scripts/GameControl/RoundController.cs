@@ -113,10 +113,16 @@ public class RoundController : MonoBehaviour
 
     private void RoundEnd()
     {
+        RemoveEnemies();
+
+        if (_round == GameController.Instance.MaxRound)
+        {
+            GameController.Instance.GameClear();
+        }
+
+
         UIController.Instance.OpenShop(true);
         WeaponController.Instance.RefillAmmo();
-
-        RemoveEnemies();
     }
 
     private void RemoveEnemies()

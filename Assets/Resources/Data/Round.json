@@ -5,41 +5,6 @@
         {
           "name": "SWORD",
           "amount": 50
-        },
-        
-        {
-          "name": "GUN",
-          "amount": 50
-        },
-        
-        {
-          "name": "CAR",
-          "amount": 15
-        },
-        
-        {
-          "name": "TANK",
-          "amount": 10
-        },
-        {
-          "name": "BOMBCAR",
-          "amount": 10
-        },
-        {
-          "name": "PARATROOPER",
-          "amount": 30
-        },
-        {
-          "name": "HELICOPTER",
-          "amount": 10
-        },
-        {
-          "name": "FLAMETHROWER",
-          "amount": 50
-        },
-        {
-          "name": "ROBOT",
-          "amount": 10
         }
       ]
     },

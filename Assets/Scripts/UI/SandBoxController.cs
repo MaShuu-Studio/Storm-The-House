@@ -16,7 +16,6 @@ public class SandBoxController : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     [SerializeField] private TMP_InputField money;

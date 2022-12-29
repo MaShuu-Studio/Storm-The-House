@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject mainView;
     [SerializeField] private GameObject gameView;
     [SerializeField] private GameObject gameOverView;
+    [SerializeField] private GameObject gameClearView;
     [Space]
     [SerializeField] private GameObject roundView;
     [SerializeField] private TextMeshProUGUI roundText;
@@ -170,9 +171,10 @@ public class UIController : MonoBehaviour
         SwitchView("GAME");
     }
 
-    public void GameOver()
+    public void GameEnd(bool clear)
     {
-        SwitchView("OVER");
+        if (clear) SwitchView("CLEAR");
+        else SwitchView("OVER");
     }
 
     public void ReturnToMain()
@@ -187,6 +189,7 @@ public class UIController : MonoBehaviour
         mainView.SetActive(false);
         gameView.SetActive(false);
         gameOverView.SetActive(false);
+        gameClearView.SetActive(false);
 
         switch (str.ToUpper())
         {
@@ -201,6 +204,9 @@ public class UIController : MonoBehaviour
                 break;
             case "OVER":
                 gameOverView.SetActive(true);
+                break;
+            case "CLEAR":
+                gameClearView.SetActive(true);
                 break;
             default:
                 break;
