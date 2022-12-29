@@ -58,11 +58,34 @@ public class GameController : MonoBehaviour
         UIController.Instance.OpenMainView();
     }
 
-    public void StartGame()
+    private const int StartingMoney = 0;
+    private const int StartingWall = 1;
+    private const int StartingDay = 1;
+    private const int AvailableTower = 3;
+
+    public void StartGame(GameMode mode)
     {
-        RoundController.Instance.NewGame();
-        Player.Instance.NewGame();
-        TowerController.Instance.Initialize(3);
+        int money = StartingMoney;
+        int wall = StartingWall;
+        int day = StartingDay;
+        int tower = AvailableTower;
+
+        bool inv = false;
+        bool inf = false;
+
+        if(mode == GameMode.SandBox)
+        {
+            money = SandBoxController.Instance.Money;
+            wall = SandBoxController.Instance.Wall;
+            day = SandBoxController.Instance.Day;
+            tower = SandBoxController.Instance.Tower;
+            inv = SandBoxController.Instance.Inv;
+            inf = SandBoxController.Instance.Inf;
+        }
+
+        RoundController.Instance.NewGame(day);
+        Player.Instance.NewGame(money, wall, inv, inf);
+        TowerController.Instance.Initialize(tower);
         WeaponController.Instance.Initialize();
 
         ProgressGame = true;

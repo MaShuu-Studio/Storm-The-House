@@ -61,6 +61,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private UpgradeView upgradeView;
     [SerializeField] private CustomButton shopDoneButton;
 
+    private GameMode mode;
+
 
     void Awake()
     {
@@ -128,10 +130,29 @@ public class UIController : MonoBehaviour
         SoundController.Instance.PlayBGM("Main");
     }
 
+
+    public void Campaign()
+    {
+        mode = GameMode.Campaign;
+        StartGame();
+    }
+
+    public void SandBox()
+    {
+        mode = GameMode.SandBox;
+        StartGame();
+    }
+
     public void StartGame()
     {
-        GameController.Instance.StartGame();
+        GameController.Instance.StartGame(mode);
 
+        for (int i = 0; i < SupporterManager.Types.Count; i++)
+        {
+            string name = SupporterManager.Types[i];
+            supporterItems[i].UpdateCost(Player.Instance.SupporterCost(name));
+            supporterItems[i].UpdateUpgradable(Player.Instance.Upgradable(name));
+        }
         selectedItemType = ItemType.WEAPON;
         selectedItem = 0;
         UpdateUpgradeView();
@@ -354,10 +375,6 @@ public class UIController : MonoBehaviour
             case ButtonType.ROUNDSTART:
                 OpenShop(false);
                 RoundStart();
-                break;
-
-            case ButtonType.GAMESTART:
-                GameController.Instance.StartGame();
                 break;
         }
     }

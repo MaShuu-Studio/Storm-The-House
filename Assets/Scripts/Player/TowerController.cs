@@ -13,7 +13,7 @@ public class TowerController : MonoBehaviour
     private Item[] _towers;
     private TowerObject[] _towerObjects;
 
-    private float zpos = 7.5f;
+    private float zpos = 10f;
 
     private int _selectedTowerIndex;
     public int SelectedTowerIndex { get { return _selectedTowerIndex; } }

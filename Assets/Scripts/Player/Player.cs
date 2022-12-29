@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
 
     private int money;
 
+    private bool infiniteMoney;
+    private bool invincible;
+
     public int Money { get { return money; } }
 
     #region Awake, Start, Update
@@ -57,9 +60,14 @@ public class Player : MonoBehaviour
         {
             GameController.Instance.GameOver();
         }
+        if (infiniteMoney)
+        {
+            money = 9999999;
+            UIController.Instance.UpdateMoney(money);
+        }
     }
 
-    public void NewGame()
+    public void NewGame(int mo, int wallLevel, bool inv, bool inf)
     {
         supporter.Clear();
         coroutines.Clear();
@@ -76,8 +84,16 @@ public class Player : MonoBehaviour
         }
 
         hp = maxHp = 100;
+        for (int i = 1; i < wallLevel; i++)
+        {
+            Upgrade("UPGRADE WALL");
+        }
+
         shield = 0;
-        money = 0;
+        money = mo;
+
+        invincible = inv;
+        infiniteMoney = inf;
 
         UIController.Instance.UpdateMoney(money);
         UIController.Instance.SetHP(hp, maxHp);
@@ -222,6 +238,7 @@ public class Player : MonoBehaviour
 
     public void Damaged(int value)
     {
+        if (invincible) return;
         hp -= value * (1 - (shield / 100));
         UIController.Instance.UpdateHP(hp);
     }
@@ -284,18 +301,6 @@ public class Player : MonoBehaviour
         if (other.tag == "Enemy")
         {
             enemys.Enqueue(other.gameObject);
-        }
-    }
-
-    GUIStyle style = new GUIStyle();
-    private void OnGUI()
-    {
-        style.fontSize = 0;
-
-        if (GUI.Button(new Rect(1110, 310 + 120, 100, 50), "ADD MONEY 10000"))
-        {
-            money += 10000;
-            UIController.Instance.UpdateMoney(money);
         }
     }
 }

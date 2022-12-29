@@ -43,9 +43,9 @@ public class RoundController : MonoBehaviour
         //sun.transform.LookAt(transform.position);
     }
 
-    public void NewGame()
+    public void NewGame(int day)
     {
-        _round = 0;
+        _round = day - 1;
 
         ResetSunPos();
     }
