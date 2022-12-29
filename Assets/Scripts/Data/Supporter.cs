@@ -8,9 +8,15 @@ using EnumData;
 public class Supporter
 {
     public string name;
-    public SupporterType supportType;
-    public int dmg;
-    public float accurancy;
-    public float probablity;
-    public float delay;
+    public SupporterType type;
+    public SupporterAbilityType ability;
+    public int value = 0;
+    public float accurancy = 1;
+    public float probablity = 1;
+    public float delay = 1;
+
+    public int cost = 0;
+    public int upgradecost = 0;
+    public float multiplyupgradecost = 0;
+    public int maxupgrade = 0;
 }

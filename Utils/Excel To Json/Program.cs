@@ -24,16 +24,17 @@ namespace Excel_To_Json
                     string contents = "";
                     Excel.Range range = sheet.UsedRange;
 
+                    Console.WriteLine($"Start Parsing {name.ToUpper()}");
                     switch (name.ToLower())
                     {
                         case "item":
                             contents = string.Format(JsonFormat.jsonFormat, ParseItem(range));
                             break;
-                        case "enemy":
-                            contents = string.Format(JsonFormat.jsonFormat, ParseEnemy(range));
-                            break;
                         case "round":
                             contents = string.Format(JsonFormat.jsonFormat, ParseRound(range));
+                            break;
+                        default:
+                            contents = string.Format(JsonFormat.jsonFormat, ParseBasicData(name, range));
                             break;
                     }
 
@@ -67,7 +68,6 @@ namespace Excel_To_Json
             // 첫번째 row는 데이터의 타입을 나타내고 있음.
             for (int row = 2; row <= range.Rows.Count; row++)
             {
-
                 string datas = "";
                 string keys = "";
                 string values = "";
@@ -112,13 +112,13 @@ namespace Excel_To_Json
                 {
                     if (contents != "") contents += ",\n";
                     contents += string.Format(JsonFormat.itemContentsFormat, datas, keys, values);
+                    Console.WriteLine($"Progress Item {count++}");
                 }
-                Console.WriteLine($"Progress Item {count++}");
             }
             return contents;
         }
 
-        private static string ParseEnemy(Excel.Range range)
+        private static string ParseBasicData(string dataName, Excel.Range range)
         {
             string contents = "";
             int count = 1;
@@ -132,18 +132,23 @@ namespace Excel_To_Json
                 {
                     object o = (range.Cells[row, column] as Excel.Range).Value2;
                     string type = (range.Cells[1, column] as Excel.Range).Value2;
-                    datas += ParseValue(type.ToLower(), o);
-                    if (column < range.Columns.Count) datas += ",\n";
+                    string tmp = ParseValue(type.ToLower(), o);
+                    if (tmp != null)
+                    {
+                        datas += tmp + ",\n";
+                    }
                 }
                 if (datas != "")
                 {
+                    datas = datas.Remove(datas.Length - 2);
                     if (contents != "") contents += ",\n";
                     contents += string.Format(JsonFormat.contentsFormat, datas);
                 }
-                Console.WriteLine($"Progress Enemy {count++}");
+                Console.WriteLine($"Progress {dataName.ToUpper()} {count++}");
             }
             return contents;
         }
+        
         private static string ParseRound(Excel.Range range)
         {
             string contents = "";
@@ -164,7 +169,7 @@ namespace Excel_To_Json
                         string type = (range.Cells[1, column] as Excel.Range).Value2;
                         if (type.ToUpper() == "VALUE") break;
                         else if (column != 2) datas += ",\n";
-                        datas += ParseRoundEnemyData(type, o);                    
+                        datas += ParseRoundEnemyData(type, o);
                     }
                 }
                 if (datas != "")
@@ -176,9 +181,10 @@ namespace Excel_To_Json
             }
             return contents;
         }
-
         private static string ParseValue(string type, object value)
         {
+            if (value == null) return null;
+
             string s = value.ToString();
             int i;
             float f;

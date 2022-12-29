@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
             area = gameObject.AddComponent<BoxCollider>();
 
         area.isTrigger = true;
-        area.center = new Vector3(-4, 0, 0);
-        area.size = new Vector3(8, 2, 2);
+        area.center = new Vector3(-20, 20, 0);
+        area.size = new Vector3(30, 40, 25);
 
         enemys = new Queue<GameObject>();
     }
@@ -57,13 +57,6 @@ public class Player : MonoBehaviour
         {
             GameController.Instance.GameOver();
         }
-        else
-            for (int i = 0; i < SupporterManager.Types.Count; i++)
-            {
-                string type = SupporterManager.Types[i];
-                if (coroutines[type] == null && supporter[type] > 0)
-                    ActiveSupporter(type);
-            }
     }
 
     public void NewGame()
@@ -71,7 +64,12 @@ public class Player : MonoBehaviour
         supporter.Clear();
         coroutines.Clear();
 
-        foreach (string name in SupporterManager.Types)
+        foreach (string name in SupporterManager.Upgradable)
+        {
+            supporter.Add(name, 0);
+        }
+
+        foreach (string name in SupporterManager.Units)
         {
             supporter.Add(name, 0);
             coroutines.Add(name, null);
@@ -79,72 +77,152 @@ public class Player : MonoBehaviour
 
         hp = maxHp = 100;
         shield = 0;
-        money = 100;
+        money = 0;
 
         UIController.Instance.UpdateMoney(money);
         UIController.Instance.SetHP(hp, maxHp);
-        UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
+        UpdateSupporterInfo();
     }
     #endregion
 
     #region Supporter
-    public void AddSupporter(string type)
+    private void UpdateSupporterInfo()
     {
-        if (!supporter.ContainsKey(type)) return;
-
-        supporter[type]++;
-
         UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
     }
 
-    private void ActiveSupporter(string type)
+    public void AddSupporter(string supporterName)
     {
-        if (!supporter.ContainsKey(type)) return;
+        if (money < SupporterCost(supporterName)) return;
 
-        Debug.Log("[SYSTEM] ACTIVE SUPPROTER " + type);
-        coroutines[type] = Active(type);
-        StartCoroutine(coroutines[type]);
+        SupporterType type = SupporterManager.Type(supporterName);
+        SupporterAbilityType ablity = SupporterManager.Ability(supporterName);
+        if (type == SupporterType.UNIT)
+        {
+            money -= SupporterCost(supporterName);
+            UIController.Instance.UpdateMoney(money);
+
+            supporter[supporterName]++;
+            if (coroutines[supporterName] == null) ActiveSupporter(supporterName, ablity);
+            UpdateSupporterInfo();
+        }
+        else if (type == SupporterType.HOUSE)
+        {
+            if (ablity == SupporterAbilityType.HEAL && hp < maxHp)
+            {
+                money -= SupporterCost(supporterName);
+                UIController.Instance.UpdateMoney(money);
+
+                Heal(SupporterManager.Value(supporterName));
+            }
+            else if (ablity == SupporterAbilityType.UPGRADE && Upgradable(supporterName))
+            {
+                money -= SupporterCost(supporterName);
+                UIController.Instance.UpdateMoney(money);
+                Upgrade(supporterName);
+            }
+        }
+
     }
 
-    IEnumerator Active(string type)
+    public int SupporterCost(string supporterName)
+    {
+        int amount = (supporter.ContainsKey(supporterName)) ? supporter[supporterName] : 0;
+        int cost = SupporterManager.Cost(supporterName, amount);
+
+        return cost;
+    }
+
+    public bool Upgradable(string supporterName)
+    {
+        bool b = true;
+        if (supporter.ContainsKey(supporterName) && SupporterManager.MaxLevel(supporterName) > 0)
+        {
+            b = (supporter[supporterName] < SupporterManager.MaxLevel(supporterName));
+        }
+        return b;
+    }
+
+    private void Upgrade(string supporterName)
+    {
+        supporter[supporterName]++;
+
+        int value = SupporterManager.Value(supporterName);
+        // 밑의 코드를 변경하는 것으로 각종 업그레이드로 활용
+        hp += value;
+        maxHp += value;
+        UIController.Instance.SetHP(hp, maxHp);
+    }
+
+    #region Unit
+
+    private void ActiveSupporter(string supporterName, SupporterAbilityType ability)
+    {
+        if (!supporter.ContainsKey(supporterName) || hp <= 0) return;
+
+        Debug.Log("[SYSTEM] ACTIVE SUPPROTER " + supporterName);
+        coroutines[supporterName] = Active(supporterName, ability);
+        StartCoroutine(coroutines[supporterName]);
+    }
+
+    IEnumerator Active(string supporterName, SupporterAbilityType ability)
     {
         // 실시간 동기화를 위해 코루틴 중간에 서포터 수 체크
         float time = 0;
         float waitingTime;
         do
         {
-            waitingTime = SupporterManager.Delay(type, supporter[type]);
+            waitingTime = SupporterManager.Delay(supporterName, supporter[supporterName]);
             time += Time.deltaTime;
             yield return null;
         } while (time < waitingTime);
 
-        GameObject target;
-        Vector3 pos = Vector3.zero;
-
-        while (enemys.Count > 0)
+        int value = SupporterManager.Value(supporterName);
+        if (ability == SupporterAbilityType.ATTACK)
         {
-            target = enemys.Peek();
+            GameObject target;
+            Vector3 pos = Vector3.zero;
 
-            if (target == null || target.activeSelf == false) enemys.Dequeue();
-            else
+            while (enemys.Count > 0)
             {
-                pos = target.transform.position;
+                target = enemys.Peek();
 
-                AttackController.Instance.SupporterAttack(pos, type);
-                break;
+                if (target == null || target.transform.parent.gameObject.activeSelf == false) enemys.Dequeue();
+                else
+                {
+                    pos = target.transform.position;
+
+                    SoundController.Instance.PlayAudio("SUPPORTER " + supporterName);
+                    AttackController.Instance.SupporterAttack(pos, value);
+                    break;
+                }
             }
-        }
 
-        if (enemys.Count > 0)
-            ActiveSupporter(type);
-        else
-            coroutines[type] = null;
+            while (enemys.Count == 0) yield return null;
+
+            if (enemys.Count > 0)
+                ActiveSupporter(supporterName, ability);
+        }
+        else if (ability == SupporterAbilityType.HEAL)
+        {
+            while (hp >= maxHp) yield return null; // 체력이 풀일때는 회복 X
+            Heal(value);
+            ActiveSupporter(supporterName, ability);
+        }
     }
     #endregion
+    #endregion
 
-    public void Damaged(int dmg)
+    public void Heal(int value)
     {
-        hp -= dmg * (1 - (shield / 100));
+        hp += value;
+        if (hp > maxHp) hp = maxHp;
+        UIController.Instance.UpdateHP(hp);
+    }
+
+    public void Damaged(int value)
+    {
+        hp -= value * (1 - (shield / 100));
         UIController.Instance.UpdateHP(hp);
     }
 
@@ -198,7 +276,7 @@ public class Player : MonoBehaviour
     public void UpdateShield(float s)
     {
         shield = s;
-        UIController.Instance.SetSupporter(shield, supporter["GUNMAN"], supporter["REPAIRMAN"]);
+        UpdateSupporterInfo();
     }
 
     private void OnTriggerEnter(Collider other)

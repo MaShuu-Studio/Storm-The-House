@@ -44,6 +44,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private Transform weaponsGrid;
     [SerializeField] private Transform towersGrid;
 
+    private List<SupporterItem> supporterItems;
+
     [Space]
     [SerializeField] private UsedWeaponItem[] usedItems;
     [SerializeField] private DraggedItem draggedItemObject;
@@ -75,13 +77,18 @@ public class UIController : MonoBehaviour
 
     public void Initialize()
     {
+        supporterItems = new List<SupporterItem>();
+
         for (int i = 0; i < SupporterManager.Types.Count; i++)
         {
             GameObject go = Instantiate(supporterPrefab);
-            ItemButton si = go.GetComponent<ItemButton>();
+            SupporterItem si = go.GetComponent<SupporterItem>();
 
             si.SetButton(ButtonType.SUPPORTER, i);
             si.SetIcon(SupporterManager.Types[i]);
+            si.UpdateCost(SupporterManager.Cost(SupporterManager.Types[i], 0));
+
+            supporterItems.Add(si);
 
             go.transform.SetParent(supporterGrid);
             go.transform.localScale = new Vector3(1, 1, 1);
@@ -90,10 +97,10 @@ public class UIController : MonoBehaviour
         for (int i = 0; i < ItemManager.Weapons.Count; i++)
         {
             GameObject go = Instantiate(itemPrefab);
-            ItemButton si = go.GetComponent<ItemButton>();
+            ItemButton wi = go.GetComponent<ItemButton>();
 
-            si.SetButton(ButtonType.WEAPON, i);
-            si.SetIcon(ItemManager.Weapons[i].name);
+            wi.SetButton(ButtonType.WEAPON, i);
+            wi.SetIcon(ItemManager.Weapons[i].name);
 
             go.transform.SetParent(weaponsGrid);
             go.transform.localScale = new Vector3(1, 1, 1);
@@ -103,10 +110,10 @@ public class UIController : MonoBehaviour
         {
             string name = ItemManager.TowerNames[i];
             GameObject go = Instantiate(itemPrefab);
-            ItemButton si = go.GetComponent<ItemButton>();
+            ItemButton ti = go.GetComponent<ItemButton>();
 
-            si.SetButton(ButtonType.TOWER, i);
-            si.SetIcon(ItemManager.Towers[name].name);
+            ti.SetButton(ButtonType.TOWER, i);
+            ti.SetIcon(ItemManager.Towers[name].name);
 
             go.transform.SetParent(towersGrid);
             go.transform.localScale = new Vector3(1, 1, 1);
@@ -321,6 +328,8 @@ public class UIController : MonoBehaviour
             case ButtonType.SUPPORTER:
                 string name = SupporterManager.Types[index];
                 Player.Instance.AddSupporter(name);
+                supporterItems[index].UpdateCost(Player.Instance.SupporterCost(name));
+                supporterItems[index].UpdateUpgradable(Player.Instance.Upgradable(name));
                 break;
 
             case ButtonType.TOWER:

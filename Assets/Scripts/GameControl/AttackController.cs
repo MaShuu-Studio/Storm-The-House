@@ -48,9 +48,8 @@ public class AttackController : MonoBehaviour
     }
 
     // 서포터의 공격을 통해 작동하는 형태
-    public void SupporterAttack(Vector3 pos, string type)
+    public void SupporterAttack(Vector3 pos, int dmg)
     {
-        float dmg = SupporterManager.Damage(type);
         float accurancy = 1;
         float remainTime = 0.1f;
         float range = 0.5f;
