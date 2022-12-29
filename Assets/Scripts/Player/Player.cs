@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
         {
             GameController.Instance.GameOver();
         }
+
         if (infiniteMoney)
         {
             money = 9999999;
