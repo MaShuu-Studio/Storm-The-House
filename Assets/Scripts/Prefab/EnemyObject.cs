@@ -58,7 +58,7 @@ public class EnemyObject : MonoBehaviour
 
     private void Attack()
     {
-        SoundController.Instance.PlayAudio("ENEMY " + _enemy.name.ToUpper());
+        SoundController.Instance.PlayAudio("ENEMY " + _enemy.name.ToUpper(), transform);
         if (_meetBarricade) Player.Instance.Damaged(_enemy.dmg);
     }
 

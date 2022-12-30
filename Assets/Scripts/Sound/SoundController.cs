@@ -22,7 +22,6 @@ public class SoundController : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -46,12 +45,14 @@ public class SoundController : MonoBehaviour
         bgmVolume = 1;
     }
 
-    public void PlayAudio(string name)
+    public void PlayAudio(string name, Transform pos = null)
     {
         CustomAudioSource audio = soundPool.GetAudio(name);
         if (audio == null) return;
 
         audios.Add(audio);
+        if (pos != null) audio.transform.position = pos.position;
+        else audio.transform.position = Vector3.zero;
 
         audio.Play(sfxVolume);
     }

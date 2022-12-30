@@ -56,7 +56,7 @@ public class TowerObject : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             if (_attackTower) dmg = _tower.GetValue(UpgradeDataType.DAMAGE);
-            AttackController.Instance.TowerAttack(_enemies[i].transform.position, dmg, _attackTypes);
+            AttackController.Instance.TowerAttack(_enemies[i].transform.position, dmg, _attackTypes, _tower.name);
         }
 
         yield return new WaitForSeconds(1 / _tower.GetValue(UpgradeDataType.FIRERATE));

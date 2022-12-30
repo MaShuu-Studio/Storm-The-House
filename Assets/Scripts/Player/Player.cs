@@ -209,8 +209,7 @@ public class Player : MonoBehaviour
                 {
                     pos = target.transform.position;
 
-                    SoundController.Instance.PlayAudio("SUPPORTER " + supporterName);
-                    AttackController.Instance.SupporterAttack(pos, value);
+                    AttackController.Instance.SupporterAttack(pos, value, "SUPPORTER " + supporterName);
                     break;
                 }
             }

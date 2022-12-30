@@ -37,6 +37,8 @@ public class SoundPool : MonoBehaviour
         gbo.transform.SetParent(_poolParent[name]);
         audio.SetClip(name, clip);
         _pool[name].Enqueue(audio);
+
+        audio.gameObject.SetActive(false);
     }
 
     public CustomAudioSource GetAudio(string name)

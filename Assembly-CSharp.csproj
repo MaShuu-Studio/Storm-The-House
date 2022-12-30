@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Sound\SoundPool.cs" />
     <Compile Include="Assets\Scripts\UI\DraggedItem.cs" />
     <Compile Include="Assets\Scripts\GameControl\GameController.cs" />
+    <Compile Include="Assets\Scripts\UI\SandBoxController.cs" />
     <Compile Include="Assets\Scripts\Data\ItemManager.cs" />
     <Compile Include="Assets\Scripts\UI\BuyButton.cs" />
     <Compile Include="Assets\Scripts\Prefab\EnemyObject.cs" />
@@ -97,7 +98,6 @@
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\UI\SandBoxController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

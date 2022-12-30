@@ -43,31 +43,33 @@ public class AttackController : MonoBehaviour
             float remainTime = weapon.GetValue(UpgradeDataType.REMAINTIME);
             float range = weapon.GetValue(UpgradeDataType.RANGE);
             bool remain = weapon.isRemain;
+
+            if (isFire) SoundController.Instance.PlayAudio(weapon.name.ToUpper());
             StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
         }
     }
 
     // 서포터의 공격을 통해 작동하는 형태
-    public void SupporterAttack(Vector3 pos, int dmg)
+    public void SupporterAttack(Vector3 pos, int dmg, string supportName)
     {
         float accurancy = 1;
         float remainTime = 0.1f;
         float range = 0.5f;
         bool remain = false;
-        string weaponName = "";
 
-        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
+        SoundController.Instance.PlayAudio(supportName.ToUpper(), Player.Instance.transform);
+        StartCoroutine(Attack( pos, dmg, range, accurancy, remainTime, remain));
     }
 
-    public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes)
+    public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes, string towerName)
     {
         float dmg = damge;
         float accurancy = 100;
         float remainTime = 0.1f;
         float range = 0.5f;
         bool remain = false;
-        string weaponName = "";
 
+        SoundController.Instance.PlayAudio(towerName.ToUpper(), Player.Instance.transform);
         StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain, attackTypes));
 
     }
@@ -94,6 +96,7 @@ public class AttackController : MonoBehaviour
                 }
             }
         }
+
         point.name += (remain ? "T" : "F");
         point.name += dmg.ToString();
         point.transform.SetParent(null);
