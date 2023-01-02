@@ -30,11 +30,12 @@ public class Item
         if (!data.ContainsKey(type))
         {
             float defaultValue = 1;
-            switch(type)
+            switch (type)
             {
                 case UpgradeDataType.SHIELD:
                     defaultValue = 0;
                     break;
+
                 case UpgradeDataType.RANGE:
                     if (this.type == ItemType.WEAPON) defaultValue = 0.5f;
                     else defaultValue = 50;
@@ -42,6 +43,14 @@ public class Item
 
                 case UpgradeDataType.REMAINTIME:
                     defaultValue = 0.1f;
+                    break;
+
+                case UpgradeDataType.MISSILES:
+                    defaultValue = 1;
+                    break;
+
+                case UpgradeDataType.DELAY:
+                    defaultValue = 0;
                     break;
             }
             return defaultValue;
@@ -59,7 +68,7 @@ public class Item
         available = item.available;
         data = new SerializableDictionary<UpgradeDataType, UpgradeData>();
 
-        foreach(UpgradeDataType t in item.data.Keys)
+        foreach (UpgradeDataType t in item.data.Keys)
         {
             data.Add(t, new UpgradeData(item.data[t]));
         }

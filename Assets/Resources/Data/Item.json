@@ -341,7 +341,7 @@
 
     {
       "type": 0,
-      "name": "CAHINSAW",
+      "name": "CHAINSAW",
       "available": false,
       "description": "“There’s a chainsaw? Sweet!” - You",
       "cost": 5000,
@@ -392,7 +392,7 @@
       "cost": 10000,
 
       "data": {
-        "keys": [0, 2, 3, 4],
+        "keys": [0, 2, 3, 4, 8],
         "values": [
           {
             "defaultValue": 3,
@@ -424,6 +424,14 @@
             "upgradeValue": 1,
             "maxValue": 8,
             "cost": 250
+          },
+
+          {
+            "defaultValue": 1.5,
+            "currentValue": 1.5,
+            "upgradeValue": 0,
+            "maxValue": 1.5,
+            "cost": 0
           }
         ]
       }
@@ -437,7 +445,7 @@
       "cost": 20000,
 
       "data": {
-        "keys": [0, 2, 3, 5],
+        "keys": [0, 2, 3, 5, 8],
         "values": [
           {
             "defaultValue": 1,
@@ -469,6 +477,14 @@
             "upgradeValue": 5,
             "maxValue": 50,
             "cost": 900
+          },
+
+          {
+            "defaultValue": 1,
+            "currentValue": 1,
+            "upgradeValue": 0,
+            "maxValue": 1,
+            "cost": 0
           }
         ]
       }
@@ -580,7 +596,7 @@
       "cost": 2000,
 
       "data": {
-        "keys": [5, 9],
+        "keys": [5, 10],
         "values": [
           {
             "defaultValue": 100,
@@ -609,7 +625,7 @@
       "cost": 2000,
 
       "data": {
-        "keys": [3, 10],
+        "keys": [3, 11],
         "values": [
           {
             "defaultValue": 1,
@@ -668,7 +684,7 @@
       "cost": 6000,
 
       "data": {
-        "keys": [3, 4, 7],
+        "keys": [3, 4, 7, 8],
         "values": [
           {
             "defaultValue": 1.2,
@@ -692,6 +708,14 @@
             "upgradeValue": 1,
             "maxValue": 7,
             "cost": 300
+          },
+
+          {
+            "defaultValue": 1.5,
+            "currentValue": 1.5,
+            "upgradeValue": 0,
+            "maxValue": 1.5,
+            "cost": 0
           }
         ]
       }
@@ -771,7 +795,7 @@
       "cost": 3000,
 
       "data": {
-        "keys": [8],
+        "keys": [9],
         "values": [
           {
             "defaultValue": 20,

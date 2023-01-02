@@ -26,7 +26,7 @@ public class TowerObject : MonoBehaviour
                 _isAttackTower = true;
             else if (type == UpgradeDataType.SHIELD)
                 _shield = true;
-            else if (type >= UpgradeDataType.SLOW)
+            else
             {
                 _attackTypes.Add(type, tower.GetValue(type));
             }
@@ -38,6 +38,11 @@ public class TowerObject : MonoBehaviour
 
     public void Upgrade()
     {
+        foreach(UpgradeDataType type in _attackTypes.Keys)
+        {
+            _attackTypes[type] = _tower.GetValue(type);
+        }
+
         _attackArea.UpdateRange(_tower.GetValue(UpgradeDataType.RANGE));
     }
 
@@ -63,12 +68,11 @@ public class TowerObject : MonoBehaviour
 
     IEnumerator Active()
     {
-        int count = _enemies.Count;
         float dmg = 0;
 
         if (_isAttackTower) dmg = _tower.GetValue(UpgradeDataType.DAMAGE);
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < _enemies.Count; i++)
         {
             GameObject targetHitbox = _enemies[i];
             if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false)
@@ -77,16 +81,13 @@ public class TowerObject : MonoBehaviour
                 continue;
             }
 
-            if (_isAttackTower)
-            {
-                AttackController.Instance.TowerAttack(targetHitbox.transform.position, dmg, _attackTypes, _tower.name);
-                break;
-            }
+            AttackController.Instance.TowerAttack(targetHitbox.transform.position, dmg, _attackTypes, _tower.name);
+            if (_isAttackTower) break;
         }
         if (_isAttackTower == false)
             SoundController.Instance.PlayAudio(_tower.name.ToUpper(), Player.Instance.transform);
 
-        yield return new WaitForSeconds(1 / _tower.GetValue(UpgradeDataType.FIRERATE));
+        yield return new WaitForSeconds(ItemManager.FireRate(_tower.GetValue(UpgradeDataType.FIRERATE)));
 
         coroutine = null;
         if (_enemies.Count > 0) ActiveTower();

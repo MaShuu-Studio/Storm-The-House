@@ -22,6 +22,8 @@ public class SoundController : MonoBehaviour
             return;
         }
         instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

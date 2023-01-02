@@ -42,10 +42,19 @@ public class AttackController : MonoBehaviour
             float dmg = weapon.GetValue(UpgradeDataType.DAMAGE);
             float remainTime = weapon.GetValue(UpgradeDataType.REMAINTIME);
             float range = weapon.GetValue(UpgradeDataType.RANGE);
+            int missiles = (int)(Mathf.Round(weapon.GetValue(UpgradeDataType.MISSILES)));
+            float delay = weapon.GetValue(UpgradeDataType.DELAY);
             bool remain = weapon.isRemain;
 
-            if (isFire) SoundController.Instance.PlayAudio(weapon.name.ToUpper());
-            StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
+            if (isFire)
+            {
+                SoundController.Instance.PlayAudio(weapon.name.ToUpper());
+                StartCoroutine(Attack(weapon.name.ToUpper(), pos, dmg, range, accurancy, missiles, delay, remainTime, remain));
+            }
+            else // 일반적인 클릭 상황
+            {
+                StartCoroutine(Attack("", pos, 0, 1, 1000, 1, 0, 0.1f, false));
+            }
         }
     }
 
@@ -63,7 +72,7 @@ public class AttackController : MonoBehaviour
         bool remain = false;
 
         SoundController.Instance.PlayAudio(supportName.ToUpper(), Player.Instance.transform);
-        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
+        StartCoroutine(Attack(supportName, pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
     }
 
     public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes, string towerName)
@@ -72,43 +81,75 @@ public class AttackController : MonoBehaviour
         float accurancy = 100;
         float remainTime = 0.1f;
         float range = 0.5f;
+        int missiles = (attackTypes.ContainsKey(UpgradeDataType.MISSILES)) ? (int)(Mathf.Round(attackTypes[UpgradeDataType.MISSILES])) : 1;
+        float missileTerm = 0.15f;
+        float delay = (attackTypes.ContainsKey(UpgradeDataType.DELAY)) ? attackTypes[UpgradeDataType.DELAY] : 0;
         bool remain = false;
 
-        SoundController.Instance.PlayAudio(towerName.ToUpper(), Player.Instance.transform);
-        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain, attackTypes));
-    }
-
-    // 결과적으로 작동시킬 코루틴
-    private IEnumerator Attack(Vector3 pos, float dmg, float range, float accurancy, float time, bool remain = false, Dictionary<UpgradeDataType, float> attackTypes = null)
-    {
-        GameObject point = ObjectPool.GetObject<GameObject>(pointName);
-
-        point.name = "";
-        if (attackTypes != null)
+        for (int i = 0; i < missiles; i++)
         {
-            foreach (UpgradeDataType type in attackTypes.Keys)
-            {
-                if (type == UpgradeDataType.SLOW)
-                {
-                    point.name += "S";
-                    point.name += string.Format("{0:0.00}", attackTypes[type]);
-                }
-
-                if (type == UpgradeDataType.DOWN)
-                {
-                    point.name += "D";
-                }
-            }
+            // 동시 발사 탄환이 아닌 연달아 발사되는 미사일(미사일터렛)
+            StartCoroutine(MissileSound(towerName, i * missileTerm));
+            StartCoroutine(Attack(towerName, pos, dmg, range, accurancy, 1, delay + missileTerm * i, remainTime, remain, attackTypes));
+        }
+    }
+    private IEnumerator MissileSound(string attackName, float term)
+    {
+        while (term > 0)
+        {
+            term -= Time.deltaTime;
+            yield return null;
         }
 
-        point.name += (remain ? "T" : "F");
-        point.name += dmg.ToString();
-        point.transform.SetParent(null);
-        point.transform.position = new Vector3(
-            pos.x + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
-            pos.y + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
-            pos.z + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)));
-        point.transform.localScale = new Vector3(range, range, range);
+        SoundController.Instance.PlayAudio(attackName.ToUpper(), Player.Instance.transform);
+    }
+    // 결과적으로 작동시킬 코루틴
+    private IEnumerator Attack(string attackName, Vector3 pos, float dmg, float range, float accurancy, int missiles, float delay, float time, bool remain = false, Dictionary<UpgradeDataType, float> attackTypes = null)
+    {
+        float waitTime = 0;
+        while (delay > waitTime)
+        {
+            waitTime += Time.deltaTime;
+            yield return null;
+        }
+
+        List<GameObject> points = new List<GameObject>();
+
+        for (int i = 0; i < missiles; i++)
+        {
+            GameObject point = ObjectPool.GetObject<GameObject>(pointName);
+
+            point.name = "";
+            if (attackTypes != null)
+            {
+                foreach (UpgradeDataType type in attackTypes.Keys)
+                {
+                    if (type == UpgradeDataType.SLOW)
+                    {
+                        point.name += "S";
+                        point.name += string.Format("{0:0.00}", attackTypes[type]);
+                    }
+
+                    if (type == UpgradeDataType.DOWN)
+                    {
+                        point.name += "D";
+                    }
+                }
+            }
+
+            point.name += (remain ? "T" : "F");
+            point.name += dmg.ToString();
+            point.transform.SetParent(null);
+            point.transform.position = new Vector3(
+                pos.x + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
+                pos.y + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
+                pos.z + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)));
+            point.transform.localScale = new Vector3(range, range, range);
+            points.Add(point);
+        }
+
+        // 폭발음
+        SoundController.Instance.PlayAudio((attackName + " BOOM").ToUpper() , points[0].transform);
 
         while (time > 0)
         {
@@ -116,7 +157,10 @@ public class AttackController : MonoBehaviour
             yield return null;
         }
 
-        ReturnPoint(point);
+        foreach (GameObject point in points)
+        {
+            ReturnPoint(point);
+        }
     }
 
     private void ReturnPoint(GameObject obj)
