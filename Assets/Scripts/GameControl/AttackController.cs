@@ -49,6 +49,11 @@ public class AttackController : MonoBehaviour
         }
     }
 
+    public void EndClick()
+    {
+        WeaponController.Instance.ReleaseTrigger();
+    }
+
     // 서포터의 공격을 통해 작동하는 형태
     public void SupporterAttack(Vector3 pos, int dmg, string supportName)
     {

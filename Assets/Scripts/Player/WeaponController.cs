@@ -81,19 +81,19 @@ public class WeaponController : MonoBehaviour
     public void SwitchWeapon()
     {
         int nextIndex = (_curWeapon + 1) % 2;
-        // 발사 불가능 상태에서는 무기 교체 불가능.
-        if (_canUse[WeaponTimerType.FIRE] == false || _usingWeapon[nextIndex] == -1) return;
+
+        if (_usingWeapon[nextIndex] == -1) return;
 
         _curWeapon = nextIndex;
+
+        if (_timer[WeaponTimerType.FIRE] != null) StopCoroutine(_timer[WeaponTimerType.FIRE]);
+        if (_timer[WeaponTimerType.RELOAD] != null) StopCoroutine(_timer[WeaponTimerType.RELOAD]);
 
         _canUse[WeaponTimerType.FIRE] = true;
         if (_ammo[_curWeapon] <= 0)
         {
             _canUse[WeaponTimerType.RELOAD] = true;
         }
-
-        if (_timer[WeaponTimerType.FIRE] != null) StopCoroutine(_timer[WeaponTimerType.FIRE]);
-        if (_timer[WeaponTimerType.RELOAD] != null) StopCoroutine(_timer[WeaponTimerType.RELOAD]);
 
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
@@ -109,12 +109,15 @@ public class WeaponController : MonoBehaviour
         {
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
-            float fireTime = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.FIRERATE);
-            _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, ItemManager.FireRate(fireTime));
-            StartCoroutine(_timer[WeaponTimerType.FIRE]);
+            float fireRate = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.FIRERATE);
+            if (fireRate != 0)
+            {
+                _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, ItemManager.FireRate(fireRate));
+                StartCoroutine(_timer[WeaponTimerType.FIRE]);
+            }
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
 
-            if (_ammo[_curWeapon] == 0) // 총알이 부족하면 자동으로 장전
+            if (_ammo[_curWeapon] <= 0) // 총알이 부족하면 자동으로 장전
                 Reload();
 
             return true;
@@ -125,6 +128,15 @@ public class WeaponController : MonoBehaviour
             Reload();
         }
         return false;
+    }
+
+    public void ReleaseTrigger()
+    {
+        // 클릭속도가 공격속도인 경우
+        if (_timer[WeaponTimerType.FIRE] == null)
+        {
+            _canUse[WeaponTimerType.FIRE] = true;
+        }
     }
 
     public void Reload()

@@ -35,8 +35,8 @@ public static class ItemManager
 
     public static float FireRate(float firerate)
     {
-        if (firerate == 0) firerate = 0.5f;
-        return 1 / firerate;
+        if (firerate == 0) return 0;
+        return 10 / firerate;
     }
 
     public static float Reload(float reload)

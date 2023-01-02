@@ -33,6 +33,10 @@ public class GameController : MonoBehaviour
             {
                 AttackController.Instance.Click(true);
             }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                AttackController.Instance.EndClick();
+            }
 
             if (Input.GetButtonDown("RELOAD"))
             {

@@ -1,42 +1,45 @@
+
 {
-  "list": [
-    {
-      "type": 0,
-      "name": "GUNMAN",
-      "ability": 0,
-      "value": 1,
-      "accurancy": 0.7,
-      "probablity": 0.7,
-      "delay": 5,
-      "cost": 200,
-      "upgradecost": 50
-    },
+    "list": 
+    [
+        
+{
+    "type": 0,
+"name": "GUNMAN",
+"ability": 0,
+"value": 1,
+"accurancy": 0.7,
+"probablity": 0.7,
+"delay": 5,
+"cost": 200,
+"upgradecost": 50
+},
 
-    {
-      "type": 0,
-      "name": "REPAIRMAN",
-      "ability": 1,
-      "value": 1,
-      "cost": 500,
-      "upgradecost": 300
-    },
+{
+    "type": 0,
+"name": "REPAIRMAN",
+"ability": 1,
+"value": 1,
+"cost": 500,
+"upgradecost": 300
+},
 
-    {
-      "type": 1,
-      "name": "UPGRADE WALL",
-      "ability": 2,
-      "value": 100,
-      "cost": 800,
-      "multiplyupgradecost": 2.5,
-      "maxupgrade": 5
-    },
+{
+    "type": 1,
+"name": "UPGRADE WALL",
+"ability": 2,
+"value": 100,
+"cost": 800,
+"multiplyupgradecost": 2.5,
+"maxupgrade": 5
+},
 
-    {
-      "type": 1,
-      "name": "REPAIR HOUSE",
-      "ability": 1,
-      "value": 50,
-      "cost": 100
-    }
-  ]
+{
+    "type": 1,
+"name": "REPAIR HOUSE",
+"ability": 1,
+"value": 50,
+"cost": 100
+}
+    ]
 }
