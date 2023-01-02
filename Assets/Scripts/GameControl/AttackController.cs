@@ -58,7 +58,7 @@ public class AttackController : MonoBehaviour
         bool remain = false;
 
         SoundController.Instance.PlayAudio(supportName.ToUpper(), Player.Instance.transform);
-        StartCoroutine(Attack( pos, dmg, range, accurancy, remainTime, remain));
+        StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain));
     }
 
     public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes, string towerName)
@@ -71,7 +71,6 @@ public class AttackController : MonoBehaviour
 
         SoundController.Instance.PlayAudio(towerName.ToUpper(), Player.Instance.transform);
         StartCoroutine(Attack(pos, dmg, range, accurancy, remainTime, remain, attackTypes));
-
     }
 
     // 결과적으로 작동시킬 코루틴
@@ -148,7 +147,7 @@ public class AttackController : MonoBehaviour
             pos = raycastHit.point;
 
         // 더 안쪽으로 파고들도록 약간의 보정 작업
-        pos += dir/5;
+        pos += dir / 5;
 
         return pos;
     }

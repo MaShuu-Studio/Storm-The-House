@@ -51,14 +51,16 @@ namespace Data
         private static string dataPath = "Data/";
         private static string prefabPath = "Prefabs/";
         private static string soundPath = "Sounds/";
-        private static string imagePath = "Sprites/Images/";
-        private static string iconPath = "Sprites/Icons/";
+        private static string imagePath = "Textures/Images/";
+        private static string iconPath = "Textures/Icons/";
+        private static string cursorPath = "Textures/Cursors/";
 
         public static string DataPath { get { return dataPath; } }
         public static string PrefabPath { get { return prefabPath; } }
         public static string SoundPath { get { return soundPath; } }
         public static string ImagePath { get { return imagePath; } }
         public static string IconPath { get { return iconPath; } }
+        public static string CursorPath { get { return cursorPath; } }
 
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)

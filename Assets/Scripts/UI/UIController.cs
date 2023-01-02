@@ -99,11 +99,12 @@ public class UIController : MonoBehaviour
 
         for (int i = 0; i < ItemManager.Weapons.Count; i++)
         {
+            string name = ItemManager.WeaponNames[i];
             GameObject go = Instantiate(itemPrefab);
             ItemButton wi = go.GetComponent<ItemButton>();
 
             wi.SetButton(ButtonType.WEAPON, i);
-            wi.SetIcon(ItemManager.Weapons[i].name);
+            wi.SetIcon(ItemManager.Weapons[name].name);
 
             go.transform.SetParent(weaponsGrid);
             go.transform.localScale = new Vector3(1, 1, 1);
@@ -211,6 +212,22 @@ public class UIController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    Texture2D cursorTexture;
+
+    public void ChangeCursor(string name = "")
+    {
+        CursorMode mode = CursorMode.Auto;
+        cursorTexture = null;
+        Vector2 center = Vector2.zero;
+        if (name != "")
+        {
+            cursorTexture = CursorManager.GetCursor(name);
+            mode = CursorMode.ForceSoftware;
+            center = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        }
+        Cursor.SetCursor(cursorTexture, center, mode);
     }
 
     #region Main View
@@ -336,6 +353,7 @@ public class UIController : MonoBehaviour
     }
     #endregion
 
+    #region Shop
     public void OpenShop(bool b)
     {
         shopObject.SetActive(b);
@@ -375,6 +393,11 @@ public class UIController : MonoBehaviour
                 else
                     Player.Instance.ReadyToBuyTower(selectedItem);
 
+                UpdateUpgradeView();
+                break;
+
+            case ButtonType.SELL:
+                Player.Instance.SellTower();
                 UpdateUpgradeView();
                 break;
 
@@ -452,6 +475,7 @@ public class UIController : MonoBehaviour
             usedItems[i].SetIcon(name);
         }
     }
+    #endregion
 
     #endregion
 }

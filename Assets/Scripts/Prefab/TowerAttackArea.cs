@@ -17,9 +17,14 @@ public class TowerAttackArea : MonoBehaviour
     {
         _tower = tower;
 
-        _collider.center = Vector3.left * size / 20;
-        _collider.size = new Vector3(size / 10, 1, 15);
+        UpdateRange(size);
         transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void UpdateRange(float size)
+    {
+        _collider.center = new Vector3(-size / 20, 0, -transform.parent.position.z / 2);
+        _collider.size = new Vector3(size / 10, 1, 15);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,13 +32,6 @@ public class TowerAttackArea : MonoBehaviour
         if (other.tag == "Enemy")
         {
             _tower.AddEnemy(other.gameObject, true);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            _tower.AddEnemy(other.gameObject, false);
         }
     }
 }

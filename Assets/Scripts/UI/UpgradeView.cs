@@ -13,11 +13,12 @@ public class UpgradeView : MonoBehaviour
     [SerializeField] private List<UpgradeButton> upgradeButtons;
     [SerializeField] private Image upgradeItemImage;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private CustomButton buyButton;
+    [SerializeField] private CustomButton dealButton;
+    [SerializeField] private TextMeshProUGUI dealText;
 
     void Start()
     {
-        buyButton.gameObject.SetActive(false);
+        dealButton.gameObject.SetActive(false);
     }
 
     public void SetUpgradeView(Item item)
@@ -29,7 +30,22 @@ public class UpgradeView : MonoBehaviour
         upgradeItemImage.sprite = SpriteManager.GetImage(item.name);
 
         descriptionText.gameObject.SetActive(!item.available);
-        buyButton.gameObject.SetActive(!item.available && (Player.Instance.Money > item.cost));
+        if (item.available == false)
+        {
+            dealText.text = "BUY";
+            dealButton.SetButton(ButtonType.BUY);
+            dealButton.gameObject.SetActive(!item.available && (Player.Instance.Money > item.cost));
+        }
+        else if (item.type == ItemType.TOWER)
+        {
+            dealText.text = "SELL\n(90%)";
+            dealButton.SetButton(ButtonType.SELL);
+            dealButton.gameObject.SetActive(item.available);
+        }
+        else
+        {
+            dealButton.gameObject.SetActive(false);
+        }
 
         int i = 0;
         if (item.available)

@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
         bool inv = false;
         bool inf = false;
 
-        if(mode == GameMode.SandBox)
+        if (mode == GameMode.SandBox)
         {
             money = SandBoxController.Instance.Money;
             wall = SandBoxController.Instance.Wall;
@@ -96,6 +96,7 @@ public class GameController : MonoBehaviour
 
     public void ReturnToMain()
     {
+        TowerController.Instance.ClearTower();
         RoundController.Instance.GameEnd();
     }
 

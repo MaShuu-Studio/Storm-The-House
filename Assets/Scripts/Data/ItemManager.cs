@@ -6,38 +6,62 @@ using Data;
 
 public static class ItemManager
 {
-    public static List<Item> Weapons { get { return weapons; } }
-    private static List<Item> weapons;
+    public static Dictionary<string, Item> Weapons { get { return weapons; } }
+    private static Dictionary<string, Item> weapons;
     public static Dictionary<string, Item> Towers { get { return towers; } }
     private static Dictionary<string, Item> towers;
     public static List<string> TowerNames { get; private set; }
+    public static List<string> WeaponNames { get; private set; }
 
     public static void Initialize()
     {
         List<Item> list = DataManager.Deserialize<Item>();
 
-        weapons = new List<Item>();
+        weapons = new Dictionary<string, Item>();
         towers = new Dictionary<string, Item>();
 
         foreach (Item item in list)
         {
             if (item.type == EnumData.ItemType.WEAPON)
-                weapons.Add(item);
+                weapons.Add(item.name, item);
             else if (item.type == EnumData.ItemType.TOWER)
                 towers.Add(item.name, item);
         }
+        WeaponNames = new List<string>(weapons.Keys.ToList());
         TowerNames = new List<string>(towers.Keys.ToList());
 
         Debug.Log("[SYSTEM] LOAD ITEMS");
     }
 
-    public static float FireRate(int firerate)
+    public static float FireRate(float firerate)
     {
+        if (firerate == 0) firerate = 0.5f;
         return 1 / firerate;
     }
 
-    public static float Reload(int reload)
+    public static float Reload(float reload)
     {
+        if (reload == 0) reload = 1;
         return 3 / reload;
+    }
+
+    public static int Value(Item item)
+    {
+        int value = item.cost;
+        Item tmpItem = new Item((item.type == EnumData.ItemType.WEAPON) ? Weapons[item.name] : Towers[item.name]);
+
+        foreach (EnumData.UpgradeDataType type in tmpItem.data.Keys)
+        {
+            UpgradeData curData = tmpItem.data[type];
+            UpgradeData itemData = item.data[type];
+            while (curData.currentValue < itemData.currentValue)
+            {
+                int infmoney = 9999999;
+                value += curData.cost;
+                curData.Upgrade(ref infmoney);
+            }
+        }
+
+        return value;
     }
 }

@@ -51,6 +51,14 @@ public class TowerController : MonoBehaviour
         }
     }
 
+    public void ClearTower()
+    {
+        for (int i = 0; i < _towers.Length; i++)
+        {
+            if (_towers[i] != null) RemoveTower(i);
+        }
+    }
+
     public void SelectTower(int index)
     {
         _selectedTowerIndex = index;
@@ -85,15 +93,16 @@ public class TowerController : MonoBehaviour
         return true;
     }
 
-    public void RemoveTower()
+    public void RemoveTower(int index)
     {
-        _towers[_selectedTowerIndex] = null;
-        Destroy(_towerObjects[_selectedTowerIndex]);
+        _towers[index] = null;
+        _towerObjects[index].RemoveTower();
     }
 
     public void Upgrade(int index, UpgradeDataType type, ref int money)
     {
         _towers[index].data[type].Upgrade(ref money);
+        _towerObjects[index].Upgrade();
 
         if (type == UpgradeDataType.SHIELD) UpdateShield();
     }

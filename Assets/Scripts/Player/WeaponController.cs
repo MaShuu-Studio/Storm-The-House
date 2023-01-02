@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour
         if (_weapons != null) _weapons.Clear();
         _weapons = new List<Item>();
 
-        foreach (Item weapon in ItemManager.Weapons)
+        foreach (Item weapon in ItemManager.Weapons.Values)
         {
             _weapons.Add(new Item(weapon));
         }
@@ -110,7 +110,7 @@ public class WeaponController : MonoBehaviour
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
             float fireTime = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.FIRERATE);
-            _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, 1 / fireTime);
+            _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, ItemManager.FireRate(fireTime));
             StartCoroutine(_timer[WeaponTimerType.FIRE]);
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
 

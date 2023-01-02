@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     private BoxCollider area;
     private Dictionary<string, int> supporter;
-    private Queue<GameObject> enemys;
+    private Queue<GameObject> enemies;
     private Dictionary<string, IEnumerator> coroutines;
 
     private float hp;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         area.center = new Vector3(-20, 20, 0);
         area.size = new Vector3(30, 40, 25);
 
-        enemys = new Queue<GameObject>();
+        enemies = new Queue<GameObject>();
     }
 
     void Start()
@@ -197,26 +197,26 @@ public class Player : MonoBehaviour
         int value = SupporterManager.Value(supporterName);
         if (ability == SupporterAbilityType.ATTACK)
         {
-            GameObject target;
+            GameObject targetHitbox;
             Vector3 pos = Vector3.zero;
 
-            while (enemys.Count > 0)
+            while (enemies.Count > 0)
             {
-                target = enemys.Peek();
+                targetHitbox = enemies.Peek();
 
-                if (target == null || target.transform.parent.gameObject.activeSelf == false) enemys.Dequeue();
+                if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false) enemies.Dequeue();
                 else
                 {
-                    pos = target.transform.position;
+                    pos = targetHitbox.transform.position;
 
                     AttackController.Instance.SupporterAttack(pos, value, "SUPPORTER " + supporterName);
                     break;
                 }
             }
 
-            while (enemys.Count == 0) yield return null;
+            while (enemies.Count == 0) yield return null;
 
-            if (enemys.Count > 0)
+            if (enemies.Count > 0)
                 ActiveSupporter(supporterName, ability);
         }
         else if (ability == SupporterAbilityType.HEAL)
@@ -266,6 +266,7 @@ public class Player : MonoBehaviour
     public void StartRound()
     {
         ReadyBuyTower = false;
+        UIController.Instance.ChangeCursor();
     }
 
     public void ReadyToBuyTower(int index)
@@ -276,7 +277,10 @@ public class Player : MonoBehaviour
         towerCost = tower.cost;
 
         if (money >= towerCost)
+        {
             ReadyBuyTower = true;
+            UIController.Instance.ChangeCursor(towerName);
+        }
     }
 
     public void BuyTower(int index)
@@ -288,6 +292,19 @@ public class Player : MonoBehaviour
 
         money -= towerCost;
         UIController.Instance.UpdateMoney(money);
+        UIController.Instance.ChangeCursor();
+    }
+
+    public void SellTower()
+    {
+        Item tower = TowerController.Instance.SelectedTower;
+        int index = TowerController.Instance.SelectedTowerIndex;
+
+        Debug.Log(ItemManager.Value(tower));
+        money += (int)(Mathf.Round(ItemManager.Value(tower) * 0.9f));
+        UIController.Instance.UpdateMoney(money);
+
+        TowerController.Instance.RemoveTower(index);
     }
 
     public void UpdateShield(float s)
@@ -300,7 +317,7 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            enemys.Enqueue(other.gameObject);
+            enemies.Enqueue(other.gameObject);
         }
     }
 }

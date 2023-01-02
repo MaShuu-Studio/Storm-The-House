@@ -23,6 +23,7 @@ public class Initializer : MonoBehaviour
         RoundManager.Initialize();
         SoundManager.Initialize();
         SpriteManager.Initialize();
+        CursorManager.Initialize();
     }
 
     void Start()

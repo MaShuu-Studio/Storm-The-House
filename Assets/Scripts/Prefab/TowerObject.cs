@@ -9,7 +9,7 @@ public class TowerObject : MonoBehaviour
     [SerializeField] private TowerHitBox _hitbox;
     private Item _tower;
     private Dictionary<UpgradeDataType, float> _attackTypes = new Dictionary<UpgradeDataType, float>();
-    private bool _attackTower;
+    private bool _isAttackTower;
     private bool _shield;
 
     private List<GameObject> _enemies = new List<GameObject>();
@@ -18,12 +18,12 @@ public class TowerObject : MonoBehaviour
     {
         _tower = tower;
         name = _tower.name;
-        _attackTower = false;
+        _isAttackTower = false;
 
-        foreach(UpgradeDataType type in tower.data.Keys)
+        foreach (UpgradeDataType type in tower.data.Keys)
         {
             if (type == UpgradeDataType.DAMAGE)
-                _attackTower = true;
+                _isAttackTower = true;
             else if (type == UpgradeDataType.SHIELD)
                 _shield = true;
             else if (type >= UpgradeDataType.SLOW)
@@ -33,7 +33,12 @@ public class TowerObject : MonoBehaviour
         }
 
         _hitbox.Initialize(index);
-        _attackArea.Initialize(this, tower.GetValue(UpgradeDataType.RANGE));
+        _attackArea.Initialize(this, _tower.GetValue(UpgradeDataType.RANGE));
+    }
+
+    public void Upgrade()
+    {
+        _attackArea.UpdateRange(_tower.GetValue(UpgradeDataType.RANGE));
     }
 
     IEnumerator coroutine;
@@ -49,15 +54,37 @@ public class TowerObject : MonoBehaviour
         }
     }
 
+    public void RemoveTower()
+    {
+        StopAllCoroutines();
+
+        ObjectPool.ReturnObject(name, gameObject);
+    }
+
     IEnumerator Active()
     {
         int count = _enemies.Count;
         float dmg = 0;
+
+        if (_isAttackTower) dmg = _tower.GetValue(UpgradeDataType.DAMAGE);
+
         for (int i = 0; i < count; i++)
         {
-            if (_attackTower) dmg = _tower.GetValue(UpgradeDataType.DAMAGE);
-            AttackController.Instance.TowerAttack(_enemies[i].transform.position, dmg, _attackTypes, _tower.name);
+            GameObject targetHitbox = _enemies[i];
+            if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false)
+            {
+                _enemies.RemoveAt(i);
+                continue;
+            }
+
+            if (_isAttackTower)
+            {
+                AttackController.Instance.TowerAttack(targetHitbox.transform.position, dmg, _attackTypes, _tower.name);
+                break;
+            }
         }
+        if (_isAttackTower == false)
+            SoundController.Instance.PlayAudio(_tower.name.ToUpper(), Player.Instance.transform);
 
         yield return new WaitForSeconds(1 / _tower.GetValue(UpgradeDataType.FIRERATE));
 
@@ -74,7 +101,7 @@ public class TowerObject : MonoBehaviour
         }
         else
         {
-            for(int i =0; i< _enemies.Count; i++)
+            for (int i = 0; i < _enemies.Count; i++)
             {
                 if (_enemies[i] == enemy)
                 {
