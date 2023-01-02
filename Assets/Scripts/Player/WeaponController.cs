@@ -98,6 +98,7 @@ public class WeaponController : MonoBehaviour
         _timer[WeaponTimerType.FIRE] = null;
         _timer[WeaponTimerType.RELOAD] = null;
 
+        UIController.Instance.ChangeCursor(CurrentWeapon.name);
         UpdateAmmoUI();
     }
 

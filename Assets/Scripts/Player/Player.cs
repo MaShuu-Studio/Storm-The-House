@@ -266,7 +266,7 @@ public class Player : MonoBehaviour
     public void StartRound()
     {
         ReadyBuyTower = false;
-        UIController.Instance.ChangeCursor();
+        UIController.Instance.ChangeCursor(WeaponController.Instance.CurrentWeapon.name);
     }
 
     public void ReadyToBuyTower(int index)

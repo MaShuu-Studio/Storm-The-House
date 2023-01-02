@@ -59,7 +59,6 @@ public class UpgradeView : MonoBehaviour
                 {
                     if (i > 2) continue;
                     upgradeButtons[i].gameObject.SetActive(false);
-                    contentsAmount--;
                     continue;
                 }
                 upgradeButtons[contentsAmount].gameObject.SetActive(true);

@@ -129,6 +129,7 @@ public class UIController : MonoBehaviour
     public void OpenMainView()
     {
         SwitchView("MAIN");
+        ChangeCursor();
         SoundController.Instance.PlayBGM("Main");
     }
 
@@ -218,16 +219,10 @@ public class UIController : MonoBehaviour
 
     public void ChangeCursor(string name = "")
     {
-        CursorMode mode = CursorMode.Auto;
-        cursorTexture = null;
-        Vector2 center = Vector2.zero;
-        if (name != "")
-        {
-            cursorTexture = CursorManager.GetCursor(name);
-            mode = CursorMode.ForceSoftware;
-            center = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
-        }
-        Cursor.SetCursor(cursorTexture, center, mode);
+        cursorTexture = CursorManager.GetCursor(name, RoundController.Instance.ProgressRound);
+        Vector2 center = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+
+        Cursor.SetCursor(cursorTexture, center, CursorMode.ForceSoftware);
     }
 
     #region Main View

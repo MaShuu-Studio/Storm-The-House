@@ -22,11 +22,15 @@ public static class CursorManager
         Debug.Log("[SYSTEM] LOAD CURSOR DATA");
     }
 
-    public static Texture2D GetCursor(string name)
+    public static Texture2D GetCursor(string name, bool inGame)
     {
         name = name.ToUpper();
 
-        if (!cursors.ContainsKey(name)) return null;
+        if (!cursors.ContainsKey(name))
+        {
+            if (inGame) return cursors["DEFAULT"];
+            else return cursors["CURSOR"];
+        }
         return cursors[name];
     }
 }
