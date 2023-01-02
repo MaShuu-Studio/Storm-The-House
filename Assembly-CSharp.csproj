@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Data\SpriteManager.cs" />
     <Compile Include="Assets\Scripts\Sound\CustomAudioSource.cs" />
     <Compile Include="Assets\Scripts\UI\SupporterItem.cs" />
+    <Compile Include="Assets\Scripts\Data\CursorManager.cs" />
     <Compile Include="Assets\Scripts\UI\CustomButton.cs" />
     <Compile Include="Assets\Scripts\Data\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Data\EnumData.cs" />
@@ -97,7 +98,6 @@
     <Compile Include="Assets\Scripts\GameControl\AttackController.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponTowerItem.cs" />
     <Compile Include="Assets\Scripts\UI\ItemButton.cs" />
-    <Compile Include="Assets\Scripts\Data\CursorManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

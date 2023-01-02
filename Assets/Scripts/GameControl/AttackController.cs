@@ -184,6 +184,7 @@ public class AttackController : MonoBehaviour
         Vector3 dirpos = mpos;
         dirpos.z -= 1;
         dirpos.y += Mathf.Tan(Mathf.Deg2Rad * cam.transform.rotation.eulerAngles.x);
+        dirpos.x -= Mathf.Tan(Mathf.Deg2Rad * cam.transform.rotation.eulerAngles.y);
         Vector3 dir = Vector3.Normalize(mpos - dirpos);
 
         RaycastHit raycastHit;

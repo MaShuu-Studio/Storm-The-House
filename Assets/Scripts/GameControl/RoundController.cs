@@ -8,10 +8,11 @@ public class RoundController : MonoBehaviour
     private static RoundController instance;
 
     [SerializeField] private GameObject sun;
-    private float maxXpos = 35;
-    private float minYpos = -5;
-    private float maxYpos = 15;
-    private float zpos = 20;
+    private const float maxXpos = 28;
+    private const float minYpos = -8;
+    private const float maxYpos = 11;
+    private const float sunZpos = 60;
+    private const float enemyZpos = 20;
 
     IEnumerator _roundCoroutine;
 
@@ -67,7 +68,7 @@ public class RoundController : MonoBehaviour
     {
         float radian = Mathf.PI;
 
-        sun.transform.position = new Vector3(maxXpos * Mathf.Cos(radian), minYpos + maxYpos * Mathf.Sin(radian), zpos);
+        sun.transform.position = new Vector3(maxXpos * Mathf.Cos(radian) - 2f, minYpos + maxYpos * Mathf.Sin(radian), sunZpos);
         sun.transform.LookAt(transform.position);
     }
 
@@ -151,7 +152,7 @@ public class RoundController : MonoBehaviour
 
             float radian = time / _roundTime * Mathf.PI;
 
-            sun.transform.position = new Vector3(maxXpos * Mathf.Cos(radian), minYpos + maxYpos * Mathf.Sin(radian), zpos);
+            sun.transform.position = new Vector3(maxXpos * Mathf.Cos(radian) - 2f, minYpos + maxYpos * Mathf.Sin(radian), sunZpos);
             sun.transform.LookAt(transform.position);
 
             yield return null;
@@ -168,7 +169,7 @@ public class RoundController : MonoBehaviour
 
         yield return new WaitForSeconds(time);
 
-        float z = Random.Range(zpos / 2, zpos / 2 * -1);
+        float z = Random.Range(enemyZpos / 2, enemyZpos / 2 * -1);
 
         Vector3 pos = new Vector3(-40, 0f, z);
 
