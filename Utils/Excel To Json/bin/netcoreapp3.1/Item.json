@@ -1,811 +1,1124 @@
+
 {
-  "list": [
+    "list": 
+    [
+        
+{
+    "type": 0,
+"name": "DESERT EAGLE",
+"available": true,
+"description": ".",
+"cost": 0,
+
+    "data":
     {
-      "type": 0,
-      "name": "DESERT EAGLE",
-      "available": true,
-      "description": ".",
-      "cost": 0,
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 7,
+"currentValue": 7,
+"upgradeValue": 1,
+"maxValue": 14,
+"cost": 10
 
-      "data": {
-        "keys": [0, 1, 2, 3, 4],
-        "values": [
-          {
-            "defaultValue": 7,
-            "currentValue": 7,
-            "upgradeValue": 1,
-            "maxValue": 14,
-            "cost": 10
-          },
+},
 
-          {
-            "defaultValue": 1.4,
-            "currentValue": 1.4,
-            "upgradeValue": 0.1,
-            "maxValue": 1.9,
-            "cost": 20
-          },
+{
+    "defaultValue": 1.4,
+"currentValue": 1.4,
+"upgradeValue": 0.1,
+"maxValue": 1.9,
+"cost": 20
 
-          {
-            "defaultValue": 1.5,
-            "currentValue": 1.5,
-            "upgradeValue": 0.5,
-            "maxValue": 4,
-            "cost": 10
-          },
+},
 
-          {
-            "defaultValue": 0,
-            "currentValue": 0,
-            "upgradeValue": 0,
-            "maxValue": 0,
-            "cost": 0
-          },
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0,
+"maxValue": 1,
+"cost": 0
 
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0,
-            "maxValue": 1,
-            "cost": 0
-          }
+},
+
+{
+    "defaultValue": 0,
+"currentValue": 0,
+"upgradeValue": 0,
+"maxValue": 0,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 1.5,
+"currentValue": 1.5,
+"upgradeValue": 0.5,
+"maxValue": 4,
+"cost": 10
+
+}
         ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "UZI",
-      "available": false,
-      "description": "A drive-by favorite, the uzi is an affordable, fuuly automatic solution to all your semi-automatic problems.",
-      "cost": 300,
-
-      "data": {
-        "keys": [0, 1, 2, 3, 4],
-        "values": [
-          {
-            "defaultValue": 20,
-            "currentValue": 20,
-            "upgradeValue": 1,
-            "maxValue": 30,
-            "cost": 10
-          },
-
-          {
-            "defaultValue": 2,
-            "currentValue": 2,
-            "upgradeValue": 0.05,
-            "maxValue": 2.4,
-            "cost": 40
-          },
-
-          {
-            "defaultValue": 1.5,
-            "currentValue": 1.5,
-            "upgradeValue": 0.2,
-            "maxValue": 2.5,
-            "cost": 30
-          },
-
-          {
-            "defaultValue": 100,
-            "currentValue": 100,
-            "upgradeValue": 0,
-            "maxValue": 100,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0,
-            "maxValue": 1,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "COMBAT SHOTGUN",
-      "available": false,
-      "description": "Rednecks and zombie slayers agree, shotguns are always a good decision. Don’t forget… shop smart, shop S-mart.",
-      "cost": 2000,
-
-      "data": {
-        "keys": [0, 2, 3, 4, 7],
-        "values": [
-          {
-            "defaultValue": 7,
-            "currentValue": 7,
-            "upgradeValue": 1,
-            "maxValue": 15,
-            "cost": 50
-          },
-
-          {
-            "defaultValue": 16,
-            "currentValue": 16,
-            "upgradeValue": 1,
-            "maxValue": 22,
-            "cost": 70
-          },
-
-          {
-            "defaultValue": 20,
-            "currentValue": 20,
-            "upgradeValue": 0,
-            "maxValue": 20,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 3,
-            "currentValue": 3,
-            "upgradeValue": 0.5,
-            "maxValue": 5,
-            "cost": 100
-          },
-
-          {
-            "defaultValue": 6,
-            "currentValue": 6,
-            "upgradeValue": 0,
-            "maxValue": 6,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "S.C.A.R",
-      "available": false,
-      "description": "You’re standard automatic rifle. Accurate and powerful. A step above that cute lil’ uzi.",
-      "cost": 5000,
-
-      "data": {
-        "keys": [0, 1, 2, 3],
-        "values": [
-          {
-            "defaultValue": 25,
-            "currentValue": 25,
-            "upgradeValue": 5,
-            "maxValue": 70,
-            "cost": 45
-          },
-
-          {
-            "defaultValue": 2,
-            "currentValue": 2,
-            "upgradeValue": 0.05,
-            "maxValue": 2.4,
-            "cost": 50
-          },
-
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0.2,
-            "maxValue": 3,
-            "cost": 70
-          },
-
-          {
-            "defaultValue": 80,
-            "currentValue": 80,
-            "upgradeValue": 0,
-            "maxValue": 80,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "DAO-12",
-      "available": false,
-      "description": "A ballsier, automatic version of the combat shotgun. For when you really need to call down the rain.",
-      "cost": 4000,
-
-      "data": {
-        "keys": [0, 3, 4, 7],
-        "values": [
-          {
-            "defaultValue": 8,
-            "currentValue": 8,
-            "upgradeValue": 2,
-            "maxValue": 20,
-            "cost": 80
-          },
-
-          {
-            "defaultValue": 30,
-            "currentValue": 30,
-            "upgradeValue": 1.5,
-            "maxValue": 40.5,
-            "cost": 100
-          },
-
-          {
-            "defaultValue": 3,
-            "currentValue": 3,
-            "upgradeValue": 1,
-            "maxValue": 7,
-            "cost": 180
-          },
-
-          {
-            "defaultValue": 6,
-            "currentValue": 6,
-            "upgradeValue": 0,
-            "maxValue": 6,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "FLAME THROWER",
-      "available": false,
-      "description": "Perfect for getting rid of termites, hilarious WWII reenactments with friends, or even when your son’s little league game runs long. The flame thrower. Don’t leave home without it.",
-      "cost": 7500,
-
-      "data": {
-        "keys": [0, 3, 4, 5],
-        "values": [
-          {
-            "defaultValue": 30,
-            "currentValue": 30,
-            "upgradeValue": 5,
-            "maxValue": 60,
-            "cost": 80
-          },
-
-          {
-            "defaultValue": 100,
-            "currentValue": 100,
-            "upgradeValue": 0,
-            "maxValue": 100,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 0.03,
-            "currentValue": 0.03,
-            "upgradeValue": 0.01,
-            "maxValue": 0.15,
-            "cost": 80
-          },
-
-          {
-            "defaultValue": 5,
-            "currentValue": 5,
-            "upgradeValue": 1,
-            "maxValue": 15,
-            "cost": 40
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "MACHINE GUN",
-      "available": false,
-      "description": "When Sylvester stalone needs to cut down row after row of Vietcong soldiers and emerge with nothing but stainless steel abs and the sweat on his brow, you better believe he brings his machine gun.",
-      "cost": 11000,
-
-      "data": {
-        "keys": [0, 1, 2, 3],
-        "values": [
-          {
-            "defaultValue": 40,
-            "currentValue": 40,
-            "upgradeValue": 10,
-            "maxValue": 200,
-            "cost": 100
-          },
-
-          {
-            "defaultValue": 1.7,
-            "currentValue": 1.7,
-            "upgradeValue": 0.05,
-            "maxValue": 2.2,
-            "cost": 130
-          },
-
-          {
-            "defaultValue": 0.7,
-            "currentValue": 0.7,
-            "upgradeValue": 0.1,
-            "maxValue": 1.5,
-            "cost": 100
-          },
-
-          {
-            "defaultValue": 80,
-            "currentValue": 80,
-            "upgradeValue": 0,
-            "maxValue": 80,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "CHAINSAW",
-      "available": false,
-      "description": "“There’s a chainsaw? Sweet!” - You",
-      "cost": 5000,
-
-      "data": {
-        "keys": [0, 2, 3, 4],
-        "values": [
-          {
-            "defaultValue": 20,
-            "currentValue": 20,
-            "upgradeValue": 5,
-            "maxValue": 100,
-            "cost": 120
-          },
-
-          {
-            "defaultValue": 6,
-            "currentValue": 6,
-            "upgradeValue": 1,
-            "maxValue": 4,
-            "cost": 250
-          },
-
-          {
-            "defaultValue": 150,
-            "currentValue": 150,
-            "upgradeValue": 0,
-            "maxValue": 150,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0.5,
-            "maxValue": 9,
-            "cost": 180
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "GRENADE LAUNCHER",
-      "available": false,
-      "description": "Perfect for launching grenades.",
-      "cost": 10000,
-
-      "data": {
-        "keys": [0, 2, 3, 4, 8],
-        "values": [
-          {
-            "defaultValue": 3,
-            "currentValue": 3,
-            "upgradeValue": 1,
-            "maxValue": 9,
-            "cost": 140
-          },
-
-          {
-            "defaultValue": 0.9,
-            "currentValue": 0.9,
-            "upgradeValue": 0.1,
-            "maxValue": 1.5,
-            "cost": 180
-          },
-
-          {
-            "defaultValue": 0,
-            "currentValue": 0,
-            "upgradeValue": 0,
-            "maxValue": 0,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 4,
-            "currentValue": 4,
-            "upgradeValue": 1,
-            "maxValue": 8,
-            "cost": 250
-          },
-
-          {
-            "defaultValue": 1.5,
-            "currentValue": 1.5,
-            "upgradeValue": 0,
-            "maxValue": 1.5,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "SPACE LASER",
-      "available": false,
-      "description": "This baby focuses a satellite mounted laser at your feeble enemies and promptly deatomizes them.",
-      "cost": 20000,
-
-      "data": {
-        "keys": [0, 2, 3, 5, 8],
-        "values": [
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 1,
-            "maxValue": 5,
-            "cost": 900
-          },
-
-          {
-            "defaultValue": 0.6,
-            "currentValue": 0.6,
-            "upgradeValue": 0.05,
-            "maxValue": 1,
-            "cost": 900
-          },
-
-          {
-            "defaultValue": 0,
-            "currentValue": 0,
-            "upgradeValue": 0,
-            "maxValue": 0,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 30,
-            "currentValue": 30,
-            "upgradeValue": 5,
-            "maxValue": 50,
-            "cost": 900
-          },
-
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0,
-            "maxValue": 1,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "THE QUAKER",
-      "available": false,
-      "description": "Handheld tele-geo-dynamics manipulating oscillator generator capable of knocking down troops and damaging vehicles.",
-      "cost": 7000,
-
-      "data": {
-        "keys": [0, 2, 3, 4],
-        "values": [
-          {
-            "defaultValue": 3,
-            "currentValue": 3,
-            "upgradeValue": 1,
-            "maxValue": 7,
-            "cost": 180
-          },
-
-          {
-            "defaultValue": -10,
-            "currentValue": -10,
-            "upgradeValue": 5,
-            "maxValue": 20,
-            "cost": 150
-          },
-
-          {
-            "defaultValue": 12,
-            "currentValue": 12,
-            "upgradeValue": 0,
-            "maxValue": 12,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 5,
-            "currentValue": 5,
-            "upgradeValue": 2.5,
-            "maxValue": 15,
-            "cost": 220
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 0,
-      "name": "OLD GLORY",
-      "available": false,
-      "description": "A gun so big it overlaps the buy button.",
-      "cost": 30000,
-
-      "data": {
-        "keys": [0, 1, 2, 3, 7],
-        "values": [
-          {
-            "defaultValue": 200,
-            "currentValue": 200,
-            "upgradeValue": 25,
-            "maxValue": 500,
-            "cost": 500
-          },
-
-          {
-            "defaultValue": 2.4,
-            "currentValue": 2.4,
-            "upgradeValue": 0.05,
-            "maxValue": 2.6,
-            "cost": 600
-          },
-
-          {
-            "defaultValue": 0.8,
-            "currentValue": 0.8,
-            "upgradeValue": 0.025,
-            "maxValue": 1.1,
-            "cost": 400
-          },
-
-          {
-            "defaultValue": 150,
-            "currentValue": 150,
-            "upgradeValue": 0,
-            "maxValue": 150,
-            "cost": 0
-          },
-
-          {
-            "defaultValue": 2,
-            "currentValue": 2,
-            "upgradeValue": 0,
-            "maxValue": 2,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "FAN TOWER",
-      "available": false,
-      "description": "This giant fan has a slowing effect that will stop those puny swordmen right in their trakcs. LOL!",
-      "cost": 2000,
-
-      "data": {
-        "keys": [5, 10],
-        "values": [
-          {
-            "defaultValue": 100,
-            "currentValue": 100,
-            "upgradeValue": 5,
-            "maxValue": 130,
-            "cost": 100
-          },
-
-          {
-            "defaultValue": 0.04,
-            "currentValue": 0.04,
-            "upgradeValue": 0.01,
-            "maxValue": 0.08,
-            "cost": 70
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "QUAKE BOX",
-      "available": false,
-      "description": "This beastbox initiates minor tremors causing foot soldiers to fall over and armored units to take damage.",
-      "cost": 2000,
-
-      "data": {
-        "keys": [3, 11],
-        "values": [
-          {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0.2,
-            "maxValue": 2.4,
-            "cost": 50
-          },
-          null
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "TESLA TOWER",
-      "available": false,
-      "description": "Known by scientists as the “Magnificant Wallopping Van De Graaff Machine”, the tesla tower delivers lethally concentrated bolts of electricity at a short range.",
-      "cost": 4000,
-
-      "data": {
-        "keys": [3, 4, 5],
-        "values": [
-          {
-            "defaultValue": 21,
-            "currentValue": 21,
-            "upgradeValue": 1.5,
-            "maxValue": 30,
-            "cost": 200
-          },
-
-          {
-            "defaultValue": 2,
-            "currentValue": 2,
-            "upgradeValue": 2,
-            "maxValue": 10,
-            "cost": 200
-          },
-
-          {
-            "defaultValue": 90,
-            "currentValue": 90,
-            "upgradeValue": 10,
-            "maxValue": 170,
-            "cost": 200
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "MISSILE TURRET",
-      "available": false,
-      "description": "Fires heat seeking missiles that damage all units within it’s blast radius.",
-      "cost": 6000,
-
-      "data": {
-        "keys": [3, 4, 7, 8],
-        "values": [
-          {
-            "defaultValue": 1.2,
-            "currentValue": 1.2,
-            "upgradeValue": 0.3,
-            "maxValue": 4.2,
-            "cost": 160
-          },
-
-          {
-            "defaultValue": 0.8,
-            "currentValue": 0.8,
-            "upgradeValue": 0.2,
-            "maxValue": 2,
-            "cost": 200
-          },
-
-          {
-            "defaultValue": 3,
-            "currentValue": 3,
-            "upgradeValue": 1,
-            "maxValue": 7,
-            "cost": 300
-          },
-
-          {
-            "defaultValue": 1.5,
-            "currentValue": 1.5,
-            "upgradeValue": 0,
-            "maxValue": 1.5,
-            "cost": 0
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "LASER TOWER",
-      "available": false,
-      "description": "The M6 Laser Tower fires a very powerful blast of energy at the toughest enemy on the screen.",
-      "cost": 8000,
-
-      "data": {
-        "keys": [3, 4],
-        "values": [
-          {
-            "defaultValue": 2.55,
-            "currentValue": 2.55,
-            "upgradeValue": 0.3,
-            "maxValue": 5.25,
-            "cost": 200
-          },
-
-          {
-            "defaultValue": 9,
-            "currentValue": 9,
-            "upgradeValue": 5,
-            "maxValue": 34,
-            "cost": 500
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "FLAMER JOE",
-      "available": false,
-      "description": "Flamer Joe likes to set people on fire.",
-      "cost": 5000,
-
-      "data": {
-        "keys": [3, 4, 5],
-        "values": [
-          {
-            "defaultValue": 10,
-            "currentValue": 10,
-            "upgradeValue": 10,
-            "maxValue": 60,
-            "cost": 200
-          },
-
-          {
-            "defaultValue": 0.04,
-            "currentValue": 0.04,
-            "upgradeValue": 0.02,
-            "maxValue": 0.14,
-            "cost": 150
-          },
-
-          {
-            "defaultValue": 50,
-            "currentValue": 50,
-            "upgradeValue": 5,
-            "maxValue": 70,
-            "cost": 120
-          }
-        ]
-      }
-    },
-
-    {
-      "type": 1,
-      "name": "SHIELD GENERATOR",
-      "available": false,
-      "description": "Generates a protective shield that cuts all damage taken by a percentage.",
-      "cost": 3000,
-
-      "data": {
-        "keys": [9],
-        "values": [
-          {
-            "defaultValue": 20,
-            "currentValue": 20,
-            "upgradeValue": 5,
-            "maxValue": 60,
-            "cost": 100
-          }
-        ]
-      }
     }
-  ]
+},
+
+{
+    "type": 0,
+"name": "UZI",
+"available": false,
+"description": "A drive-by favorite, the uzi is an affordable, fuuly automatic solution to all your semi-automatic problems.",
+"cost": 300,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 20,
+"currentValue": 20,
+"upgradeValue": 1,
+"maxValue": 30,
+"cost": 10
+
+},
+
+{
+    "defaultValue": 2,
+"currentValue": 2,
+"upgradeValue": 0.05,
+"maxValue": 2.4,
+"cost": 40
+
+},
+
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0,
+"maxValue": 1,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 100,
+"currentValue": 100,
+"upgradeValue": 0,
+"maxValue": 100,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 1.5,
+"currentValue": 1.5,
+"upgradeValue": 0.2,
+"maxValue": 2.5,
+"cost": 30
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "COMBAT SHOTGUN",
+"available": false,
+"description": "Rednecks and zombie slayers agree, shotguns are always a good decision. Don’t forget… shop smart, shop S-mart.",
+"cost": 2000,
+"autoreload": true,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4,
+7
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 7,
+"currentValue": 7,
+"upgradeValue": 1,
+"maxValue": 15,
+"cost": 50
+
+},
+
+{
+    "defaultValue": 0.5,
+"currentValue": 0.5,
+"upgradeValue": 0,
+"maxValue": 0.5,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 3,
+"currentValue": 3,
+"upgradeValue": 0.4,
+"maxValue": 3.6,
+"cost": 100
+
+},
+
+{
+    "defaultValue": 20,
+"currentValue": 20,
+"upgradeValue": 0,
+"maxValue": 20,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 8,
+"currentValue": 8,
+"upgradeValue": 0.5,
+"maxValue": 11,
+"cost": 70
+
+},
+
+{
+    "defaultValue": 4,
+"currentValue": 4,
+"upgradeValue": 0,
+"maxValue": 4,
+"cost": 0
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "S.C.A.R",
+"available": false,
+"description": "You’re standard automatic rifle. Accurate and powerful. A step above that cute lil’ uzi.",
+"cost": 5000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 25,
+"currentValue": 25,
+"upgradeValue": 5,
+"maxValue": 70,
+"cost": 45
+
+},
+
+{
+    "defaultValue": 2,
+"currentValue": 2,
+"upgradeValue": 0.05,
+"maxValue": 2.4,
+"cost": 50
+
+},
+
+{
+    "defaultValue": 2,
+"currentValue": 2,
+"upgradeValue": 0,
+"maxValue": 2,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 80,
+"currentValue": 80,
+"upgradeValue": 0,
+"maxValue": 80,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0.2,
+"maxValue": 3,
+"cost": 70
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "DAO-12",
+"available": false,
+"description": "A ballsier, automatic version of the combat shotgun. For when you really need to call down the rain.",
+"cost": 4000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4,
+7
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 8,
+"currentValue": 8,
+"upgradeValue": 2,
+"maxValue": 20,
+"cost": 80
+
+},
+
+{
+    "defaultValue": 0.5,
+"currentValue": 0.5,
+"upgradeValue": 0,
+"maxValue": 0.5,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0.25,
+"maxValue": 4,
+"cost": 180
+
+},
+
+{
+    "defaultValue": 30,
+"currentValue": 30,
+"upgradeValue": 1.5,
+"maxValue": 40.5,
+"cost": 100
+
+},
+
+{
+    "defaultValue": 1.5,
+"currentValue": 1.5,
+"upgradeValue": 0,
+"maxValue": 1.5,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 6,
+"currentValue": 6,
+"upgradeValue": 0,
+"maxValue": 6,
+"cost": 0
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "FLAME THROWER",
+"available": false,
+"description": "Perfect for getting rid of termites, hilarious WWII reenactments with friends, or even when your son’s little league game runs long. The flame thrower. Don’t leave home without it.",
+"cost": 7500,
+"flame": true,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+2,
+3,
+5
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 30,
+"currentValue": 30,
+"upgradeValue": 5,
+"maxValue": 60,
+"cost": 80
+
+},
+
+{
+    "defaultValue": 0.03,
+"currentValue": 0.03,
+"upgradeValue": 0.01,
+"maxValue": 0.15,
+"cost": 80
+
+},
+
+{
+    "defaultValue": 100,
+"currentValue": 100,
+"upgradeValue": 0,
+"maxValue": 100,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 5,
+"currentValue": 5,
+"upgradeValue": 1,
+"maxValue": 15,
+"cost": 40
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "MACHINE GUN",
+"available": false,
+"description": "When Sylvester stalone needs to cut down row after row of Vietcong soldiers and emerge with nothing but stainless steel abs and the sweat on his brow, you better believe he brings his machine gun.",
+"cost": 11000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 40,
+"currentValue": 40,
+"upgradeValue": 10,
+"maxValue": 200,
+"cost": 100
+
+},
+
+{
+    "defaultValue": 1.7,
+"currentValue": 1.7,
+"upgradeValue": 0.05,
+"maxValue": 2.2,
+"cost": 130
+
+},
+
+{
+    "defaultValue": 6,
+"currentValue": 6,
+"upgradeValue": 0,
+"maxValue": 6,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 80,
+"currentValue": 80,
+"upgradeValue": 0,
+"maxValue": 80,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 0.7,
+"currentValue": 0.7,
+"upgradeValue": 0.1,
+"maxValue": 1.5,
+"cost": 100
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "CHAINSAW",
+"available": false,
+"description": "“There’s a chainsaw? Sweet!” - You",
+"cost": 5000,
+"autoreload": true,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+2,
+3,
+4
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 20,
+"currentValue": 20,
+"upgradeValue": 5,
+"maxValue": 100,
+"cost": 120
+
+},
+
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0.5,
+"maxValue": 9,
+"cost": 180
+
+},
+
+{
+    "defaultValue": 150,
+"currentValue": 150,
+"upgradeValue": 0,
+"maxValue": 150,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 30,
+"currentValue": 30,
+"upgradeValue": 5,
+"maxValue": 45,
+"cost": 250
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "GRENADE LAUNCHER",
+"available": false,
+"description": "Perfect for launching grenades.",
+"cost": 10000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+2,
+3,
+4,
+8
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 3,
+"currentValue": 3,
+"upgradeValue": 1,
+"maxValue": 9,
+"cost": 140
+
+},
+
+{
+    "defaultValue": 4,
+"currentValue": 4,
+"upgradeValue": 1,
+"maxValue": 8,
+"cost": 250
+
+},
+
+{
+    "defaultValue": 0,
+"currentValue": 0,
+"upgradeValue": 0,
+"maxValue": 0,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 0.9,
+"currentValue": 0.9,
+"upgradeValue": 0.1,
+"maxValue": 1.5,
+"cost": 180
+
+},
+
+{
+    "defaultValue": 1.5,
+"currentValue": 1.5,
+"upgradeValue": 0,
+"maxValue": 1.5,
+"cost": 0
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "SPACE LASER",
+"available": false,
+"description": "This baby focuses a satellite mounted laser at your feeble enemies and promptly deatomizes them.",
+"cost": 20000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+2,
+3,
+4,
+5,
+8
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 1,
+"maxValue": 5,
+"cost": 900
+
+},
+
+{
+    "defaultValue": 50,
+"currentValue": 50,
+"upgradeValue": 0,
+"maxValue": 50,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 0,
+"currentValue": 0,
+"upgradeValue": 0,
+"maxValue": 0,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 0.6,
+"currentValue": 0.6,
+"upgradeValue": 0.05,
+"maxValue": 1,
+"cost": 900
+
+},
+
+{
+    "defaultValue": 30,
+"currentValue": 30,
+"upgradeValue": 5,
+"maxValue": 50,
+"cost": 900
+
+},
+
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0,
+"maxValue": 1,
+"cost": 0
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "THE QUAKER",
+"available": false,
+"description": "Handheld tele-geo-dynamics manipulating oscillator generator capable of knocking down troops and damaging vehicles.",
+"cost": 7000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+2,
+3,
+4
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 3,
+"currentValue": 3,
+"upgradeValue": 1,
+"maxValue": 7,
+"cost": 180
+
+},
+
+{
+    "defaultValue": 5,
+"currentValue": 5,
+"upgradeValue": 2.5,
+"maxValue": 15,
+"cost": 220
+
+},
+
+{
+    "defaultValue": 12,
+"currentValue": 12,
+"upgradeValue": 0,
+"maxValue": 12,
+"cost": 0
+
+},
+
+{
+    "defaultValue": -10,
+"currentValue": -10,
+"upgradeValue": 5,
+"maxValue": 20,
+"cost": 150
+
+}
+        ]
+    }
+},
+
+{
+    "type": 0,
+"name": "OLD GLORY",
+"available": false,
+"description": "A gun so big it overlaps the buy button.",
+"cost": 30000,
+
+    "data":
+    {
+        "keys": 
+        [
+            0,
+1,
+2,
+3,
+4,
+7
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 200,
+"currentValue": 200,
+"upgradeValue": 25,
+"maxValue": 500,
+"cost": 500
+
+},
+
+{
+    "defaultValue": 0.24,
+"currentValue": 0.24,
+"upgradeValue": 0.005,
+"maxValue": 0.26,
+"cost": 600
+
+},
+
+{
+    "defaultValue": 4,
+"currentValue": 4,
+"upgradeValue": 0,
+"maxValue": 4,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 150,
+"currentValue": 150,
+"upgradeValue": 0,
+"maxValue": 150,
+"cost": 0
+
+},
+
+{
+    "defaultValue": 0.8,
+"currentValue": 0.8,
+"upgradeValue": 0.025,
+"maxValue": 1.1,
+"cost": 400
+
+},
+
+{
+    "defaultValue": 2,
+"currentValue": 2,
+"upgradeValue": 0,
+"maxValue": 2,
+"cost": 0
+
+}
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "FAN TOWER",
+"available": false,
+"description": "This giant fan has a slowing effect that will stop those puny swordmen right in their trakcs. LOL!",
+"cost": 2000,
+
+    "data":
+    {
+        "keys": 
+        [
+            5,
+10
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 100,
+"currentValue": 100,
+"upgradeValue": 5,
+"maxValue": 130,
+"cost": 100
+
+},
+
+{
+    "defaultValue": 0.04,
+"currentValue": 0.04,
+"upgradeValue": 0.01,
+"maxValue": 0.08,
+"cost": 70
+
+}
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "QUAKE BOX",
+"available": false,
+"description": "This beastbox initiates minor tremors causing foot soldiers to fall over and armored units to take damage.",
+"cost": 2000,
+
+    "data":
+    {
+        "keys": 
+        [
+            3,
+11
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 1,
+"currentValue": 1,
+"upgradeValue": 0.2,
+"maxValue": 2.4,
+"cost": 50
+
+},
+null
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "TESLA TOWER",
+"available": false,
+"description": "Known by scientists as the “Magnificant Wallopping Van De Graaff Machine”, the tesla tower delivers lethally concentrated bolts of electricity at a short range.",
+"cost": 4000,
+
+    "data":
+    {
+        "keys": 
+        [
+            2,
+3,
+5
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 2,
+"currentValue": 2,
+"upgradeValue": 2,
+"maxValue": 10,
+"cost": 200
+
+},
+
+{
+    "defaultValue": 21,
+"currentValue": 21,
+"upgradeValue": 1.5,
+"maxValue": 30,
+"cost": 200
+
+},
+
+{
+    "defaultValue": 90,
+"currentValue": 90,
+"upgradeValue": 10,
+"maxValue": 170,
+"cost": 200
+
+}
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "MISSILE TURRET",
+"available": false,
+"description": "Fires heat seeking missiles that damage all units within it’s blast radius.",
+"cost": 6000,
+
+    "data":
+    {
+        "keys": 
+        [
+            2,
+3,
+7,
+8
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 0.8,
+"currentValue": 0.8,
+"upgradeValue": 0.2,
+"maxValue": 2,
+"cost": 200
+
+},
+
+{
+    "defaultValue": 1.2,
+"currentValue": 1.2,
+"upgradeValue": 0.3,
+"maxValue": 4.2,
+"cost": 160
+
+},
+
+{
+    "defaultValue": 3,
+"currentValue": 3,
+"upgradeValue": 1,
+"maxValue": 7,
+"cost": 300
+
+},
+
+{
+    "defaultValue": 1.5,
+"currentValue": 1.5,
+"upgradeValue": 0,
+"maxValue": 1.5,
+"cost": 0
+
+}
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "LASER TOWER",
+"available": false,
+"description": "The M6 Laser Tower fires a very powerful blast of energy at the toughest enemy on the screen.",
+"cost": 8000,
+
+    "data":
+    {
+        "keys": 
+        [
+            2,
+3
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 9,
+"currentValue": 9,
+"upgradeValue": 5,
+"maxValue": 34,
+"cost": 500
+
+},
+
+{
+    "defaultValue": 2.55,
+"currentValue": 2.55,
+"upgradeValue": 0.3,
+"maxValue": 5.25,
+"cost": 200
+
+}
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "FLAMER JOE",
+"available": false,
+"description": "Flamer Joe likes to set people on fire.",
+"cost": 5000,
+"flame": true,
+
+    "data":
+    {
+        "keys": 
+        [
+            2,
+3,
+5
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 0.04,
+"currentValue": 0.04,
+"upgradeValue": 0.02,
+"maxValue": 0.14,
+"cost": 150
+
+},
+
+{
+    "defaultValue": 10,
+"currentValue": 10,
+"upgradeValue": 10,
+"maxValue": 60,
+"cost": 200
+
+},
+
+{
+    "defaultValue": 50,
+"currentValue": 50,
+"upgradeValue": 5,
+"maxValue": 70,
+"cost": 120
+
+}
+        ]
+    }
+},
+
+{
+    "type": 1,
+"name": "SHIELD GENERATOR",
+"available": false,
+"description": "Generates a protective shield that cuts all damage taken by a percentage.",
+"cost": 3000,
+
+    "data":
+    {
+        "keys": 
+        [
+            9
+        ],
+        "values": 
+        [
+            
+{
+    "defaultValue": 20,
+"currentValue": 20,
+"upgradeValue": 5,
+"maxValue": 60,
+"cost": 100
+
+}
+        ]
+    }
+}
+    ]
 }

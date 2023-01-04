@@ -22,6 +22,8 @@ public class Item
     public string description = "";
     public bool isRemain = false;
     public bool available = false;
+    public bool autoreload = false;
+    public bool flame = false;
 
     public SerializableDictionary<UpgradeDataType, UpgradeData> data;
 
@@ -66,6 +68,8 @@ public class Item
         cost = item.cost;
         description = item.description;
         available = item.available;
+        autoreload = item.autoreload;
+        flame = item.flame;
         data = new SerializableDictionary<UpgradeDataType, UpgradeData>();
 
         foreach (UpgradeDataType t in item.data.Keys)

@@ -13,9 +13,9 @@
     {
       "name": "GUN",
       "hp": 3,
-      "dmg": 1,
+      "dmg": 2,
       "speed": 3.5,
-      "attackdelay": 2,
+      "attackdelay": 1,
       "attackrange": 10,
       "money": 50
     },
@@ -23,9 +23,9 @@
     {
       "name": "CAR",
       "hp": 8,
-      "dmg": 1,
+      "dmg": 6,
       "speed": 10,
-      "attackdelay": 2,
+      "attackdelay": 3,
       "attackrange": 17,
       "money": 100
     },
@@ -33,9 +33,9 @@
     {
       "name": "PARATROOPER",
       "hp": 7,
-      "dmg": 1,
+      "dmg": 10,
       "speed": 7,
-      "attackdelay": 2,
+      "attackdelay": 4,
       "attackrange": 18,
       "money": 60
     },
@@ -43,29 +43,29 @@
     {
       "name": "BOMBCAR",
       "hp": 5,
-      "dmg": 5,
+      "dmg": 100,
       "speed": 20,
       "attackdelay": 2,
-      "attackrange": 5,
+      "attackrange": 3,
       "money": 150
     },
 
     {
       "name": "FLAMETHROWER",
-      "hp": 35,
+      "hp": 37,
       "dmg": 1,
       "speed": 3,
-      "attackdelay": 2,
-      "attackrange": 5,
+      "attackdelay": 0.2,
+      "attackrange": 4,
       "money": 130
     },
 
     {
       "name": "TANK",
-      "hp": 150,
-      "dmg": 1,
-      "speed": 2.5,
-      "attackdelay": 2,
+      "hp": 147,
+      "dmg": 30,
+      "speed": 3,
+      "attackdelay": 15,
       "attackrange": 30,
       "money": 180
     },
@@ -73,18 +73,18 @@
     {
       "name": "HELICOPTER",
       "hp": 20,
-      "dmg": 1,
+      "dmg": 10,
       "speed": 5,
-      "attackdelay": 2,
+      "attackdelay": 10,
       "attackrange": 27,
       "money": 100
     },
 
     {
       "name": "ROBOT",
-      "hp": 270,
-      "dmg": 1,
-      "speed": 3,
+      "hp": 267,
+      "dmg": 15,
+      "speed": 1,
       "attackdelay": 2,
       "attackrange": 10,
       "money": 1000

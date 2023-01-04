@@ -56,6 +56,7 @@ namespace Excel_To_Json
 
         }
 
+        private const int ItemElementCount = 7;
         private static string ParseItem(Excel.Range range)
         {
             string contents = "";
@@ -80,7 +81,7 @@ namespace Excel_To_Json
                     {
                         string type = (range.Cells[1, column] as Excel.Range).Value2;
 
-                        if (column <= 5)
+                        if (column <= ItemElementCount)
                         {
                             datas += ParseValue(type, o) + ",\n";
                         }
@@ -92,7 +93,7 @@ namespace Excel_To_Json
                                 values += ",\n";
                             }
 
-                            keys += (column - 6).ToString();
+                            keys += (column - (ItemElementCount + 1)).ToString();
                             values += ParseUpgradeData(o.ToString());
                         }
                     }

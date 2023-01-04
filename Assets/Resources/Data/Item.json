@@ -27,11 +27,11 @@
           },
 
           {
-            "defaultValue": 1.5,
-            "currentValue": 1.5,
-            "upgradeValue": 0.5,
-            "maxValue": 4,
-            "cost": 10
+            "defaultValue": 1,
+            "currentValue": 1,
+            "upgradeValue": 0,
+            "maxValue": 1,
+            "cost": 0
           },
 
           {
@@ -43,11 +43,11 @@
           },
 
           {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0,
-            "maxValue": 1,
-            "cost": 0
+            "defaultValue": 1.5,
+            "currentValue": 1.5,
+            "upgradeValue": 0.5,
+            "maxValue": 4,
+            "cost": 10
           }
         ]
       }
@@ -80,11 +80,11 @@
           },
 
           {
-            "defaultValue": 1.5,
-            "currentValue": 1.5,
-            "upgradeValue": 0.2,
-            "maxValue": 2.5,
-            "cost": 30
+            "defaultValue": 1,
+            "currentValue": 1,
+            "upgradeValue": 0,
+            "maxValue": 1,
+            "cost": 0
           },
 
           {
@@ -96,11 +96,11 @@
           },
 
           {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0,
-            "maxValue": 1,
-            "cost": 0
+            "defaultValue": 1.5,
+            "currentValue": 1.5,
+            "upgradeValue": 0.2,
+            "maxValue": 2.5,
+            "cost": 30
           }
         ]
       }
@@ -112,9 +112,10 @@
       "available": false,
       "description": "Rednecks and zombie slayers agree, shotguns are always a good decision. Don’t forget… shop smart, shop S-mart.",
       "cost": 2000,
+      "autoreload": true,
 
       "data": {
-        "keys": [0, 2, 3, 4, 7],
+        "keys": [0, 1, 2, 3, 4, 7],
         "values": [
           {
             "defaultValue": 7,
@@ -125,11 +126,19 @@
           },
 
           {
-            "defaultValue": 16,
-            "currentValue": 16,
-            "upgradeValue": 1,
-            "maxValue": 22,
-            "cost": 70
+            "defaultValue": 0.5,
+            "currentValue": 0.5,
+            "upgradeValue": 0,
+            "maxValue": 0.5,
+            "cost": 0
+          },
+
+          {
+            "defaultValue": 3,
+            "currentValue": 3,
+            "upgradeValue": 0.4,
+            "maxValue": 3.6,
+            "cost": 100
           },
 
           {
@@ -141,18 +150,18 @@
           },
 
           {
-            "defaultValue": 3,
-            "currentValue": 3,
+            "defaultValue": 8,
+            "currentValue": 8,
             "upgradeValue": 0.5,
-            "maxValue": 5,
-            "cost": 100
+            "maxValue": 11,
+            "cost": 70
           },
 
           {
-            "defaultValue": 6,
-            "currentValue": 6,
+            "defaultValue": 4,
+            "currentValue": 4,
             "upgradeValue": 0,
-            "maxValue": 6,
+            "maxValue": 4,
             "cost": 0
           }
         ]
@@ -167,7 +176,7 @@
       "cost": 5000,
 
       "data": {
-        "keys": [0, 1, 2, 3],
+        "keys": [0, 1, 2, 3, 4],
         "values": [
           {
             "defaultValue": 25,
@@ -186,11 +195,11 @@
           },
 
           {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0.2,
-            "maxValue": 3,
-            "cost": 70
+            "defaultValue": 2,
+            "currentValue": 2,
+            "upgradeValue": 0,
+            "maxValue": 2,
+            "cost": 0
           },
 
           {
@@ -199,6 +208,14 @@
             "upgradeValue": 0,
             "maxValue": 80,
             "cost": 0
+          },
+
+          {
+            "defaultValue": 1,
+            "currentValue": 1,
+            "upgradeValue": 0.2,
+            "maxValue": 3,
+            "cost": 70
           }
         ]
       }
@@ -212,7 +229,7 @@
       "cost": 4000,
 
       "data": {
-        "keys": [0, 3, 4, 7],
+        "keys": [0, 1, 2, 3, 4, 7],
         "values": [
           {
             "defaultValue": 8,
@@ -220,6 +237,22 @@
             "upgradeValue": 2,
             "maxValue": 20,
             "cost": 80
+          },
+
+          {
+            "defaultValue": 0.5,
+            "currentValue": 0.5,
+            "upgradeValue": 0,
+            "maxValue": 0.5,
+            "cost": 0
+          },
+
+          {
+            "defaultValue": 1,
+            "currentValue": 1,
+            "upgradeValue": 0.25,
+            "maxValue": 4,
+            "cost": 180
           },
 
           {
@@ -231,11 +264,11 @@
           },
 
           {
-            "defaultValue": 3,
-            "currentValue": 3,
-            "upgradeValue": 1,
-            "maxValue": 7,
-            "cost": 180
+            "defaultValue": 1.5,
+            "currentValue": 1.5,
+            "upgradeValue": 0,
+            "maxValue": 1.5,
+            "cost": 0
           },
 
           {
@@ -255,9 +288,10 @@
       "available": false,
       "description": "Perfect for getting rid of termites, hilarious WWII reenactments with friends, or even when your son’s little league game runs long. The flame thrower. Don’t leave home without it.",
       "cost": 7500,
+      "flame": true,
 
       "data": {
-        "keys": [0, 3, 4, 5],
+        "keys": [0, 2, 3, 5],
         "values": [
           {
             "defaultValue": 30,
@@ -268,19 +302,19 @@
           },
 
           {
-            "defaultValue": 100,
-            "currentValue": 100,
-            "upgradeValue": 0,
-            "maxValue": 100,
-            "cost": 0
-          },
-
-          {
             "defaultValue": 0.03,
             "currentValue": 0.03,
             "upgradeValue": 0.01,
             "maxValue": 0.15,
             "cost": 80
+          },
+
+          {
+            "defaultValue": 100,
+            "currentValue": 100,
+            "upgradeValue": 0,
+            "maxValue": 100,
+            "cost": 0
           },
 
           {
@@ -302,7 +336,7 @@
       "cost": 11000,
 
       "data": {
-        "keys": [0, 1, 2, 3],
+        "keys": [0, 1, 2, 3, 4],
         "values": [
           {
             "defaultValue": 40,
@@ -321,11 +355,11 @@
           },
 
           {
-            "defaultValue": 0.7,
-            "currentValue": 0.7,
-            "upgradeValue": 0.1,
-            "maxValue": 1.5,
-            "cost": 100
+            "defaultValue": 6,
+            "currentValue": 6,
+            "upgradeValue": 0,
+            "maxValue": 6,
+            "cost": 0
           },
 
           {
@@ -334,6 +368,14 @@
             "upgradeValue": 0,
             "maxValue": 80,
             "cost": 0
+          },
+
+          {
+            "defaultValue": 0.7,
+            "currentValue": 0.7,
+            "upgradeValue": 0.1,
+            "maxValue": 1.5,
+            "cost": 100
           }
         ]
       }
@@ -345,6 +387,7 @@
       "available": false,
       "description": "“There’s a chainsaw? Sweet!” - You",
       "cost": 5000,
+      "autoreload": true,
 
       "data": {
         "keys": [0, 2, 3, 4],
@@ -358,11 +401,11 @@
           },
 
           {
-            "defaultValue": 6,
-            "currentValue": 6,
-            "upgradeValue": 1,
-            "maxValue": 4,
-            "cost": 250
+            "defaultValue": 1,
+            "currentValue": 1,
+            "upgradeValue": 0.5,
+            "maxValue": 9,
+            "cost": 180
           },
 
           {
@@ -374,11 +417,11 @@
           },
 
           {
-            "defaultValue": 1,
-            "currentValue": 1,
-            "upgradeValue": 0.5,
-            "maxValue": 9,
-            "cost": 180
+            "defaultValue": 30,
+            "currentValue": 30,
+            "upgradeValue": 5,
+            "maxValue": 45,
+            "cost": 250
           }
         ]
       }
@@ -403,11 +446,11 @@
           },
 
           {
-            "defaultValue": 0.9,
-            "currentValue": 0.9,
-            "upgradeValue": 0.1,
-            "maxValue": 1.5,
-            "cost": 180
+            "defaultValue": 4,
+            "currentValue": 4,
+            "upgradeValue": 1,
+            "maxValue": 8,
+            "cost": 250
           },
 
           {
@@ -419,11 +462,11 @@
           },
 
           {
-            "defaultValue": 4,
-            "currentValue": 4,
-            "upgradeValue": 1,
-            "maxValue": 8,
-            "cost": 250
+            "defaultValue": 0.9,
+            "currentValue": 0.9,
+            "upgradeValue": 0.1,
+            "maxValue": 1.5,
+            "cost": 180
           },
 
           {
@@ -445,7 +488,7 @@
       "cost": 20000,
 
       "data": {
-        "keys": [0, 2, 3, 5, 8],
+        "keys": [0, 2, 3, 4, 5, 8],
         "values": [
           {
             "defaultValue": 1,
@@ -456,11 +499,11 @@
           },
 
           {
-            "defaultValue": 0.6,
-            "currentValue": 0.6,
-            "upgradeValue": 0.05,
-            "maxValue": 1,
-            "cost": 900
+            "defaultValue": 50,
+            "currentValue": 50,
+            "upgradeValue": 0,
+            "maxValue": 50,
+            "cost": 0
           },
 
           {
@@ -469,6 +512,14 @@
             "upgradeValue": 0,
             "maxValue": 0,
             "cost": 0
+          },
+
+          {
+            "defaultValue": 0.6,
+            "currentValue": 0.6,
+            "upgradeValue": 0.05,
+            "maxValue": 1,
+            "cost": 900
           },
 
           {
@@ -509,11 +560,11 @@
           },
 
           {
-            "defaultValue": -10,
-            "currentValue": -10,
-            "upgradeValue": 5,
-            "maxValue": 20,
-            "cost": 150
+            "defaultValue": 5,
+            "currentValue": 5,
+            "upgradeValue": 2.5,
+            "maxValue": 15,
+            "cost": 220
           },
 
           {
@@ -525,11 +576,11 @@
           },
 
           {
-            "defaultValue": 5,
-            "currentValue": 5,
-            "upgradeValue": 2.5,
-            "maxValue": 15,
-            "cost": 220
+            "defaultValue": -10,
+            "currentValue": -10,
+            "upgradeValue": 5,
+            "maxValue": 20,
+            "cost": 150
           }
         ]
       }
@@ -543,7 +594,7 @@
       "cost": 30000,
 
       "data": {
-        "keys": [0, 1, 2, 3, 7],
+        "keys": [0, 1, 2, 3, 4, 7],
         "values": [
           {
             "defaultValue": 200,
@@ -554,19 +605,19 @@
           },
 
           {
-            "defaultValue": 2.4,
-            "currentValue": 2.4,
-            "upgradeValue": 0.05,
-            "maxValue": 2.6,
+            "defaultValue": 0.24,
+            "currentValue": 0.24,
+            "upgradeValue": 0.005,
+            "maxValue": 0.26,
             "cost": 600
           },
 
           {
-            "defaultValue": 0.8,
-            "currentValue": 0.8,
-            "upgradeValue": 0.025,
-            "maxValue": 1.1,
-            "cost": 400
+            "defaultValue": 4,
+            "currentValue": 4,
+            "upgradeValue": 0,
+            "maxValue": 4,
+            "cost": 0
           },
 
           {
@@ -575,6 +626,14 @@
             "upgradeValue": 0,
             "maxValue": 150,
             "cost": 0
+          },
+
+          {
+            "defaultValue": 0.8,
+            "currentValue": 0.8,
+            "upgradeValue": 0.025,
+            "maxValue": 1.1,
+            "cost": 400
           },
 
           {
@@ -647,21 +706,21 @@
       "cost": 4000,
 
       "data": {
-        "keys": [3, 4, 5],
+        "keys": [2, 3, 5],
         "values": [
-          {
-            "defaultValue": 21,
-            "currentValue": 21,
-            "upgradeValue": 1.5,
-            "maxValue": 30,
-            "cost": 200
-          },
-
           {
             "defaultValue": 2,
             "currentValue": 2,
             "upgradeValue": 2,
             "maxValue": 10,
+            "cost": 200
+          },
+
+          {
+            "defaultValue": 21,
+            "currentValue": 21,
+            "upgradeValue": 1.5,
+            "maxValue": 30,
             "cost": 200
           },
 
@@ -684,22 +743,22 @@
       "cost": 6000,
 
       "data": {
-        "keys": [3, 4, 7, 8],
+        "keys": [2, 3, 7, 8],
         "values": [
-          {
-            "defaultValue": 1.2,
-            "currentValue": 1.2,
-            "upgradeValue": 0.3,
-            "maxValue": 4.2,
-            "cost": 160
-          },
-
           {
             "defaultValue": 0.8,
             "currentValue": 0.8,
             "upgradeValue": 0.2,
             "maxValue": 2,
             "cost": 200
+          },
+
+          {
+            "defaultValue": 1.2,
+            "currentValue": 1.2,
+            "upgradeValue": 0.3,
+            "maxValue": 4.2,
+            "cost": 160
           },
 
           {
@@ -729,22 +788,22 @@
       "cost": 8000,
 
       "data": {
-        "keys": [3, 4],
+        "keys": [2, 3],
         "values": [
-          {
-            "defaultValue": 2.55,
-            "currentValue": 2.55,
-            "upgradeValue": 0.3,
-            "maxValue": 5.25,
-            "cost": 200
-          },
-
           {
             "defaultValue": 9,
             "currentValue": 9,
             "upgradeValue": 5,
             "maxValue": 34,
             "cost": 500
+          },
+
+          {
+            "defaultValue": 2.55,
+            "currentValue": 2.55,
+            "upgradeValue": 0.3,
+            "maxValue": 5.25,
+            "cost": 200
           }
         ]
       }
@@ -756,24 +815,25 @@
       "available": false,
       "description": "Flamer Joe likes to set people on fire.",
       "cost": 5000,
+      "flame": true,
 
       "data": {
-        "keys": [3, 4, 5],
+        "keys": [2, 3, 5],
         "values": [
-          {
-            "defaultValue": 10,
-            "currentValue": 10,
-            "upgradeValue": 10,
-            "maxValue": 60,
-            "cost": 200
-          },
-
           {
             "defaultValue": 0.04,
             "currentValue": 0.04,
             "upgradeValue": 0.02,
             "maxValue": 0.14,
             "cost": 150
+          },
+
+          {
+            "defaultValue": 10,
+            "currentValue": 10,
+            "upgradeValue": 10,
+            "maxValue": 60,
+            "cost": 200
           },
 
           {

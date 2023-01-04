@@ -108,17 +108,24 @@ public class WeaponController : MonoBehaviour
 
         if (_ammo[_curWeapon] > 0)
         {
+            if (_timer[WeaponTimerType.RELOAD] != null)
+            {
+                _canUse[WeaponTimerType.RELOAD] = true;
+                StopCoroutine(_timer[WeaponTimerType.RELOAD]);
+            }
+
             _canUse[WeaponTimerType.FIRE] = false;
             _ammo[_curWeapon]--;
             float fireRate = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.FIRERATE);
+            fireRate = ItemManager.FireRate(fireRate);
             if (fireRate != 0)
             {
-                _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, ItemManager.FireRate(fireRate));
+                _timer[WeaponTimerType.FIRE] = Timer(WeaponTimerType.FIRE, fireRate);
                 StartCoroutine(_timer[WeaponTimerType.FIRE]);
             }
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
 
-            if (_ammo[_curWeapon] <= 0) // 총알이 부족하면 자동으로 장전
+            if (_ammo[_curWeapon] <= 0 && CurrentWeapon.autoreload == false) // 총알이 부족하면 자동으로 장전
                 Reload();
 
             return true;
@@ -138,21 +145,33 @@ public class WeaponController : MonoBehaviour
         {
             _canUse[WeaponTimerType.FIRE] = true;
         }
+
+        // 자동 장전의 경우
+        if (CurrentWeapon.autoreload)
+        {
+            Reload();
+        }
     }
 
     public void Reload()
     {
         if (_canUse[WeaponTimerType.RELOAD] == false) return;
+        if (_ammo[_curWeapon] >= _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO)) return;
 
-        _ammo[_curWeapon] = 0;
-        _canUse[WeaponTimerType.FIRE] = false;
         _canUse[WeaponTimerType.RELOAD] = false;
 
-        float reloadTime = _weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.RELOAD);
+        float reloadTime = ItemManager.Reload(_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.RELOAD));
+
+        if (CurrentWeapon.autoreload == false)
+        {
+            _ammo[_curWeapon] = 0;
+            _canUse[WeaponTimerType.FIRE] = false;
+            UIController.Instance.Reload(reloadTime);
+            SoundController.Instance.PlayAudio("Reload");
+        }
+
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
         StartCoroutine(_timer[WeaponTimerType.RELOAD]);
-        UIController.Instance.Reload(reloadTime);
-        SoundController.Instance.PlayAudio("Reload");
     }
 
     IEnumerator Timer(WeaponTimerType type, float time)
@@ -165,9 +184,19 @@ public class WeaponController : MonoBehaviour
 
         if (type == WeaponTimerType.RELOAD)
         {
-            _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO);
+            if (CurrentWeapon.autoreload)
+            {
+                SoundController.Instance.PlayAudio("Reload " + CurrentWeapon.name);
+                _ammo[_curWeapon]++;
+                _canUse[type] = true;
+                Reload();
+            }
+            else
+            {
+                _canUse[WeaponTimerType.FIRE] = true;
+                _ammo[_curWeapon] = (int)_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.AMMO);
+            }
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
-            _canUse[WeaponTimerType.FIRE] = true;
         }
         _canUse[type] = true;
     }
