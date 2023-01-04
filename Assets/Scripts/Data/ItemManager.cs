@@ -22,6 +22,8 @@ public static class ItemManager
 
         foreach (Item item in list)
         {
+            if (item.data.ContainsKey(EnumData.UpgradeDataType.REMAINTIME)) item.isRemain = true;
+
             if (item.type == EnumData.ItemType.WEAPON)
                 weapons.Add(item.name, item);
             else if (item.type == EnumData.ItemType.TOWER)

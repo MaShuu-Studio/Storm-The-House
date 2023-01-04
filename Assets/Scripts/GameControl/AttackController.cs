@@ -80,7 +80,7 @@ public class AttackController : MonoBehaviour
         float dmg = damge;
         float accurancy = 100;
         float remainTime = 0.1f;
-        float range = 0.5f;
+        float range = tower.GetValue(UpgradeDataType.RANGE);
         bool remain = false;
 
         StartCoroutine(Attack(tower.name, pos, dmg, range, accurancy, 1, 0f, remainTime, remain, tower.data));
@@ -183,7 +183,13 @@ public class AttackController : MonoBehaviour
         Vector3 pos = Vector3.zero;
 
         if (raycastHit.transform != null)
-            pos = raycastHit.point;
+        {
+            if (raycastHit.collider.gameObject.tag == "Object")
+                pos = raycastHit.collider.transform.position;
+            else
+                pos = raycastHit.point;
+
+        }
 
         // 더 안쪽으로 파고들도록 약간의 보정 작업
         pos += dir / 5;

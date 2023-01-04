@@ -126,7 +126,10 @@ public class WeaponController : MonoBehaviour
             UIController.Instance.UpdateAmmo(_ammo[_curWeapon]);
 
             if (_ammo[_curWeapon] <= 0 && CurrentWeapon.autoreload == false) // 총알이 부족하면 자동으로 장전
+            {
+                _canUse[WeaponTimerType.RELOAD] = true;
                 Reload();
+            }
 
             return true;
         }
@@ -164,10 +167,15 @@ public class WeaponController : MonoBehaviour
 
         if (CurrentWeapon.autoreload == false)
         {
+            if (_timer[WeaponTimerType.RELOAD] != null)
+            {
+                StopCoroutine(_timer[WeaponTimerType.RELOAD]);
+                _timer[WeaponTimerType.RELOAD] = null;
+            }
             _ammo[_curWeapon] = 0;
             _canUse[WeaponTimerType.FIRE] = false;
             UIController.Instance.Reload(reloadTime);
-            SoundController.Instance.PlayAudio("Reload");
+            SoundController.Instance.PlayAudio("Reload " + CurrentWeapon.name);
         }
 
         _timer[WeaponTimerType.RELOAD] = Timer(WeaponTimerType.RELOAD, reloadTime);
@@ -235,6 +243,7 @@ public class WeaponController : MonoBehaviour
         // 웨폰 세팅을 했으니 총알 충전 및 재표기
         RefillAmmo();
         UpdateAmmoUI();
+        UIController.Instance.UpdateUsedWeapons();
     }
 
     public void BuyWeapon(int index, ref int money)
@@ -243,6 +252,13 @@ public class WeaponController : MonoBehaviour
         {
             _weapons[index].available = true;
             money -= _weapons[index].cost;
+
+            _usingWeapon[1] = _usingWeapon[0];
+            _usingWeapon[0] = index;
+
+            RefillAmmo();
+            UpdateAmmoUI();
+            UIController.Instance.UpdateUsedWeapons();
         }
     }
 

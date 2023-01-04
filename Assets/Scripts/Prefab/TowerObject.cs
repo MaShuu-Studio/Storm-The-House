@@ -28,12 +28,12 @@ public class TowerObject : MonoBehaviour
         }
 
         _hitbox.Initialize(index);
-        _attackArea.Initialize(this, _tower.GetValue(UpgradeDataType.RANGE));
+        _attackArea.Initialize(this, _tower.GetValue(UpgradeDataType.DISTANCE));
     }
 
     public void Upgrade()
     {
-        _attackArea.UpdateRange(_tower.GetValue(UpgradeDataType.RANGE));
+        _attackArea.UpdateRange(_tower.GetValue(UpgradeDataType.DISTANCE));
     }
 
     IEnumerator coroutine;
@@ -89,7 +89,6 @@ public class TowerObject : MonoBehaviour
                 while (_enemies.Count > 0)
                 {
                     int index = Random.Range(0, _enemies.Count);
-                    Debug.Log(index);
                     GameObject targetHitbox = _enemies[index];
                     if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false)
                     {

@@ -23,8 +23,8 @@ public class TowerAttackArea : MonoBehaviour
 
     public void UpdateRange(float size)
     {
-        _collider.center = new Vector3(-size / 20, 0, -transform.parent.position.z / 2);
-        _collider.size = new Vector3(size / 10, 1, 15);
+        _collider.center = new Vector3(-size / 20, 0, 0);
+        _collider.size = new Vector3(size / 10, 1, size / 10);
     }
 
     private void OnTriggerEnter(Collider other)

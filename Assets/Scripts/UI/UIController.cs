@@ -457,10 +457,9 @@ public class UIController : MonoBehaviour
     public void DropItem(int pos)
     {
         WeaponController.Instance.SetWeapon(pos, draggedItemIndex);
-        UpdateUsedWeapons();
     }
 
-    private void UpdateUsedWeapons()
+    public void UpdateUsedWeapons()
     {
         for (int i = 0; i < usedItems.Length; i++)
         {

@@ -68,6 +68,7 @@ public class Item
         description = item.description;
         available = item.available;
         autoreload = item.autoreload;
+        isRemain = item.isRemain;
         data = new SerializableDictionary<UpgradeDataType, UpgradeData>();
 
         foreach (UpgradeDataType t in item.data.Keys)
