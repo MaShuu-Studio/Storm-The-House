@@ -370,7 +370,6 @@
 "available": false,
 "description": "Perfect for getting rid of termites, hilarious WWII reenactments with friends, or even when your son’s little league game runs long. The flame thrower. Don’t leave home without it.",
 "cost": 7500,
-"flame": true,
 
     "data":
     {
@@ -379,7 +378,8 @@
             0,
 2,
 3,
-5
+5,
+12
         ],
         "values": 
         [
@@ -417,6 +417,15 @@
 "upgradeValue": 1,
 "maxValue": 15,
 "cost": 40
+
+},
+
+{
+    "defaultValue": 0,
+"currentValue": 0,
+"upgradeValue": 0,
+"maxValue": 0,
+"cost": 0
 
 }
         ]
@@ -776,19 +785,19 @@
         [
             
 {
-    "defaultValue": 200,
-"currentValue": 200,
-"upgradeValue": 25,
-"maxValue": 500,
+    "defaultValue": 100,
+"currentValue": 100,
+"upgradeValue": 15,
+"maxValue": 280,
 "cost": 500
 
 },
 
 {
-    "defaultValue": 0.24,
-"currentValue": 0.24,
-"upgradeValue": 0.005,
-"maxValue": 0.26,
+    "defaultValue": 0.48,
+"currentValue": 0.48,
+"upgradeValue": 0.01,
+"maxValue": 0.52,
 "cost": 600
 
 },
@@ -895,7 +904,15 @@
 "cost": 50
 
 },
-null
+
+{
+    "defaultValue": 0,
+"currentValue": 0,
+"upgradeValue": 0,
+"maxValue": 0,
+"cost": 0
+
+}
         ]
     }
 },
@@ -1050,7 +1067,6 @@ null
 "available": false,
 "description": "Flamer Joe likes to set people on fire.",
 "cost": 5000,
-"flame": true,
 
     "data":
     {
@@ -1058,7 +1074,8 @@ null
         [
             2,
 3,
-5
+5,
+12
         ],
         "values": 
         [
@@ -1087,6 +1104,15 @@ null
 "upgradeValue": 5,
 "maxValue": 70,
 "cost": 120
+
+},
+
+{
+    "defaultValue": 0,
+"currentValue": 0,
+"upgradeValue": 0,
+"maxValue": 0,
+"cost": 0
 
 }
         ]

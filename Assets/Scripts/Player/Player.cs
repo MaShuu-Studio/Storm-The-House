@@ -285,6 +285,7 @@ public class Player : MonoBehaviour
 
     public void BuyTower(int index)
     {
+        UIController.Instance.ChangeCursor();
         ReadyBuyTower = false;
         bool buy = TowerController.Instance.AddTower(index, towerName);
 
@@ -292,7 +293,6 @@ public class Player : MonoBehaviour
 
         money -= towerCost;
         UIController.Instance.UpdateMoney(money);
-        UIController.Instance.ChangeCursor();
     }
 
     public void SellTower()

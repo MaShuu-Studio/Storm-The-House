@@ -46,6 +46,11 @@ public class EnemyObject : MonoBehaviour
     {
         _hp = _enemy.hp;
         slowAmount = 0;
+        if (burnCoroutine != null)
+        {
+            burnDamage = 0;
+            StopCoroutine(burnCoroutine);
+        }
         MeetBrricade(false);
     }
 
@@ -66,6 +71,33 @@ public class EnemyObject : MonoBehaviour
     public void Slow(float amount)
     {
         slowAmount = amount;
+    }
+
+    private float burnDamage = 0;
+    private IEnumerator burnCoroutine;
+    public void Burn(float dmg)
+    {
+        burnDamage = dmg;
+        if (burnCoroutine == null)
+        {
+            burnCoroutine = Burning();
+            StartCoroutine(burnCoroutine);
+        }
+    }
+
+    private IEnumerator Burning()
+    {
+        float time = 0.07f; // 1초에 15번 정도 데미지
+        while (true) // 죽을 떄 까지 데미지
+        {
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+                yield return null;
+            }
+            Damage(burnDamage);
+            time += 0.07f; // 시간이 밀렸을 경우를 대비 시간 초기화가 아닌 추가로 조정
+        }
     }
 
     public void Down()

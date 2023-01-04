@@ -57,8 +57,6 @@ public class UpgradeView : MonoBehaviour
             {
                 if (item.data[names[i]] == null || item.data[names[i]].defaultValue >= item.data[names[i]].maxValue)
                 {
-                    if (i > 2) continue;
-                    upgradeButtons[i].gameObject.SetActive(false);
                     continue;
                 }
                 upgradeButtons[contentsAmount].gameObject.SetActive(true);

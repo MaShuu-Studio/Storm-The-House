@@ -17,8 +17,8 @@ public class TowerFloor : MonoBehaviour
         {
             if (Player.Instance.ReadyBuyTower)
                 Player.Instance.BuyTower(index);
-            else
-                TowerController.Instance.SelectTower(index);
+
+            TowerController.Instance.SelectTower(index);
         }
     }
 }

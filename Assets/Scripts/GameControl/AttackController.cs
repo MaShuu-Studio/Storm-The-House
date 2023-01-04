@@ -49,7 +49,7 @@ public class AttackController : MonoBehaviour
             if (isFire)
             {
                 SoundController.Instance.PlayAudio(weapon.name.ToUpper());
-                StartCoroutine(Attack(weapon.name.ToUpper(), pos, dmg, range, accurancy, missiles, delay, remainTime, remain));
+                StartCoroutine(Attack(weapon.name.ToUpper(), pos, dmg, range, accurancy, missiles, delay, remainTime, remain, weapon.data));
             }
             else // 일반적인 클릭 상황
             {
@@ -75,36 +75,20 @@ public class AttackController : MonoBehaviour
         StartCoroutine(Attack(supportName, pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
     }
 
-    public void TowerAttack(Vector3 pos, float damge, Dictionary<UpgradeDataType, float> attackTypes, string towerName)
+    public void TowerAttack(Vector3 pos, float damge, Item tower)
     {
         float dmg = damge;
         float accurancy = 100;
         float remainTime = 0.1f;
         float range = 0.5f;
-        int missiles = (attackTypes.ContainsKey(UpgradeDataType.MISSILES)) ? (int)(Mathf.Round(attackTypes[UpgradeDataType.MISSILES])) : 1;
-        float missileTerm = 0.15f;
-        float delay = (attackTypes.ContainsKey(UpgradeDataType.DELAY)) ? attackTypes[UpgradeDataType.DELAY] : 0;
         bool remain = false;
 
-        for (int i = 0; i < missiles; i++)
-        {
-            // 동시 발사 탄환이 아닌 연달아 발사되는 미사일(미사일터렛)
-            StartCoroutine(MissileSound(towerName, i * missileTerm));
-            StartCoroutine(Attack(towerName, pos, dmg, range, accurancy, 1, delay + missileTerm * i, remainTime, remain, attackTypes));
-        }
+        StartCoroutine(Attack(tower.name, pos, dmg, range, accurancy, 1, 0f, remainTime, remain, tower.data));
     }
-    private IEnumerator MissileSound(string attackName, float term)
-    {
-        while (term > 0)
-        {
-            term -= Time.deltaTime;
-            yield return null;
-        }
 
-        SoundController.Instance.PlayAudio(attackName.ToUpper(), Player.Instance.transform);
-    }
     // 결과적으로 작동시킬 코루틴
-    private IEnumerator Attack(string attackName, Vector3 pos, float dmg, float range, float accurancy, int missiles, float delay, float time, bool remain = false, Dictionary<UpgradeDataType, float> attackTypes = null)
+    private IEnumerator Attack(string attackName, Vector3 pos, float dmg, float range, float accurancy,
+        int missiles, float delay, float time, bool remain = false, Dictionary<UpgradeDataType, UpgradeData> data = null)
     {
         float waitTime = 0;
         while (delay > waitTime)
@@ -120,19 +104,24 @@ public class AttackController : MonoBehaviour
             GameObject point = ObjectPool.GetObject<GameObject>(pointName);
 
             point.name = "";
-            if (attackTypes != null)
+            if (data != null)
             {
-                foreach (UpgradeDataType type in attackTypes.Keys)
+                foreach (UpgradeDataType type in data.Keys)
                 {
                     if (type == UpgradeDataType.SLOW)
                     {
                         point.name += "S";
-                        point.name += string.Format("{0:0.00}", attackTypes[type]);
+                        point.name += string.Format("{0:0.00}", data[type].currentValue);
                     }
 
                     if (type == UpgradeDataType.DOWN)
                     {
                         point.name += "D";
+                    }
+
+                    if (type == UpgradeDataType.FLAME)
+                    {
+                        point.name += "B";
                     }
                 }
             }
@@ -149,7 +138,7 @@ public class AttackController : MonoBehaviour
         }
 
         // 폭발음
-        SoundController.Instance.PlayAudio((attackName + " BOOM").ToUpper() , points[0].transform);
+        SoundController.Instance.PlayAudio((attackName + " BOOM").ToUpper(), points[0].transform);
 
         while (time > 0)
         {
@@ -230,6 +219,7 @@ public class AttackController : MonoBehaviour
                 bool remain = false;
                 float slowAmount = 0;
                 bool down = false;
+                bool burn = false;
                 char c = 'a';
 
                 int j = 0;
@@ -244,6 +234,7 @@ public class AttackController : MonoBehaviour
                         j += 3;
                     }
                     else if (c == 'D') down = true;
+                    else if (c == 'B') burn = true;
                     else if (c == 'T')
                     {
                         remain = true;
@@ -265,7 +256,11 @@ public class AttackController : MonoBehaviour
                 if (remain == false) ReturnPoint(point);
 
                 if (float.TryParse(pn.Substring(j), out dmg) == false && dmg != 0) continue;
-                else enemy.Damage(dmg);
+                else
+                {
+                    if (burn) enemy.Burn(dmg);
+                    else enemy.Damage(dmg);
+                }
             }
 
         }
