@@ -86,6 +86,17 @@ public class AttackController : MonoBehaviour
         StartCoroutine(Attack(tower.name, pos, dmg, range, accurancy, 1, 0f, remainTime, remain, tower.data));
     }
 
+    public void EnemyBoom(Vector3 pos) // 자폭차
+    {
+        float dmg = 50;
+        float accurancy = 100;
+        float remainTime = 0.3f;
+        float range = 8;
+        bool remain = true;
+
+        StartCoroutine(Attack("", pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
+    }
+
     // 결과적으로 작동시킬 코루틴
     private IEnumerator Attack(string attackName, Vector3 pos, float dmg, float range, float accurancy,
         int missiles, float delay, float time, bool remain = false, Dictionary<UpgradeDataType, UpgradeData> data = null)

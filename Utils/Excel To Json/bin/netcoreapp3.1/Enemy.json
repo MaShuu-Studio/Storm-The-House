@@ -1,96 +1,93 @@
+{
+  "list": [
+    {
+      "name": "SWORD",
+      "hp": 2,
+      "dmg": 1,
+      "speed": 3.5,
+      "attackdelay": 1,
+      "attackrange": 1.5,
+      "money": 20
+    },
 
-{
-    "list": 
-    [
-        
-{
-    "name": "SWORD",
-"hp": 2,
-"dmg": 1,
-"speed": 3.5,
-"attackdelay": 2,
-"attackrange": 1.5,
-"money": 20
-},
+    {
+      "name": "GUN",
+      "hp": 3,
+      "dmg": 2,
+      "speed": 3.5,
+      "attackdelay": 0.5,
+      "attackrange": 10,
+      "money": 50
+    },
 
-{
-    "name": "GUN",
-"hp": 3,
-"dmg": 2,
-"speed": 3.5,
-"attackdelay": 1,
-"attackrange": 10,
-"money": 50
-},
+    {
+      "name": "CAR",
+      "hp": 8,
+      "dmg": 6,
+      "speed": 10,
+      "attackdelay": 1.5,
+      "attackrange": 17,
+      "money": 100
+    },
 
-{
-    "name": "CAR",
-"hp": 8,
-"dmg": 6,
-"speed": 10,
-"attackdelay": 3,
-"attackrange": 17,
-"money": 100
-},
+    {
+      "name": "PARATROOPER",
+      "hp": 7,
+      "dmg": 10,
+      "speed": 7,
+      "attackdelay": 1,
+      "attackrange": 18,
+      "money": 60
+    },
 
-{
-    "name": "PARATROOPER",
-"hp": 7,
-"dmg": 10,
-"speed": 7,
-"attackdelay": 4,
-"attackrange": 18,
-"money": 60
-},
+    {
+      "name": "BOMBCAR",
+      "hp": 5,
+      "dmg": 100,
+      "speed": 20,
+      "attackdelay": 2,
+      "attackrange": 3,
+      "money": 150
+    },
 
-{
-    "name": "BOMBCAR",
-"hp": 5,
-"dmg": 100,
-"speed": 20,
-"attackdelay": 2,
-"attackrange": 3,
-"money": 150
-},
+    {
+      "name": "FLAMETHROWER",
+      "hp": 37,
+      "dmg": 1,
+      "speed": 3,
+      "attackdelay": 0.1,
+      "attackrange": 4,
+      "money": 130
+    },
 
-{
-    "name": "FLAMETHROWER",
-"hp": 37,
-"dmg": 1,
-"speed": 3,
-"attackdelay": 0.2,
-"attackrange": 4,
-"money": 130
-},
+    {
+      "name": "TANK",
+      "hp": 147,
+      "dmg": 30,
+      "speed": 3,
+      "attackdelay": 7.5,
+      "attackrange": 30,
+      "money": 180
+    },
 
-{
-    "name": "TANK",
-"hp": 147,
-"dmg": 30,
-"speed": 3,
-"attackdelay": 15,
-"attackrange": 30,
-"money": 180
-},
+    {
+      "name": "HELICOPTER",
+      "hp": 20,
+      "dmg": 10,
+      "speed": 5,
+      "attackdelay": 2.5,
+      "attackrange": 27,
+      "money": 100
+    },
 
-{
-    "name": "HELICOPTER",
-"hp": 20,
-"dmg": 10,
-"speed": 5,
-"attackdelay": 10,
-"attackrange": 27,
-"money": 100
-},
-
-{
-    "name": "ROBOT",
-"hp": 267,
-"dmg": 15,
-"speed": 1,
-"attackdelay": 2,
-"attackrange": 10,
-"money": 1000
-}
-    ]
+    {
+      "name": "ROBOT",
+      "hp": 267,
+      "dmg": 15,
+      "speed": 1,
+      "attackdelay": 1,
+      "attackrange": 10,
+      "money": 1000
+    }
+  ]
 }

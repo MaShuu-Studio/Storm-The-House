@@ -67,6 +67,12 @@ public class EnemyObject : MonoBehaviour
         if (_meetBarricade) Player.Instance.Damaged(_enemy.dmg);
     }
 
+    private void Boom() // 다른 유닛에게도 데미지를 주는 공격
+    {
+        Attack();
+        AttackController.Instance.EnemyBoom(transform.position);
+        Damage(9999);
+    }
     float slowAmount = 0;
     public void Slow(float amount)
     {
