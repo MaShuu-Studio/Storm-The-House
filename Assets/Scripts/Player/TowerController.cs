@@ -97,6 +97,7 @@ public class TowerController : MonoBehaviour
     {
         _towers[index] = null;
         _towerObjects[index].RemoveTower();
+        UpdateShield();
     }
 
     public void Upgrade(int index, UpgradeDataType type, ref int money)

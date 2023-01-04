@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     private BoxCollider area;
     private Dictionary<string, int> supporter;
-    private Queue<GameObject> enemies;
+    private List<GameObject> enemies;
     private Dictionary<string, IEnumerator> coroutines;
 
     private float hp;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         area.center = new Vector3(-20, 20, 0);
         area.size = new Vector3(30, 40, 25);
 
-        enemies = new Queue<GameObject>();
+        enemies = new List<GameObject>();
     }
 
     void Start()
@@ -197,14 +197,14 @@ public class Player : MonoBehaviour
         int value = SupporterManager.Value(supporterName);
         if (ability == SupporterAbilityType.ATTACK)
         {
-            GameObject targetHitbox;
             Vector3 pos = Vector3.zero;
 
             while (enemies.Count > 0)
             {
-                targetHitbox = enemies.Peek();
+                int index = Random.Range(0, enemies.Count);
+                GameObject targetHitbox = enemies[index];
 
-                if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false) enemies.Dequeue();
+                if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false) enemies.RemoveAt(index);
                 else
                 {
                     pos = targetHitbox.transform.position;
@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
                     AttackController.Instance.SupporterAttack(pos, value, "SUPPORTER " + supporterName);
                     break;
                 }
-            }
+            } 
 
             while (enemies.Count == 0) yield return null;
 
@@ -300,7 +300,6 @@ public class Player : MonoBehaviour
         Item tower = TowerController.Instance.SelectedTower;
         int index = TowerController.Instance.SelectedTowerIndex;
 
-        Debug.Log(ItemManager.Value(tower));
         money += (int)(Mathf.Round(ItemManager.Value(tower) * 0.9f));
         UIController.Instance.UpdateMoney(money);
 
@@ -317,7 +316,7 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            enemies.Enqueue(other.gameObject);
+            enemies.Add(other.gameObject);
         }
     }
 }

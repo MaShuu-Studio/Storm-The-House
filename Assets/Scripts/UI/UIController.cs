@@ -297,7 +297,7 @@ public class UIController : MonoBehaviour
 
     public void SetSupporter(float shield, int gun, int repair)
     {
-        baseText.text = string.Format("{0:#}", shield) + "%" + "\n" + gun.ToString() + "\n" + repair.ToString();
+        baseText.text = string.Format("{0:0#}", shield) + "%" + "\n" + gun.ToString() + "\n" + repair.ToString();
     }
     #endregion
 
