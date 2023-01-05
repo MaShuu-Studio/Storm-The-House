@@ -12,6 +12,7 @@ public class TowerObject : MonoBehaviour
     private bool _shield;
 
     private List<GameObject> _enemies = new List<GameObject>();
+    [SerializeField] private Laser laser;
 
     public void UpdateTower(Item tower, int index)
     {
@@ -107,6 +108,26 @@ public class TowerObject : MonoBehaviour
         coroutine = null;
         if (_enemies.Count > 0) ActiveTower();
     }
+    private IEnumerator Missile(Vector3 startpos, Transform endtrans, float delay)
+    {
+        float waitTime = 0;
+        string effect = "MISSILE TRAIL";
+        startpos.y += 2;
+        GameObject effectObj = ObjectPool.GetObject<Effect>(effect);
+        while (delay > waitTime)
+        {
+            Vector3 endpos = endtrans.position;
+            Vector3 dir = (endpos - startpos);
+
+            float amount = Mathf.PI / delay * waitTime;
+            effectObj.transform.SetParent(null);
+            Vector3 pos = startpos + dir * waitTime / delay; // endpos에 도착할 수 있도록 (sin(pi/2) = 1)
+            pos.y += 5 * Mathf.Sin(amount); // 위로 갔다가 떨어지도록 (Sin(pi) = 0)
+            effectObj.transform.position = pos;
+            waitTime += Time.deltaTime;
+            yield return null;
+        }
+    }
 
     private IEnumerator Attack(float term, float delay, Transform enemy, float dmg)
     {
@@ -118,13 +139,18 @@ public class TowerObject : MonoBehaviour
 
         SoundController.Instance.PlayAudio(_tower.name.ToUpper(), Player.Instance.transform);
 
+        Vector3 startpos = transform.position;
+        startpos.y += 2;
+        if (_tower.effect.ToUpper() == "MISSILE") StartCoroutine(Missile(startpos, enemy.transform, delay - 0.3f));
+
         while (delay > 0)
         {
             delay -= Time.deltaTime;
             yield return null;
         }
 
-        AttackController.Instance.TowerAttack(enemy.position, dmg, _tower);
+        if (_tower.effect.ToUpper() == "LASER") laser.Setposition(startpos, enemy.position);
+        AttackController.Instance.TowerAttack(startpos, enemy.position, dmg, _tower);
     }
 
     public void AddEnemy(GameObject enemy, bool add)

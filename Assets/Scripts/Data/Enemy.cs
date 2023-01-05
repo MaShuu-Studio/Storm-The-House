@@ -7,6 +7,7 @@ using System;
 public class Enemy
 {
     public string name;
+    public string type;
 
     public float hp;
     public int dmg;

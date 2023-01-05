@@ -54,6 +54,7 @@ namespace Data
         private static string imagePath = "Textures/Images/";
         private static string iconPath = "Textures/Icons/";
         private static string cursorPath = "Textures/Cursors/";
+        private static string effectPath = "Effect/";
 
         public static string DataPath { get { return dataPath; } }
         public static string PrefabPath { get { return prefabPath; } }
@@ -61,6 +62,7 @@ namespace Data
         public static string ImagePath { get { return imagePath; } }
         public static string IconPath { get { return iconPath; } }
         public static string CursorPath { get { return cursorPath; } }
+        public static string EffectPath { get { return prefabPath + effectPath; } }
 
         // Json 데이터 구조 틀을 만들기 위해 활용
         public static void Serialize<T>(List<T> objects)

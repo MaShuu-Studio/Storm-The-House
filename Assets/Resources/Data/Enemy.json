@@ -2,6 +2,7 @@
   "list": [
     {
       "name": "SWORD",
+      "type": "HUMAN",
       "hp": 2,
       "dmg": 1,
       "speed": 3.5,
@@ -12,6 +13,7 @@
 
     {
       "name": "GUN",
+      "type": "HUMAN",
       "hp": 3,
       "dmg": 2,
       "speed": 3.5,
@@ -22,6 +24,7 @@
 
     {
       "name": "CAR",
+      "type": "METAL",
       "hp": 8,
       "dmg": 6,
       "speed": 10,
@@ -32,6 +35,7 @@
 
     {
       "name": "PARATROOPER",
+      "type": "HUMAN",
       "hp": 7,
       "dmg": 10,
       "speed": 7,
@@ -42,6 +46,7 @@
 
     {
       "name": "BOMBCAR",
+      "type": "METAL",
       "hp": 5,
       "dmg": 100,
       "speed": 20,
@@ -52,6 +57,7 @@
 
     {
       "name": "FLAMETHROWER",
+      "type": "HUMAN",
       "hp": 37,
       "dmg": 1,
       "speed": 3,
@@ -62,6 +68,7 @@
 
     {
       "name": "TANK",
+      "type": "METAL",
       "hp": 147,
       "dmg": 30,
       "speed": 3,
@@ -72,6 +79,7 @@
 
     {
       "name": "HELICOPTER",
+      "type": "METAL",
       "hp": 20,
       "dmg": 10,
       "speed": 5,
@@ -82,6 +90,7 @@
 
     {
       "name": "ROBOT",
+      "type": "METAL",
       "hp": 267,
       "dmg": 15,
       "speed": 1,

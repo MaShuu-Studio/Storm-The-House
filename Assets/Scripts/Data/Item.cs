@@ -23,6 +23,7 @@ public class Item
     public bool isRemain = false;
     public bool available = false;
     public bool autoreload = false;
+    public string effect = "";
 
     public SerializableDictionary<UpgradeDataType, UpgradeData> data;
 
@@ -64,6 +65,7 @@ public class Item
     {
         type = item.type;
         name = item.name;
+        effect = item.effect;
         cost = item.cost;
         description = item.description;
         available = item.available;

@@ -165,13 +165,14 @@ public class WeaponController : MonoBehaviour
 
         float reloadTime = ItemManager.Reload(_weapons[CurrentUsingWeapon].GetValue(UpgradeDataType.RELOAD));
 
+        if (_timer[WeaponTimerType.RELOAD] != null)
+        {
+            StopCoroutine(_timer[WeaponTimerType.RELOAD]);
+            _timer[WeaponTimerType.RELOAD] = null;
+        }
+
         if (CurrentWeapon.autoreload == false)
         {
-            if (_timer[WeaponTimerType.RELOAD] != null)
-            {
-                StopCoroutine(_timer[WeaponTimerType.RELOAD]);
-                _timer[WeaponTimerType.RELOAD] = null;
-            }
             _ammo[_curWeapon] = 0;
             _canUse[WeaponTimerType.FIRE] = false;
             UIController.Instance.Reload(reloadTime);

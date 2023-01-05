@@ -24,6 +24,7 @@ public class Initializer : MonoBehaviour
         SoundManager.Initialize();
         SpriteManager.Initialize();
         CursorManager.Initialize();
+        EffectManager.Initialize();
     }
 
     void Start()

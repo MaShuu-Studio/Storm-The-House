@@ -6,8 +6,11 @@ using EnumData;
 public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyAttackArea _attackArea;
+    [SerializeField] private GameObject burnedEffect;
+        
     private Animator animator;
     private Enemy _enemy;
+    public string type { get; private set; }
 
     private float _hp;
 
@@ -37,6 +40,7 @@ public class EnemyObject : MonoBehaviour
         Enemy enemy = EnemyManager.Enemies[name];
 
         _enemy = enemy;
+        type = enemy.type;
         _attackArea.Initialize(this, enemy.attackrange);
 
         Recover();
@@ -49,7 +53,9 @@ public class EnemyObject : MonoBehaviour
         if (burnCoroutine != null)
         {
             burnDamage = 0;
+            burnedEffect.SetActive(false);
             StopCoroutine(burnCoroutine);
+            burnCoroutine = null;
         }
         MeetBrricade(false);
     }
@@ -84,8 +90,9 @@ public class EnemyObject : MonoBehaviour
     public void Burn(float dmg)
     {
         burnDamage = dmg;
-        if (burnCoroutine == null)
+        if (burnCoroutine == null && burnedEffect != null)
         {
+            burnedEffect.SetActive(true);
             burnCoroutine = Burning();
             StartCoroutine(burnCoroutine);
         }

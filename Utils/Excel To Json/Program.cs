@@ -56,7 +56,7 @@ namespace Excel_To_Json
 
         }
 
-        private const int ItemElementCount = 6;
+        private const int ItemElementCount = 7;
         private static string ParseItem(Excel.Range range)
         {
             string contents = "";

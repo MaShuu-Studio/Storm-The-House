@@ -31,12 +31,14 @@ public class ObjectPool : MonoBehaviour
         _poolParent = new Dictionary<string, Transform>();
 
         // Enemy
+        GameObject pp = new GameObject("ENEMIES");
+        pp.transform.SetParent(transform);
         for (int i = 0; i < EnemyManager.Enemies.Count; i++)
         {
             string name = EnemyManager.Types[i];
 
             GameObject p = new GameObject(name);
-            p.transform.SetParent(transform);
+            p.transform.SetParent(pp.transform);
 
             _pool.Add(name, new Queue<GameObject>());
             _poolParent.Add(name, p.transform);
@@ -48,12 +50,14 @@ public class ObjectPool : MonoBehaviour
         }
 
         // Tower
+        pp = new GameObject("TOWERS");
+        pp.transform.SetParent(transform);
         for (int i = 0; i < ItemManager.Towers.Count; i++)
         {
             string name = ItemManager.TowerNames[i];
 
             GameObject p = new GameObject(name);
-            p.transform.SetParent(transform);
+            p.transform.SetParent(pp.transform);
 
             _pool.Add(name, new Queue<GameObject>());
             _poolParent.Add(name, p.transform);
@@ -75,10 +79,30 @@ public class ObjectPool : MonoBehaviour
                 CreateNewObject<GameObject>(name);
             }
         }
+
+        // Effect
+        pp = new GameObject("EFFECTS");
+        pp.transform.SetParent(transform);
+        for (int i = 0; i < EffectManager.Effects.Count; i++)
+        {
+            string name = EffectManager.effectNames[i];
+
+            GameObject p = new GameObject(name);
+            p.transform.SetParent(pp.transform);
+
+            _pool.Add(name, new Queue<GameObject>());
+            _poolParent.Add(name, p.transform);
+
+            for (int j = 0; j < 10; j++)
+            {
+                CreateNewObject<Effect>(name);
+            }
+        }
     }
 
     protected static void CreateNewObject<T>(string name)
     {
+        name = name.ToUpper();
         GameObject bo = DataManager.GetPrefab<T>(name);
         if (bo == null) return;
 
@@ -92,6 +116,8 @@ public class ObjectPool : MonoBehaviour
 
     public static GameObject GetObject<T>(string name)
     {
+        name = name.ToUpper();
+        if (Instance.Pool.ContainsKey(name) == false) return null;
         if (Instance.Pool[name].Count <= 0)
             CreateNewObject<T>(name);
 
@@ -104,7 +130,9 @@ public class ObjectPool : MonoBehaviour
 
     public static void ReturnObject(string name, GameObject gbo)
     {
+        name = name.ToUpper();
         gbo.transform.SetParent(Instance.PoolParent[name]);
+        gbo.transform.localPosition = Vector3.zero;
         gbo.SetActive(false);
 
         Instance.Pool[name].Enqueue(gbo);

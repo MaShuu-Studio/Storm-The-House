@@ -6,6 +6,7 @@
       "available": true,
       "description": ".",
       "cost": 0,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5],
@@ -67,6 +68,7 @@
       "available": false,
       "description": "A drive-by favorite, the uzi is an affordable, fuuly automatic solution to all your semi-automatic problems.",
       "cost": 300,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5],
@@ -129,6 +131,7 @@
       "description": "Rednecks and zombie slayers agree, shotguns are always a good decision. Don’t forget… shop smart, shop S-mart.",
       "cost": 2000,
       "autoreload": true,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 8],
@@ -198,6 +201,7 @@
       "available": false,
       "description": "You’re standard automatic rifle. Accurate and powerful. A step above that cute lil’ uzi.",
       "cost": 5000,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5],
@@ -259,6 +263,7 @@
       "available": false,
       "description": "A ballsier, automatic version of the combat shotgun. For when you really need to call down the rain.",
       "cost": 4000,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 8],
@@ -328,6 +333,7 @@
       "available": false,
       "description": "Perfect for getting rid of termites, hilarious WWII reenactments with friends, or even when your son’s little league game runs long. The flame thrower. Don’t leave home without it.",
       "cost": 7500,
+      "effect": "fire",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 7, 13],
@@ -405,6 +411,7 @@
       "available": false,
       "description": "When Sylvester stalone needs to cut down row after row of Vietcong soldiers and emerge with nothing but stainless steel abs and the sweat on his brow, you better believe he brings his machine gun.",
       "cost": 11000,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5],
@@ -467,6 +474,7 @@
       "description": "“There’s a chainsaw? Sweet!” - You",
       "cost": 5000,
       "autoreload": true,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5],
@@ -528,6 +536,7 @@
       "available": false,
       "description": "Perfect for launching grenades.",
       "cost": 10000,
+      "effect": "missile",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 7, 9],
@@ -605,6 +614,7 @@
       "available": false,
       "description": "This baby focuses a satellite mounted laser at your feeble enemies and promptly deatomizes them.",
       "cost": 20000,
+      "effect": "energy",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 7, 9],
@@ -682,6 +692,7 @@
       "available": false,
       "description": "Handheld tele-geo-dynamics manipulating oscillator generator capable of knocking down troops and damaging vehicles.",
       "cost": 7000,
+      "effect": "quake",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 7],
@@ -751,6 +762,7 @@
       "available": false,
       "description": "A gun so big it overlaps the buy button.",
       "cost": 30000,
+      "effect": "dust",
 
       "data": {
         "keys": [0, 1, 2, 3, 4, 5, 8],
@@ -857,6 +869,7 @@
       "available": false,
       "description": "This beastbox initiates minor tremors causing foot soldiers to fall over and armored units to take damage.",
       "cost": 2000,
+      "effect": "quake",
 
       "data": {
         "keys": [1, 3, 6, 12],
@@ -902,9 +915,10 @@
       "available": false,
       "description": "Known by scientists as the “Magnificant Wallopping Van De Graaff Machine”, the tesla tower delivers lethally concentrated bolts of electricity at a short range.",
       "cost": 4000,
+      "effect": "elec",
 
       "data": {
-        "keys": [1, 2, 3, 6],
+        "keys": [1, 2, 3, 5, 6],
         "values": [
           {
             "defaultValue": 100,
@@ -931,6 +945,14 @@
           },
 
           {
+            "defaultValue": 0.5,
+            "currentValue": 0.5,
+            "upgradeValue": 0,
+            "maxValue": 0.5,
+            "cost": 0
+          },
+
+          {
             "defaultValue": 90,
             "currentValue": 90,
             "upgradeValue": 10,
@@ -947,6 +969,7 @@
       "available": false,
       "description": "Fires heat seeking missiles that damage all units within it’s blast radius.",
       "cost": 6000,
+      "effect": "missile",
 
       "data": {
         "keys": [2, 3, 5, 6, 7, 8, 9],
@@ -1016,9 +1039,10 @@
       "available": false,
       "description": "The M6 Laser Tower fires a very powerful blast of energy at the toughest enemy on the screen.",
       "cost": 8000,
+      "effect": "laser",
 
       "data": {
-        "keys": [1, 2, 3, 6],
+        "keys": [1, 2, 3, 5, 6],
         "values": [
           {
             "defaultValue": 100,
@@ -1045,6 +1069,14 @@
           },
 
           {
+            "defaultValue": 0.5,
+            "currentValue": 0.5,
+            "upgradeValue": 0,
+            "maxValue": 0.5,
+            "cost": 0
+          },
+
+          {
             "defaultValue": 200,
             "currentValue": 200,
             "upgradeValue": 0,
@@ -1061,6 +1093,7 @@
       "available": false,
       "description": "Flamer Joe likes to set people on fire.",
       "cost": 5000,
+      "effect": "fire",
 
       "data": {
         "keys": [1, 2, 3, 5, 6, 13],
@@ -1082,10 +1115,10 @@
           },
 
           {
-            "defaultValue": 10,
-            "currentValue": 10,
-            "upgradeValue": 10,
-            "maxValue": 60,
+            "defaultValue": 50,
+            "currentValue": 50,
+            "upgradeValue": 50,
+            "maxValue": 300,
             "cost": 200
           },
 

@@ -13,6 +13,7 @@ public class AttackController : MonoBehaviour
 
     private Camera cam;
 
+    private Dictionary<GameObject, GameObject> pointEffect;
     private Queue<Tuple<EnemyObject, GameObject, string>> enemyQueue;
 
     void Awake()
@@ -26,6 +27,7 @@ public class AttackController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         cam = Camera.main;
+        pointEffect = new Dictionary<GameObject, GameObject>();
         enemyQueue = new Queue<Tuple<EnemyObject, GameObject, string>>();
     }
 
@@ -38,6 +40,7 @@ public class AttackController : MonoBehaviour
         {
             Vector3 pos = ClickPos();
             Item weapon = WeaponController.Instance.CurrentWeapon;
+            string effect = weapon.effect;
             float accurancy = weapon.GetValue(UpgradeDataType.ACCURANCY);
             float dmg = weapon.GetValue(UpgradeDataType.DAMAGE);
             float remainTime = weapon.GetValue(UpgradeDataType.REMAINTIME);
@@ -48,12 +51,15 @@ public class AttackController : MonoBehaviour
 
             if (isFire)
             {
+                Vector3 startpos = Player.Instance.transform.position;
+                if (effect.ToUpper() == "MISSILE")
+                    startpos += new Vector3(10, 7, 0);
                 SoundController.Instance.PlayAudio(weapon.name.ToUpper());
-                StartCoroutine(Attack(weapon.name.ToUpper(), pos, dmg, range, accurancy, missiles, delay, remainTime, remain, weapon.data));
+                StartCoroutine(Attack(weapon.name.ToUpper(), effect.ToUpper(), startpos, pos, dmg, range, accurancy, missiles, delay, remainTime, remain, weapon.data));
             }
             else // 일반적인 클릭 상황
             {
-                StartCoroutine(Attack("", pos, 0, 1, 1000, 1, 0, 0.1f, false));
+                StartCoroutine(Attack("", "", Vector3.zero, pos, 0, 1, 1000, 1, 0, 0.1f, false));
             }
         }
     }
@@ -72,10 +78,10 @@ public class AttackController : MonoBehaviour
         bool remain = false;
 
         SoundController.Instance.PlayAudio(supportName.ToUpper(), Player.Instance.transform);
-        StartCoroutine(Attack(supportName, pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
+        StartCoroutine(Attack(supportName, "DUST", Player.Instance.transform.position, pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
     }
 
-    public void TowerAttack(Vector3 pos, float damge, Item tower)
+    public void TowerAttack(Vector3 startpos, Vector3 pos, float damge, Item tower)
     {
         float dmg = damge;
         float accurancy = 100;
@@ -83,7 +89,7 @@ public class AttackController : MonoBehaviour
         float range = tower.GetValue(UpgradeDataType.RANGE);
         bool remain = false;
 
-        StartCoroutine(Attack(tower.name, pos, dmg, range, accurancy, 1, 0f, remainTime, remain, tower.data));
+        StartCoroutine(Attack(tower.name, tower.effect.ToUpper(), startpos, pos, dmg, range, accurancy, 1, 0f, remainTime, remain, tower.data));
     }
 
     public void EnemyBoom(Vector3 pos) // 자폭차
@@ -94,14 +100,42 @@ public class AttackController : MonoBehaviour
         float range = 8;
         bool remain = true;
 
-        StartCoroutine(Attack("", pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
+        StartCoroutine(Attack("", "EXPLOSION", Vector3.zero, pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
+    }
+
+    private IEnumerator Missile(Vector3 startpos, Vector3 endpos, float delay)
+    {
+        float waitTime = 0;
+        string effect = "MISSILE TRAIL";
+        GameObject effectObj = ObjectPool.GetObject<Effect>(effect);
+        Vector3 dir = (endpos - startpos);
+        while (delay > waitTime)
+        {
+            float amount = Mathf.PI / delay * waitTime;
+            effectObj.transform.SetParent(null);
+            Vector3 pos = startpos + dir * waitTime / delay; // endpos에 도착할 수 있도록 (sin(pi/2) = 1)
+            pos.y += 5 * Mathf.Sin(amount); // 위로 갔다가 떨어지도록 (Sin(pi) = 0)
+            effectObj.transform.position = pos;
+            waitTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     // 결과적으로 작동시킬 코루틴
-    private IEnumerator Attack(string attackName, Vector3 pos, float dmg, float range, float accurancy,
+    private IEnumerator Attack(string attackName, string effect, Vector3 startpos, Vector3 pos, float dmg, float range, float accurancy,
         int missiles, float delay, float time, bool remain = false, Dictionary<UpgradeDataType, UpgradeData> data = null)
     {
+        effect = effect.ToUpper();
         float waitTime = 0;
+        if (effect == "MISSILE" && delay != 0) StartCoroutine(Missile(startpos, pos, delay));
+
+        if (effect == "ELEC")
+        {
+            GameObject ef = ObjectPool.GetObject<Effect>(effect);
+            ef.transform.SetParent(null);
+            ef.transform.position = startpos;
+        }
+
         while (delay > waitTime)
         {
             waitTime += Time.deltaTime;
@@ -138,14 +172,28 @@ public class AttackController : MonoBehaviour
             }
 
             point.name += (remain ? "T" : "F");
+            point.name += effect;
             point.name += dmg.ToString();
             point.transform.SetParent(null);
+            point.transform.position = pos;
+            float accAmount = 3f;
+            if (i != 0) accAmount = 1.5f;
             point.transform.position = new Vector3(
-                pos.x + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
-                pos.y + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)),
-                pos.z + UnityEngine.Random.Range(-1 / (accurancy * 5), 1 / (accurancy * 5)));
+                pos.x + UnityEngine.Random.Range(-1 / (accurancy * accAmount), 1 / (accurancy * accAmount)),
+                pos.y + UnityEngine.Random.Range(-1 / (accurancy * accAmount), 1 / (accurancy * accAmount)),
+                pos.z + UnityEngine.Random.Range(-1 / (accurancy * accAmount), 1 / (accurancy * accAmount)));
             point.transform.localScale = new Vector3(range, range, range);
+
             points.Add(point);
+
+            if (effect != "" && effect != "LASER")
+            {
+                GameObject effectObj = ObjectPool.GetObject<Effect>(effect);
+                effectObj.transform.SetParent(null);
+                effectObj.transform.position = point.transform.position;
+                pointEffect.Add(point, effectObj);
+            }
+
         }
 
         // 폭발음
@@ -157,15 +205,16 @@ public class AttackController : MonoBehaviour
             yield return null;
         }
 
-        foreach (GameObject point in points)
+        for (int i = 0; i < points.Count; i++)
         {
-            ReturnPoint(point);
+            if (points[i].activeSelf) ReturnPoint(points[i]);
         }
     }
 
     private void ReturnPoint(GameObject obj)
     {
         obj.name = pointName;
+        pointEffect.Remove(obj);
         ObjectPool.ReturnObject(pointName, obj);
     }
 
@@ -264,20 +313,39 @@ public class AttackController : MonoBehaviour
                         break;
                     }
                 }
+                // 이펙트 이름 처리
+                int es = j;
+                for (; j < pn.Length && c > '9'; j++)
+                {
+                    c = pn[j];
+                }
+                j--;
+                string effect = pn.Substring(es, j - es);
 
                 float dmg = 0;
 
                 if (slowAmount != 0) enemy.Slow(slowAmount);
                 if (down) enemy.Down();
 
-                if (remain == false) ReturnPoint(point);
-
                 if (float.TryParse(pn.Substring(j), out dmg) == false && dmg != 0) continue;
                 else
                 {
                     if (burn) enemy.Burn(dmg);
-                    else enemy.Damage(dmg);
+                    else
+                    {
+                        enemy.Damage(dmg);
+                        if (effect == "DUST")
+                        {
+                            GameObject newEffect = ObjectPool.GetObject<Effect>(effect + " " + enemy.type.ToString());
+                            newEffect.transform.SetParent(null);
+                            newEffect.transform.position = pointEffect[point].transform.position;
+                            ObjectPool.ReturnObject(pointEffect[point].name, pointEffect[point]);
+                            pointEffect[point] = newEffect;
+                        }
+                    }
                 }
+
+                if (remain == false) ReturnPoint(point);
             }
 
         }
