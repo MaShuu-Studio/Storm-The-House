@@ -159,6 +159,7 @@ public class EnemyObject : MonoBehaviour
 
         if (_hp <= 0)
         {
+            Player.Instance.AddMoney(_enemy.money);
             TowerController.Instance.RemoveEnemy(hitbox.gameObject);
             ObjectPool.ReturnObject(name, gameObject);
 

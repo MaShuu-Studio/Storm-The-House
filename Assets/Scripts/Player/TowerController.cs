@@ -129,7 +129,8 @@ public class TowerController : MonoBehaviour
         Debug.Log("REMOVE");
         for (int i = 0; i < _towerObjects.Length; i++)
         {
-            _towerObjects[i].AddEnemy(enemy, false);
+            if (_towerObjects[i] != null)
+                _towerObjects[i].AddEnemy(enemy, false);
         }
     }
 }

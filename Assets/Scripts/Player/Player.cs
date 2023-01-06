@@ -283,6 +283,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        UIController.Instance.UpdateMoney(money);
+    }
+
     public void BuyTower(int index)
     {
         UIController.Instance.ChangeCursor();
