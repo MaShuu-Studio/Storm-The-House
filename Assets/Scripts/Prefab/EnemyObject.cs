@@ -6,6 +6,7 @@ using EnumData;
 public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyAttackArea _attackArea;
+    [SerializeField] private EnemyHitBox hitbox;
     [SerializeField] private GameObject burnedEffect;
 
     private Animator animator;
@@ -158,6 +159,7 @@ public class EnemyObject : MonoBehaviour
 
         if (_hp <= 0)
         {
+            TowerController.Instance.RemoveEnemy(hitbox.gameObject);
             ObjectPool.ReturnObject(name, gameObject);
 
             Recover();

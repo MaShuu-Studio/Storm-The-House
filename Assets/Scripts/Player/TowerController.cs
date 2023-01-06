@@ -123,4 +123,13 @@ public class TowerController : MonoBehaviour
         shield = (1 - shield) * 100;
         Player.Instance.UpdateShield(shield);
     }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        Debug.Log("REMOVE");
+        for (int i = 0; i < _towerObjects.Length; i++)
+        {
+            _towerObjects[i].AddEnemy(enemy, false);
+        }
+    }
 }

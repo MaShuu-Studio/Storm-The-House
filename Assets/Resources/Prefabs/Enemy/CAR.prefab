@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackArea: {fileID: 7018780416356700412}
+  hitbox: {fileID: 2685319152255064561}
   burnedEffect: {fileID: 4890921726466275938}
 --- !u!95 &2917788691573329684
 Animator:
