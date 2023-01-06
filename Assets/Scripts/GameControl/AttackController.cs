@@ -14,7 +14,7 @@ public class AttackController : MonoBehaviour
     private Camera cam;
 
     private Dictionary<GameObject, GameObject> pointEffect;
-    private Queue<Tuple<EnemyObject, GameObject, string>> enemyQueue;
+    private Queue<Tuple<EnemyObject, GameObject>> enemyQueue;
 
     void Awake()
     {
@@ -28,7 +28,7 @@ public class AttackController : MonoBehaviour
 
         cam = Camera.main;
         pointEffect = new Dictionary<GameObject, GameObject>();
-        enemyQueue = new Queue<Tuple<EnemyObject, GameObject, string>>();
+        enemyQueue = new Queue<Tuple<EnemyObject, GameObject>>();
     }
 
     // 마우스 상호작용으로 작동하는 형태
@@ -148,7 +148,7 @@ public class AttackController : MonoBehaviour
         {
             GameObject point = ObjectPool.GetObject<GameObject>(pointName);
 
-            point.name = "";
+            point.name = (remain ? "T" : "F");
             if (data != null)
             {
                 foreach (UpgradeDataType type in data.Keys)
@@ -170,8 +170,7 @@ public class AttackController : MonoBehaviour
                     }
                 }
             }
-
-            point.name += (remain ? "T" : "F");
+            point.name += ":";
             point.name += effect;
             point.name += dmg.ToString();
             point.transform.SetParent(null);
@@ -259,13 +258,78 @@ public class AttackController : MonoBehaviour
 
     public void EnemyDamaged(EnemyObject enemy, GameObject point)
     {
-        enemyQueue.Enqueue(new Tuple<EnemyObject, GameObject, string>(enemy, point, point.name));
+        enemyQueue.Enqueue(new Tuple<EnemyObject, GameObject>(enemy, point));
 
         if (flushCoroutine == null)
         {
             flushCoroutine = Flush();
             StartCoroutine(Flush());
         }
+    }
+
+    public static void ParsingPoint(GameObject point, EnemyObject enemy)
+    {
+        string pn = point.name;
+
+        float slow = 0;
+        bool down = false;
+        bool burn = false;
+        string effect = "";
+        float dmg = 0;
+
+        int j = 0;
+        char c = pn[j++]; // 가장 앞자리 스킵
+
+        for (; j < pn.Length && c > '9'; j++)
+        {
+            c = pn[j];
+
+            if (c == 'S')
+            {
+                j++;
+                float.TryParse(pn.Substring(j, j + 3), out slow);
+                j += 3;
+            }
+            else if (c == 'D') down = true;
+            else if (c == 'B') burn = true;
+            else if (c == ':')
+            {
+                j++;
+                break;
+            }
+        }
+
+        // 이펙트 이름 처리
+        int es = j;
+        for (; j < pn.Length && c > '9'; j++)
+        {
+            c = pn[j];
+        }
+        j--;
+        effect = pn.Substring(es, j - es);
+        if (float.TryParse(pn.Substring(j), out dmg) == false) dmg = 0;
+
+        if (slow != 0) enemy.Slow(slow);
+        if (down) enemy.Down();
+        if (burn)
+        {
+            enemy.Burn(dmg);
+        }
+        else
+        {
+            enemy.Damage(dmg);
+            if (effect == "DUST")
+                Instance.ChangeEffect(point, enemy.type, effect);
+        }
+    }
+
+    public void ChangeEffect(GameObject point, string type, string effect)
+    {
+        GameObject newEffect = ObjectPool.GetObject<Effect>(effect + " " + type);
+        newEffect.transform.SetParent(null);
+        newEffect.transform.position = pointEffect[point].transform.position;
+        ObjectPool.ReturnObject(pointEffect[point].name, pointEffect[point]);
+        pointEffect[point] = newEffect;
     }
 
     IEnumerator flushCoroutine;
@@ -275,77 +339,16 @@ public class AttackController : MonoBehaviour
         int count = enemyQueue.Count;
         for (int i = 0; i < count; i++)
         {
-            Tuple<EnemyObject, GameObject, string> kv = enemyQueue.Dequeue();
+            Tuple<EnemyObject, GameObject> kv = enemyQueue.Dequeue();
             EnemyObject enemy = kv.Item1;
             GameObject point = kv.Item2;
-            string pn = kv.Item3;
+            string pn = point.name;
 
             if (pn != pointName)
             {
-                bool remain = false;
-                float slowAmount = 0;
-                bool down = false;
-                bool burn = false;
-                char c = 'a';
+                ParsingPoint(point, enemy);
 
-                int j = 0;
-                for (; j < pn.Length && c > '9'; j++)
-                {
-                    c = pn[j];
-
-                    if (c == 'S')
-                    {
-                        j++;
-                        float.TryParse(pn.Substring(j, j + 3), out slowAmount);
-                        j += 3;
-                    }
-                    else if (c == 'D') down = true;
-                    else if (c == 'B') burn = true;
-                    else if (c == 'T')
-                    {
-                        remain = true;
-                        j++;
-                        break;
-                    }
-                    else if (c == 'F')
-                    {
-                        j++;
-                        break;
-                    }
-                }
-                // 이펙트 이름 처리
-                int es = j;
-                for (; j < pn.Length && c > '9'; j++)
-                {
-                    c = pn[j];
-                }
-                j--;
-                string effect = pn.Substring(es, j - es);
-
-                float dmg = 0;
-
-                if (slowAmount != 0) enemy.Slow(slowAmount);
-                if (down) enemy.Down();
-
-                if (float.TryParse(pn.Substring(j), out dmg) == false && dmg != 0) continue;
-                else
-                {
-                    if (burn) enemy.Burn(dmg);
-                    else
-                    {
-                        enemy.Damage(dmg);
-                        if (effect == "DUST")
-                        {
-                            GameObject newEffect = ObjectPool.GetObject<Effect>(effect + " " + enemy.type.ToString());
-                            newEffect.transform.SetParent(null);
-                            newEffect.transform.position = pointEffect[point].transform.position;
-                            ObjectPool.ReturnObject(pointEffect[point].name, pointEffect[point]);
-                            pointEffect[point] = newEffect;
-                        }
-                    }
-                }
-
-                if (remain == false) ReturnPoint(point);
+                ReturnPoint(point);
             }
 
         }

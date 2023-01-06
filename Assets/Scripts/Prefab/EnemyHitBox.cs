@@ -9,8 +9,7 @@ public class EnemyHitBox : MonoBehaviour
     {
         if (other.tag == "AttackPoint")
         {
-            Debug.Log($"[SYSTEM] HIT {enemy.name}");
-            AttackController.Instance.EnemyDamaged(enemy, other.gameObject);
+            enemy.Hit(other.gameObject);
         }
     }
 }

@@ -142,6 +142,20 @@ public class EnemyObject : MonoBehaviour
         animator.SetBool("ATTACK", !_isMoving);
     }
 
+    public void Hit(GameObject point)
+    {
+        Debug.Log($"[SYSTEM] HIT {name}");
+
+        if (point.name[0] == 'T')
+        {
+            AttackController.ParsingPoint(point, this);
+        }
+        else
+        {
+            AttackController.Instance.EnemyDamaged(this, point);
+        }
+    }
+
     public void Damage(float dmg)
     {
         _hp -= dmg;
