@@ -834,7 +834,7 @@
       "cost": 2000,
 
       "data": {
-        "keys": [1, 6, 11],
+        "keys": [1, 6, 7, 11],
         "values": [
           {
             "defaultValue": 100,
@@ -850,6 +850,14 @@
             "upgradeValue": 5,
             "maxValue": 130,
             "cost": 100
+          },
+
+          {
+            "defaultValue": 0.3,
+            "currentValue": 0.3,
+            "upgradeValue": 0,
+            "maxValue": 0.3,
+            "cost": 0
           },
 
           {
@@ -872,7 +880,7 @@
       "effect": "quake",
 
       "data": {
-        "keys": [1, 3, 6, 12],
+        "keys": [1, 3, 6, 7, 12],
         "values": [
           {
             "defaultValue": 100,
@@ -895,6 +903,14 @@
             "currentValue": 200,
             "upgradeValue": 0,
             "maxValue": 200,
+            "cost": 0
+          },
+
+          {
+            "defaultValue": 0.3,
+            "currentValue": 0.3,
+            "upgradeValue": 0,
+            "maxValue": 0.3,
             "cost": 0
           },
 
@@ -1115,10 +1131,10 @@
           },
 
           {
-            "defaultValue": 10,
-            "currentValue": 10,
-            "upgradeValue": 10,
-            "maxValue": 60,
+            "defaultValue": 50,
+            "currentValue": 50,
+            "upgradeValue": 50,
+            "maxValue": 300,
             "cost": 200
           },
 

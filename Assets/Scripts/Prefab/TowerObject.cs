@@ -73,16 +73,7 @@ public class TowerObject : MonoBehaviour
         {
             if (_isAttackTower == false)
             {
-                // 모든 적에게 공격
-                for (int i = 0; i < _enemies.Count; i++)
-                {
-                    GameObject targetHitbox = _enemies[i];
-                    if (targetHitbox == null || targetHitbox.transform.parent.gameObject.activeSelf == false)
-                    {
-                        _enemies.RemoveAt(i);
-                        continue;
-                    }
-                }
+                _attackArea.SpecialAttack(_tower);
             }
             else
             {

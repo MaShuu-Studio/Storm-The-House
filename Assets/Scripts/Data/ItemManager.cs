@@ -23,6 +23,7 @@ public static class ItemManager
         foreach (Item item in list)
         {
             if (item.data.ContainsKey(EnumData.UpgradeDataType.REMAINTIME)) item.isRemain = true;
+            if (item.effect == null) item.effect = "";
 
             if (item.type == EnumData.ItemType.WEAPON)
                 weapons.Add(item.name, item);

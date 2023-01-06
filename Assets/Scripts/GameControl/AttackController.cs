@@ -81,13 +81,13 @@ public class AttackController : MonoBehaviour
         StartCoroutine(Attack(supportName, "DUST", Player.Instance.transform.position, pos, dmg, range, accurancy, 1, 0f, remainTime, remain));
     }
 
-    public void TowerAttack(Vector3 startpos, Vector3 pos, float damge, Item tower)
+    public void TowerAttack(Vector3 startpos, Vector3 pos, float damge, Item tower, float size = -1)
     {
         float dmg = damge;
         float accurancy = 100;
         float remainTime = 0.1f;
-        float range = tower.GetValue(UpgradeDataType.RANGE);
-        bool remain = false;
+        float range = (size == -1) ? tower.GetValue(UpgradeDataType.RANGE) : size;
+        bool remain = tower.isRemain;
 
         StartCoroutine(Attack(tower.name, tower.effect.ToUpper(), startpos, pos, dmg, range, accurancy, 1, 0f, remainTime, remain, tower.data));
     }
