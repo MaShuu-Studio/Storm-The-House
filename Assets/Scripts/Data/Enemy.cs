@@ -16,4 +16,6 @@ public class Enemy
     public float attackrange = 0.5f;
      
     public int money;
+
+    public bool downable = false;
 }

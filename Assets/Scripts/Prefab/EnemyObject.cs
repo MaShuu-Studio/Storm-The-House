@@ -7,7 +7,7 @@ public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyAttackArea _attackArea;
     [SerializeField] private GameObject burnedEffect;
-        
+
     private Animator animator;
     private Enemy _enemy;
     public string type { get; private set; }
@@ -115,24 +115,19 @@ public class EnemyObject : MonoBehaviour
 
     public void Down()
     {
-        // 추후 애니메이션 관련 조절
-        StartCoroutine(DownTestCoroutine());
+        if (_enemy.downable)
+            animator.SetTrigger("DOWN");
     }
 
     // 애니메이션으로 캐릭의 다운을 조정하기 위한 함수
-    private void CharacterDown(bool down)
+    public void CharacterDown()
     {
-        _isMoving = !down;
-        animator.SetBool("ATTACK", !_isMoving);
+        _isMoving = false;
     }
 
-    // 애니메이션을 대체할 코루틴
-    IEnumerator DownTestCoroutine()
+    public void CharacterStand()
     {
-        CharacterDown(true);
-        yield return new WaitForSeconds(1.5f);
-
-        CharacterDown(false);
+        _isMoving = true;
     }
 
     public void MeetBrricade(bool meet)
