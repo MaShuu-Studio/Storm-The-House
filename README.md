@@ -7,7 +7,7 @@ https://mashuu-studio.github.io/Storm-The-House/
  [https://www.crazygames.com/game/storm-the-house-3]
  
 # 개발 기간
-2022.4 - 진행중
+2022.4 - 2023.1
 
 # 개발 노트
 [📝Notion](https://brick-clerk-b88.notion.site/Storm-the-house-dedcb4dd56b04b66a758c5d62a69c996)
